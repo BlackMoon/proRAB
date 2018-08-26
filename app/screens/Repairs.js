@@ -12,7 +12,8 @@ export class Repairs extends Component {
   }
 
   render() {
-    this.ds.getAll();
+    this.ds.getAll().then(res => console.log(res));
+
     return (
       <View style={styles.container}>
         <Text style={styles.title}>{this.expr}</Text>

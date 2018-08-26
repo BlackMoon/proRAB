@@ -16,11 +16,11 @@ export class DataService {
     });*/
   }
 
-  add(entity) {}
+  async add(entity) {}
 
-  delete(key) {}
+  async delete(key) {}
 
-  get(key) {}
+  async get(key) {}
 
   async getAll(...args) {
     await FS.downloadAsync(
@@ -35,19 +35,17 @@ export class DataService {
 
     this._db = SQLite.openDatabase(dbName);
 
-    this._db.transaction(tx => {
-      tx.executeSql(
-        "select * from functions",
-        [],
-        (_, { rows }) => {
-          console.log(rows);
-        },
-        (_, error) => {
-          console.log(error);
-        }
-      );
-    });
+    return new Promise((resolve, reject) =>
+      this._db.transaction(tx => {
+        tx.executeSql(
+          "select * from functions",
+          [],
+          (_, { rows }) => resolve(rows),
+          (_, error) => reject(error)
+        );
+      })
+    );
   }
 
-  update(entity) {}
+  async update(entity) {}
 }
