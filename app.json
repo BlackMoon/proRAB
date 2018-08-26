@@ -2,6 +2,11 @@
   "expo": {
     "sdkVersion": "27.0.0",
     "slug": "proRAB",
-    "name": "proRAB"
+    "name": "proRAB",
+    "packagerOpts": {
+      "assetExts": [
+        "db"
+      ]
+    }
   }
 }
