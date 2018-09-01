@@ -7,6 +7,10 @@
       "assetExts": [
         "db"
       ]
+    },
+    "splash": {
+      "image": "./app/assets/splash.png",
+      "backgroundColor": "#faaaaa"
     }
   }
 }

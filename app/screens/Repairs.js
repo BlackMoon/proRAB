@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { DataService } from "@services";
 
 export class Repairs extends Component {
   constructor() {
@@ -8,11 +7,11 @@ export class Repairs extends Component {
 
     let f = new Function("a, b", "if (a < 10) {a = 101;} return a + b");
     this.expr = f(1, 1);
-    this.ds = new DataService();
+    //this.ds = new DataService();
   }
 
   render() {
-    this.ds.getAll().then(res => console.log(res));
+    //this.ds.getAll().then(res => console.log(res));
 
     return (
       <View style={styles.container}>

@@ -1,4 +1,5 @@
 import { Asset, FileSystem as FS, SQLite } from "expo";
+import config from "@config";
 
 const dbName = "projects.db";
 const dbLocation = `../projects.db`;
@@ -23,11 +24,11 @@ export class DataService {
   async get(key) {}
 
   async getAll(...args) {
-    await FS.downloadAsync(
-      Asset.fromModule(require(dbLocation)).uri,
-      `${FS.documentDirectory}SQLite/${dbName}`
-    );
-
+    //await FS.downloadAsync(
+    //Asset.fromModule(require(`${config.DB_LOCATION}`)).uri,
+    //`${FS.documentDirectory}SQLite/${config.DB_NAME}`
+    //);
+    /*
     const { exists } = await FS.getInfoAsync(
       `${FS.documentDirectory}SQLite/${dbName}`
     );
@@ -44,7 +45,7 @@ export class DataService {
           (_, error) => reject(error)
         );
       })
-    );
+    );*/
   }
 
   async update(entity) {}
