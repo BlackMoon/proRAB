@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { AppLoading } from "expo";
 import { AppNavigator } from "@navigation";
-import { copyDbAsync } from "./app/preload/copyDb";
+import { copyDbAsync } from "@preload";
+import { connect, Provider } from "react-redux";
+import configureStore from "@redux";
+
+const store = configureStore();
 
 export default class App extends Component {
   state = {
@@ -19,6 +23,10 @@ export default class App extends Component {
       );
     }
 
-    return <AppNavigator />;
+    return (
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
+    );
   }
 }
