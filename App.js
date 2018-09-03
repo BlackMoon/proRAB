@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { AppLoading } from "expo";
 import { AppNavigator } from "@navigation";
 import { copyDbAsync } from "@preload";
-import { connect, Provider } from "react-redux";
-import configureStore from "@redux";
-
-const store = configureStore();
+import { Provider } from "react-redux";
+import store from "@redux";
 
 export default class App extends Component {
   state = {
