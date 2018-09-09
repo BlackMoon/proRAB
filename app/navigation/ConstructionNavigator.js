@@ -1,8 +1,8 @@
-import React from "react";
-import { createStackNavigator } from "react-navigation";
-import config from "@config";
+import { Construction } from "@containers";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Construction } from "@screens";
+import React from "react";
+import config from "@config";
+import { createStackNavigator } from "react-navigation";
 
 const ConstructionStack = createStackNavigator({
   Construction: Construction
@@ -21,4 +21,4 @@ ConstructionStack.navigationOptions = {
   }
 };
 
-export { ConstructionStack };
+export default ConstructionStack;

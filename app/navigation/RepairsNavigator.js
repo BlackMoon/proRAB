@@ -1,8 +1,8 @@
-import React from "react";
-import { createStackNavigator } from "react-navigation";
-import config from "@config";
-import { Repairs } from "@screens";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { Repairs } from "@containers";
+import config from "@config";
+import { createStackNavigator } from "react-navigation";
 
 const RepairsStack = createStackNavigator({
   Repairs: Repairs
@@ -21,4 +21,4 @@ RepairsStack.navigationOptions = {
   }
 };
 
-export { RepairsStack };
+export default RepairsStack;

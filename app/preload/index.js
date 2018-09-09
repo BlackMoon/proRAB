@@ -1,4 +1,5 @@
 import { Asset, FileSystem as FS } from "expo";
+
 import config from "@config";
 
 const copyDbAsync = async () => {

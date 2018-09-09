@@ -1,8 +1,8 @@
-import React from "react";
-import { createStackNavigator } from "react-navigation";
-import config from "@config";
-import { Objects } from "@screens";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Objects } from "@components";
+import React from "react";
+import config from "@config";
+import { createStackNavigator } from "react-navigation";
 
 const ObjectsStack = createStackNavigator({
   Objects: Objects
@@ -21,4 +21,4 @@ ObjectsStack.navigationOptions = {
   }
 };
 
-export { ObjectsStack };
+export default ObjectsStack;

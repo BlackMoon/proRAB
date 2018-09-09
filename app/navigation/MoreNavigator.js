@@ -1,7 +1,7 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation";
 import config from "@config";
-import { More } from "@screens";
+import { createStackNavigator } from "react-navigation";
+import { More } from "@components";
 import { Entypo } from "@expo/vector-icons";
 
 const MoreStack = createStackNavigator({
@@ -21,4 +21,4 @@ MoreStack.navigationOptions = {
   }
 };
 
-export { MoreStack };
+export default MoreStack;

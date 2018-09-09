@@ -1,8 +1,8 @@
+import { Dictionaries } from "@containers";
+import { Entypo } from "@expo/vector-icons";
 import React from "react";
-import { createStackNavigator } from "react-navigation";
 import config from "@config";
-import { Dictionaries } from "@screens";
-import { FontAwesome } from "@expo/vector-icons";
+import { createStackNavigator } from "react-navigation";
 
 const DictionariesStack = createStackNavigator({
   Dictionaries: Dictionaries
@@ -11,10 +11,8 @@ const DictionariesStack = createStackNavigator({
 DictionariesStack.navigationOptions = {
   tabBarLabel: "Справочники",
   tabBarIcon: ({ tintColor }) => {
-    return (
-      <FontAwesome name="book" size={config.ICON_SIZE} color={tintColor} />
-    );
+    return <Entypo name="book" size={config.ICON_SIZE} color={tintColor} />;
   }
 };
 
-export { DictionariesStack };
+export default DictionariesStack;

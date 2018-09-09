@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+
 import { AppLoading } from "expo";
-import { AppNavigator } from "@navigation";
-import { copyDbAsync } from "@preload";
+import AppNavigator from "@navigation";
 import { Provider } from "react-redux";
+import { copyDbAsync } from "@preload";
 import store from "@redux";
 
 export default class App extends Component {

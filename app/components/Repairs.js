@@ -1,22 +1,9 @@
 import React, { Component } from "react";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
+
 import GridView from "react-native-super-grid";
-import {
-  Alert,
-  StyleSheet,
-  View,
-  Text,
-  TouchableHighlight
-} from "react-native";
-import * as RepairsActions from "@redux/actions";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 
-class Repairs extends Component {
-  _onPress(item) {
-    this.props.actions.addRepair("item");
-    Alert.alert(item.name);
-  }
-
+export class Repairs extends Component {
   render() {
     const items = [
       { name: "TURQUOISE", code: "#1abc9c" },
@@ -47,10 +34,7 @@ class Repairs extends Component {
         items={items}
         style={styles.gridView}
         renderItem={item => (
-          <TouchableHighlight
-            onPress={() => this._onPress(item)}
-            underlayColor="white"
-          >
+          <TouchableHighlight underlayColor="white">
             <View
               style={[styles.itemContainer, { backgroundColor: item.code }]}
             >
@@ -86,14 +70,3 @@ const styles = StyleSheet.create({
     color: "#fff"
   }
 });
-
-const WrappedRepairs = connect(
-  state => ({
-    state: state.counter
-  }),
-  dispatch => ({
-    actions: bindActionCreators(RepairsActions, dispatch)
-  })
-)(Repairs);
-
-export { WrappedRepairs as Repairs };

@@ -1,8 +1,6 @@
 import { Asset, FileSystem as FS, SQLite } from "expo";
-import config from "@config";
 
-const dbName = "projects.db";
-const dbLocation = `../projects.db`;
+import config from "@config";
 
 export class DataService {
   constructor() {
