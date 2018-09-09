@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import repairs from "./Repairs";
+import handbook from "./handbookReducer";
+import repairsReducer from "./repairsReducer";
 
 const rootReducer = combineReducers({
-  repairs
+  handbook,
+  repairsReducer
 });
 
 export default rootReducer;

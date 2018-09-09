@@ -1,4 +1,4 @@
-import * as types from "./../ActionTypes";
+import { ADD_REPAIR } from "@constants";
 
 const initialState = {
   friends: [1, 2, 3],
@@ -18,9 +18,9 @@ const initialState = {
   }
 };
 
-export default function repairs(state = initialState, action) {
+export default function repairsReducer(state = initialState, action) {
   switch (action.type) {
-    case types.ADD_REPAIR:
+    case ADD_REPAIR:
       const newId = state.friends[state.friends.length - 1] + 1;
       return {
         ...state,

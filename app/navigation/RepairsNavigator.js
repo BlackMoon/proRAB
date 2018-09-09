@@ -1,7 +1,7 @@
+import { ICON_SIZE } from "@constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 import { Repairs } from "@containers";
-import config from "@config";
 import { createStackNavigator } from "react-navigation";
 
 const RepairsStack = createStackNavigator({
@@ -14,7 +14,7 @@ RepairsStack.navigationOptions = {
     return (
       <MaterialCommunityIcons
         name="format-paint"
-        size={config.ICON_SIZE}
+        size={ICON_SIZE}
         color={tintColor}
       />
     );

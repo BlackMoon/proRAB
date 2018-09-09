@@ -1,7 +1,7 @@
+import { ICON_SIZE } from "@constants";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Objects } from "@components";
 import React from "react";
-import config from "@config";
 import { createStackNavigator } from "react-navigation";
 
 const ObjectsStack = createStackNavigator({
@@ -14,7 +14,7 @@ ObjectsStack.navigationOptions = {
     return (
       <MaterialCommunityIcons
         name="shape-square-plus"
-        size={config.ICON_SIZE}
+        size={ICON_SIZE}
         color={tintColor}
       />
     );

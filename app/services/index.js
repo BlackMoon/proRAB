@@ -1,1 +1,1 @@
-export * from "./DataService";
+export { default as HandbooksDataService } from "./HandbooksDataService";

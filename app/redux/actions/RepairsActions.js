@@ -1,8 +1,8 @@
-import * as types from "./../ActionTypes";
+import { ADD_REPAIR } from "@constants";
 
 export function addRepair(name) {
   return {
-    type: types.ADD_REPAIR,
+    type: ADD_REPAIR,
     name
   };
 }

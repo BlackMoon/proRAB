@@ -1,18 +1,14 @@
-import { Asset, FileSystem as FS, SQLite } from "expo";
+import { SQLite } from "expo";
+import config from "@constants";
 
-import config from "@config";
+export const db = SQLite.openDatabase(config.DB_NAME);
 
-export class DataService {
-  constructor() {
+export default class DataService {
+  constructor(table) {
     if (this.constructor === DataService) {
-      //throw new TypeError("Cannot construct DataService instances directly");
+      throw new TypeError("Cannot construct DataService instances directly");
     }
-
-    /*this._db.transaction(tx => {
-      tx.executeSql(
-        "create table if not exists functions (id integer primary key not null, done int, value text);"
-      );
-    });*/
+    this.table = table;
   }
 
   async add(entity) {}
@@ -22,29 +18,18 @@ export class DataService {
   async get(key) {}
 
   async getAll(...args) {
-    //await FS.downloadAsync(
-    //Asset.fromModule(require(`${config.DB_LOCATION}`)).uri,
-    //`${FS.documentDirectory}SQLite/${config.DB_NAME}`
-    //);
-    /*
-    const { exists } = await FS.getInfoAsync(
-      `${FS.documentDirectory}SQLite/${dbName}`
-    );
-    console.log(exists);
-
-    this._db = SQLite.openDatabase(dbName);
-
+    let sqlStatement = `select * from ${this.table}`;
     return new Promise((resolve, reject) =>
-      this._db.transaction(tx => {
+      db.transaction(tx => {
         tx.executeSql(
-          "select * from functions",
+          sqlStatement,
           [],
-          (_, { rows }) => resolve(rows),
+          (_, { rows: { _array } }) => resolve(_array),
           (_, error) => reject(error)
         );
       })
-    );*/
+    );
   }
 
-  async update(entity) {}
+  async update(entity, key) {}
 }
