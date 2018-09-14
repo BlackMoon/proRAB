@@ -1,4 +1,8 @@
-import { LOAD_HANDBOOKS_REQUEST, LOAD_HANDBOOKS_SUCCESS } from "@constants";
+import {
+  LOAD_HANDBOOKS_FAILED,
+  LOAD_HANDBOOKS_REQUEST,
+  LOAD_HANDBOOKS_SUCCESS
+} from "@constants";
 
 const initialState = {
   items: [],
@@ -7,6 +11,8 @@ const initialState = {
 
 export default function handbookReducer(state = initialState, action) {
   switch (action.type) {
+    case LOAD_HANDBOOKS_FAILED:
+      return { ...state, loading: false };
     case LOAD_HANDBOOKS_REQUEST:
       return { ...state, loading: true };
     case LOAD_HANDBOOKS_SUCCESS:

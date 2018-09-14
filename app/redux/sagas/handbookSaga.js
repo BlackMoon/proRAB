@@ -1,4 +1,8 @@
-import { LOAD_HANDBOOKS_REQUEST, LOAD_HANDBOOKS_SUCCESS } from "@constants";
+import {
+  LOAD_HANDBOOKS_FAILED,
+  LOAD_HANDBOOKS_REQUEST,
+  LOAD_HANDBOOKS_SUCCESS
+} from "@constants";
 import { call, put, takeEvery } from "redux-saga/effects";
 
 import { HandbooksDataService } from "@services";
@@ -9,7 +13,9 @@ export function* loadHandbooksAsync() {
   try {
     const items = yield call([ds, "getAll"]);
     yield put({ type: LOAD_HANDBOOKS_SUCCESS, handbooks: items });
-  } catch (ex) {}
+  } catch (ex) {
+    yield put({ type: LOAD_HANDBOOKS_FAILED });
+  }
 }
 
 export function* watchLoadHandbooksAsync() {
