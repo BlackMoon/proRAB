@@ -1,8 +1,11 @@
-import ConstructionStack from "./ConstructionNavigator";
-import HandbooksStack from "./HandbooksNavigator";
-import MoreStack from "./MoreNavigator";
-import ObjectsStack from "./ObjectsNavigator";
-import RepairsStack from "./RepairsNavigator";
+import {
+  ConstructionStack,
+  HandbooksStack,
+  MoreStack,
+  ObjectsStack,
+  RepairsStack
+} from "./Navigators";
+
 import { createBottomTabNavigator } from "react-navigation";
 
 const RouteConfigMap = {

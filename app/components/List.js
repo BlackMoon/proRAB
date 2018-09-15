@@ -11,5 +11,6 @@ export const List = ({ items, renderItem }) => (
 );
 
 List.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  renderItem: PropTypes.func.isRequired
 };
