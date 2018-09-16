@@ -6,13 +6,13 @@ import { ListWithLoader } from "./withLoader";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-class HandbookList extends Component {
+class HandbookListContainer extends Component {
   componentDidMount() {
     this.props.actions.loadHandbooksRequest();
   }
 
   itemPress = item => {
-    this.props.navigation.navigate("Construction", { id: item.id });
+    this.props.navigation.navigate("Handbook", { id: item.id });
   };
 
   renderItem = ({ item }) => (
@@ -39,17 +39,16 @@ class HandbookList extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(
-    { loadHandbooksRequest, loadHandbooksSuccess },
-    dispatch
-  )
+  actions: bindActionCreators({ loadHandbooksRequest }, dispatch)
 });
 const mapStateToProps = state => ({
   handbooks: state.handbook.items,
   loading: state.handbook.loading
 });
 
-export default connect(
+const HandbookList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(HandbookList);
+)(HandbookListContainer);
+
+export { HandbookList };

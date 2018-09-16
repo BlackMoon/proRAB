@@ -1,4 +1,4 @@
-import { Construction, HandbookList, Repairs } from "@containers";
+import { Construction, Handbook, HandbookList, Repairs } from "@containers";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { ICON_SIZE } from "@constants";
@@ -22,9 +22,15 @@ ConstructionStack.navigationOptions = {
 /**
  * Handbooks
  */
-const HandbooksStack = createStackNavigator({
-  Handbooks: HandbookList
-});
+const HandbooksStack = createStackNavigator(
+  {
+    Handbook: Handbook,
+    Handbooks: HandbookList
+  },
+  {
+    initialRouteName: "Handbooks"
+  }
+);
 
 HandbooksStack.navigationOptions = {
   tabBarLabel: "Справочники",

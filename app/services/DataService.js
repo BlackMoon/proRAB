@@ -11,24 +11,35 @@ export default class DataService {
     this.table = table;
   }
 
-  async add(entity) {}
-
-  async delete(key) {}
-
-  async get(key) {}
-
-  async getAll(...args) {
-    let sqlStatement = `select * from ${this.table}`;
+  async executeSql(sqlStatement, ...args) {
+    console.log(args);
     return new Promise((resolve, reject) =>
       db.transaction(tx => {
         tx.executeSql(
           sqlStatement,
-          [],
-          (_, { rows: { _array } }) => resolve(_array),
+          [...args],
+          (_, { rows }) => resolve(rows),
           (_, error) => reject(error)
         );
       })
     );
+  }
+
+  async add(entity) {}
+
+  async delete(key) {}
+
+  async get(key) {
+    const rows = await this.executeSql(
+      `select * from ${this.table} where id=?`,
+      key
+    );
+    return rows.item(0);
+  }
+
+  async getAll(...args) {
+    const rows = await this.executeSql(`select * from ${this.table}`, args);
+    return rows._array;
   }
 
   async update(entity, key) {}

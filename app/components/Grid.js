@@ -1,4 +1,5 @@
 import GridView from "react-native-super-grid";
+import React from "react";
 import { StyleSheet } from "react-native";
 
 export const Grid = ({ items, renderItem, itemDimension = 130 }) => {

@@ -16,6 +16,8 @@ const RouteConfigMap = {
   More: MoreStack
 };
 
-const AppNavigator = createBottomTabNavigator(RouteConfigMap);
+const AppNavigator = createBottomTabNavigator(RouteConfigMap, {
+  initialRouteName: "Handbooks"
+});
 
 export default AppNavigator;
