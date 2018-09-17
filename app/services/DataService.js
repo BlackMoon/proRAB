@@ -18,7 +18,7 @@ export default class DataService {
         tx.executeSql(
           sqlStatement,
           [...args],
-          (_, { rows }) => resolve(rows),
+          (_, result) => resolve(result),
           (_, error) => reject(error)
         );
       })
@@ -30,7 +30,7 @@ export default class DataService {
   async delete(key) {}
 
   async get(key) {
-    const rows = await this.executeSql(
+    const { rows } = await this.executeSql(
       `select * from ${this.table} where id=?`,
       key
     );
@@ -38,7 +38,7 @@ export default class DataService {
   }
 
   async getAll(...args) {
-    const rows = await this.executeSql(`select * from ${this.table}`, args);
+    const { rows } = await this.executeSql(`select * from ${this.table}`, args);
     return rows._array;
   }
 
