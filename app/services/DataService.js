@@ -11,9 +11,8 @@ export default class DataService {
     this.table = table;
   }
 
-  async executeSql(sqlStatement, ...args) {
-    console.log(args);
-    return new Promise((resolve, reject) =>
+  executeSql = async (sqlStatement, ...args) =>
+    new Promise((resolve, reject) =>
       db.transaction(tx => {
         tx.executeSql(
           sqlStatement,
@@ -23,7 +22,6 @@ export default class DataService {
         );
       })
     );
-  }
 
   async add(entity) {}
 

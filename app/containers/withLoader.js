@@ -1,9 +1,12 @@
 import { ActivityIndicator, StyleSheet } from "react-native";
-import { Grid, List } from "@components";
+import { Form, Grid, List } from "@components";
 
 import React from "react";
 
-export const withLoader = (WrappedComponent, size = "large") => ({ loading, ...props }) => {
+export const withLoader = (WrappedComponent, size = "large") => ({
+  loading,
+  ...props
+}) => {
   if (loading) {
     return <ActivityIndicator size={size} style={styles.activityIndicator} />;
   }
@@ -16,5 +19,6 @@ const styles = StyleSheet.create({
   }
 });
 
+export const FormWithLoader = withLoader(Form);
 export const GridWithLoader = withLoader(Grid);
 export const ListWithLoader = withLoader(List);

@@ -1,4 +1,10 @@
-import { Construction, Handbook, HandbookList, Repairs } from "@containers";
+import {
+  Construction,
+  Details,
+  Handbook,
+  HandbookList,
+  Repairs
+} from "@containers";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { ICON_SIZE } from "@constants";
@@ -24,11 +30,13 @@ ConstructionStack.navigationOptions = {
  */
 const HandbooksStack = createStackNavigator(
   {
+    Details: Details,
     Handbook: Handbook,
     Handbooks: HandbookList
   },
   {
-    initialRouteName: "Handbooks"
+    initialRouteName: "Handbooks",
+    initialRouteParams: { id: 1 }
   }
 );
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { loadHandbooksRequest, loadHandbooksSuccess } from "@redux/actions";
 
 import { ListItem } from "react-native-elements";
 import { ListWithLoader } from "./withLoader";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { loadHandbooksRequest } from "@redux/actions";
 
 class HandbookListContainer extends Component {
   componentDidMount() {
