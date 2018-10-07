@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import handbook from "./handbookReducer";
+import handbooks from "./handbooksReducer";
+import records from "./recordsReducer";
 
 const rootReducer = combineReducers({
-  handbook
+  records,
+  handbooks
 });
 
 export default rootReducer;

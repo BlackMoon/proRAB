@@ -40,5 +40,10 @@ export default class DataService {
     return rows._array;
   }
 
-  async update(entity, key) {}
+  async update(entity, key) {
+    const { rows } = await this.executeSql(
+      `select * from ${this.table} where id=?`,
+      key
+    );
+  }
 }

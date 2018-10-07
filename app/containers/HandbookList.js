@@ -41,9 +41,10 @@ class HandbookListContainer extends Component {
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators({ loadHandbooksRequest }, dispatch)
 });
+
 const mapStateToProps = state => ({
-  handbooks: state.handbook.items,
-  loading: state.handbook.loading
+  handbooks: state.handbooks.items,
+  loading: state.handbooks.loading
 });
 
 const HandbookList = connect(

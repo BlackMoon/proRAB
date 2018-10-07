@@ -7,7 +7,7 @@ import { ListWithLoader } from "./withLoader";
 import { MaterialIcons } from "@expo/vector-icons";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { loadHandbookRequest } from "@redux/actions";
+import { loadRecordsRequest } from "@redux/actions";
 
 const styles = StyleSheet.create({
   field: {
@@ -41,27 +41,28 @@ class HandbookContainer extends Component {
     };
   };
 
-  /**
-   * Добавить новую сущность
-   */
   add() {
-    const { handbook, navigation } = this.props;
-    navigation.navigate("Details", { types: handbook.fields });
+    const { fields, table, navigation } = this.props;
+    navigation.navigate("Details", {
+      item: { name: null },
+      fields: fields,
+      table: table
+    });
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
+    const { actions, navigation } = this.props;
 
     const id = navigation.getParam("id");
-    this.props.actions.loadHandbookRequest(id);
+    actions.loadRecordsRequest(id);
     navigation.setParams({ handleAdd: this.add.bind(this) });
   }
 
-  itemPress = (item, fields) => {
-    this.props.navigation.navigate("Details", { entity: item, types: fields });
+  itemPress = (item, fields, table) => {
+    this.props.navigation.navigate("Details", { item, fields, table });
   };
 
-  renderItem = ({ item }, fields) => {
+  renderItem = ({ item }, fields, table) => {
     let subtitle;
     if (fields) {
       subtitle = Array.from(fields).map(([k, v]) => (
@@ -73,7 +74,7 @@ class HandbookContainer extends Component {
     }
     return (
       <ListItem
-        onPress={this.itemPress.bind(this, item, fields)}
+        onPress={this.itemPress.bind(this, item, fields, table)}
         style={styles.title}
         subtitle={<View style={styles.subtitle}>{subtitle}</View>}
         title={<Text style={styles.title}>{item.name}</Text>}
@@ -82,24 +83,26 @@ class HandbookContainer extends Component {
   };
 
   render() {
-    const { handbook, loading } = this.props;
+    const { fields, records, table, loading } = this.props;
     return (
       <ListWithLoader
         loading={loading}
-        items={handbook.records}
-        renderItem={item => this.renderItem(item, handbook.fields)}
+        items={records}
+        renderItem={item => this.renderItem(item, fields, table)}
       />
     );
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators({ loadHandbookRequest }, dispatch)
+  actions: bindActionCreators({ loadRecordsRequest }, dispatch)
 });
 
 const mapStateToProps = state => ({
-  handbook: state.handbook.activeItem,
-  loading: state.handbook.loading
+  fields: state.records.fields,
+  records: state.records.items,
+  table: state.records.table,
+  loading: state.records.loading
 });
 
 const Handbook = connect(

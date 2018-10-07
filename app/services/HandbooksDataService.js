@@ -1,4 +1,4 @@
-import DataService, { db } from "./DataService";
+import DataService from "./DataService";
 
 export class HandbooksDataService extends DataService {
   constructor() {
@@ -14,7 +14,7 @@ export class HandbooksDataService extends DataService {
       key
     );
 
-    let handbook = { records: [] };
+    let handbook = { id: key };
     if (rows.length) {
       handbook.fields = new Map(
         rows._array.map(f => [
@@ -23,12 +23,16 @@ export class HandbooksDataService extends DataService {
         ])
       );
       handbook.table = rows.item(0).tableName;
-      try {
-        ({ rows } = await this.executeSql(`select * from ${handbook.table}`));
-        handbook.records = rows._array;
-      } catch (e) {}
     }
 
     return handbook;
+  }
+
+  async getAll(...args) {
+    const { rows } = await this.executeSql(
+      `select id, name, table_name from ${this.table}`,
+      args
+    );
+    return rows._array;
   }
 }

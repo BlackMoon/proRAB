@@ -1,4 +1,5 @@
 export { HandbooksDataService } from "./HandbooksDataService";
+export { RecordsDataService } from "./RecordsDataService";
 
 export const ValueType = {
   numeric: 1,

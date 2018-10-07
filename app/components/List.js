@@ -10,6 +10,10 @@ export const List = ({ items, renderItem }) => (
   />
 );
 
+List.defaultProps = {
+  items: []
+};
+
 List.propTypes = {
   items: PropTypes.array.isRequired,
   renderItem: PropTypes.func.isRequired

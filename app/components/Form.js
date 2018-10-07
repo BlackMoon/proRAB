@@ -1,73 +1,51 @@
 import { FormInput, FormLabel } from "react-native-elements";
 import { StyleSheet, View } from "react-native";
 
-import { Field } from "redux-form";
-import PropTypes from "prop-types";
 import React from "react";
 import { ValueType } from "@services";
+import t from "tcomb-form-native";
+
+const nameProp = "name";
 
 const styles = StyleSheet.create({
   name: { fontSize: 18 }
 });
 
-const FormControl = ({ input, ...inputProps }) => {
-  let formControl;
-  if (type.valueType != ValueType.object) {
-    let keyboardType = "default";
-    switch (type.valueType) {
-      case ValueType.numeric:
-        keyboardType = "numeric";
-        break;
+export const Form = ({ ref, fields, value }) => {
+  const data = { ...value };
+
+  const fieldDef = {};
+  const typeDef = {};
+  if (data.hasOwnProperty(nameProp)) {
+    typeDef[nameProp] = t.String;
+  }
+
+  const fieldTypes = fields || Object.entries(data);
+
+  fieldTypes.forEach((v, k) => {
+    fieldDef[k] = { label: v.name };
+
+    switch (v.valueType) {
       case ValueType.integer:
-        keyboardType = "number-pad";
+      case ValueType.numeric:
+        typeInfo = t.Number;
+        break;
+      default:
+        typeInfo = t.String;
         break;
     }
-    formControl = (
-      <FormInput
-        inputStyle={inputStyle}
-        keyboardType={keyboardType}
-        placeholder={type.name}
-        value={input.value}
+
+    typeDef[k] = typeInfo;
+  });
+
+  return (
+    <View>
+      <t.form.Form
+        ref={ref}
+        type={t.struct(typeDef)}
+        value={data}
+        options={{ auto: "none", fields: fieldDef }}
       />
-    );
-  } else {
-    // todo dropdown
-  }
-
-  let formLabel;
-  if (showLabel) {
-    formLabel = <FormLabel>{type.name}</FormLabel>;
-  }
-
-  return (
-    <View>
-      {formLabel}
-      {formControl}
     </View>
   );
-};
-
-const FormGroup = ({ entity, types }) => {
-  return (
-    <View>
-      {Array.from(types).map(([k, v]) => (
-        <FormControl key={k} type={v} value={entity[k]} />
-      ))}
-    </View>
-  );
-};
-
-export const Form = ({ entity, types }) => {
-  const state = { ...entity };
-  let nameControl;
-  if (!state.hasOwnProperty("name")) {
-    nameControl = (
-      <Field name="name">
-        <FormControl value={state.name} types={types} />
-      </Field>
-    );
-  }
-
-  const propTypes = types || Object.entries(state);
-  return <View>{nameControl}</View>;
 };
