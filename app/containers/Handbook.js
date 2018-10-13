@@ -53,9 +53,15 @@ class HandbookContainer extends Component {
   componentDidMount() {
     const { actions, navigation } = this.props;
 
-    const id = navigation.getParam("id");
-    actions.loadRecordsRequest(id);
+    this.willFocusListener = navigation.addListener("willFocus", () => {
+      actions.loadRecordsRequest(navigation.getParam("id"));
+    });
+
     navigation.setParams({ handleAdd: this.add.bind(this) });
+  }
+
+  componentWillUnmount() {
+    this.willFocusListener.remove();
   }
 
   itemPress = (item, fields, table) => {

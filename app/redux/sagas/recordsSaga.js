@@ -15,9 +15,9 @@ import { all, call, put, takeEvery } from "redux-saga/effects";
 const handbooksDs = new HandbooksDataService();
 const recordsDs = new RecordsDataService();
 
-export function* addRecordAsync({ item }) {
+export function* addRecordAsync({ item, table }) {
   try {
-    const id = yield call([recordsDs, "add"], item);
+    const id = yield call([recordsDs, "add"], item, table);
     yield put({ type: ADD_RECORD_SUCCESS, id });
   } catch (e) {
     yield put({ type: ADD_RECORD_FAILED, e });
@@ -41,7 +41,8 @@ export function* loadRecordsAsync({ id }) {
 
 export function* updateRecordAsync({ item, table }) {
   try {
-    yield call([recordsDs, "update"], item, "id", table);
+    let a = yield call([recordsDs, "update"], item, table);
+    console.log(a);
     yield put({ type: UPDATE_RECORD_SUCCESS });
   } catch (e) {
     yield put({ type: UPDATE_RECORD_FAILED, e });

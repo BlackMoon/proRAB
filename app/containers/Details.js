@@ -1,26 +1,32 @@
-import { Button, View } from "react-native";
 import React, { Component } from "react";
-import { loadRecordRequest, updateRecordRequest } from "@redux/actions";
+import {
+  addRecordRequest,
+  loadRecordRequest,
+  updateRecordRequest
+} from "@redux/actions";
 
-import { ValueType } from "@services";
+import { Button } from "react-native";
+import { Form } from "@components";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import t from "tcomb-form-native";
-
-const nameProp = "name";
 
 class DetailsContainer extends Component {
+  state = {};
+
+  static getDerivedStateFromProps(props) {
+    const { goBack, navigation } = props;
+    if (goBack) {
+      navigation.goBack();
+    }
+    return null;
+  }
+
   static navigationOptions = ({ navigation }) => {
     const handleSave = navigation.getParam("handleSave");
     return {
       headerRight: <Button onPress={() => handleSave()} title="Сохранить" />
     };
   };
-
-  constructor() {
-    super();
-    this.state = {};
-  }
 
   componentDidMount() {
     const { actions, navigation } = this.props;
@@ -33,61 +39,22 @@ class DetailsContainer extends Component {
   }
 
   handleSubmit = () => {
-    const { actions, item, table } = this.props;
-    const record = { ...item, ...this._form.getValue() };
-    actions.updateRecordRequest(record, table);
+    const { actions, table } = this.props;
+    const record = this._form.handleSubmit();
+    actions[record.id ? "updateRecordRequest" : "addRecordRequest"](
+      record,
+      table
+    );
   };
 
   render() {
-    const { fields, goBack, item, navigation } = this.props;
-
-    if (goBack) {
-      navigation.goBack();
-    }
-
-    const fieldDef = {};
-    const typeDef = {};
-    const value = { ...item };
-
-    if (value.hasOwnProperty(nameProp)) {
-      fieldDef[nameProp] = { placeholder: "Наименование" };
-      typeDef[nameProp] = t.String;
-    }
-
-    const fieldTypes = fields || Object.entries(value);
-
-    fieldTypes.forEach((v, k) => {
-      fieldDef[k] = { label: v.name, placeholder: v.name };
-
-      switch (v.valueType) {
-        case ValueType.integer:
-        case ValueType.numeric:
-          typeInfo = t.Number;
-          break;
-        default:
-          typeInfo = t.String;
-          break;
-      }
-
-      typeDef[k] = typeInfo;
-    });
-
-    return (
-      <View>
-        <t.form.Form
-          ref={c => (this._form = c)}
-          type={t.struct(typeDef)}
-          value={value}
-          options={{ auto: "none", fields: fieldDef }}
-        />
-      </View>
-    );
+    return <Form ref={c => (this._form = c)} {...this.props} />;
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(
-    { loadRecordRequest, updateRecordRequest },
+    { addRecordRequest, loadRecordRequest, updateRecordRequest },
     dispatch
   )
 });

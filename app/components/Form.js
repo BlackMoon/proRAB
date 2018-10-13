@@ -1,7 +1,6 @@
-import { FormInput, FormLabel } from "react-native-elements";
+import React, { Component } from "react";
 import { StyleSheet, View } from "react-native";
 
-import React from "react";
 import { ValueType } from "@services";
 import t from "tcomb-form-native";
 
@@ -11,41 +10,48 @@ const styles = StyleSheet.create({
   name: { fontSize: 18 }
 });
 
-export const Form = ({ ref, fields, value }) => {
-  const data = { ...value };
+export class Form extends Component {
+  handleSubmit = () => ({ ...this.props.item, ...this._form.getValue() });
 
-  const fieldDef = {};
-  const typeDef = {};
-  if (data.hasOwnProperty(nameProp)) {
-    typeDef[nameProp] = t.String;
-  }
+  render() {
+    const { fields, item } = this.props;
 
-  const fieldTypes = fields || Object.entries(data);
+    const fieldDef = {};
+    const typeDef = {};
+    const value = { ...item };
 
-  fieldTypes.forEach((v, k) => {
-    fieldDef[k] = { label: v.name };
-
-    switch (v.valueType) {
-      case ValueType.integer:
-      case ValueType.numeric:
-        typeInfo = t.Number;
-        break;
-      default:
-        typeInfo = t.String;
-        break;
+    if (value.hasOwnProperty(nameProp)) {
+      fieldDef[nameProp] = { placeholder: "Наименование" };
+      typeDef[nameProp] = t.String;
     }
 
-    typeDef[k] = typeInfo;
-  });
+    const fieldTypes = fields || Object.entries(value);
 
-  return (
-    <View>
-      <t.form.Form
-        ref={ref}
-        type={t.struct(typeDef)}
-        value={data}
-        options={{ auto: "none", fields: fieldDef }}
-      />
-    </View>
-  );
-};
+    fieldTypes.forEach((v, k) => {
+      fieldDef[k] = { label: v.name, placeholder: v.name };
+
+      switch (v.valueType) {
+        case ValueType.integer:
+        case ValueType.numeric:
+          typeInfo = t.Number;
+          break;
+        default:
+          typeInfo = t.String;
+          break;
+      }
+
+      typeDef[k] = typeInfo;
+    });
+
+    return (
+      <View>
+        <t.form.Form
+          ref={c => (this._form = c)}
+          type={t.struct(typeDef)}
+          value={value}
+          options={{ auto: "none", fields: fieldDef }}
+        />
+      </View>
+    );
+  }
+}

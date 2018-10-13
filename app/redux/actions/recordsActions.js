@@ -17,9 +17,10 @@ export const addRecordFailed = ex => ({
   ex
 });
 
-export const addRecordRequest = handbook => ({
+export const addRecordRequest = (item, table) => ({
   type: ADD_RECORD_REQUEST,
-  handbook
+  item,
+  table
 });
 
 export const addRecordSuccess = id => ({

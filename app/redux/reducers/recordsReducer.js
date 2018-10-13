@@ -41,6 +41,7 @@ export default function recordsReducer(state = initialState, action) {
     case UPDATE_RECORD_REQUEST:
       return {
         ...state,
+        goBack: false,
         item: action.item,
         table: action.table,
         loading: true
