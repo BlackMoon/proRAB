@@ -7,6 +7,7 @@ import {
 
 import { Button } from "react-native";
 import { Form } from "@components";
+import { FormWithLoader } from "./withLoader";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 

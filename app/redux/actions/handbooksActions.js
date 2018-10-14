@@ -1,7 +1,8 @@
 import {
   LOAD_HANDBOOKS_FAILED,
   LOAD_HANDBOOKS_REQUEST,
-  LOAD_HANDBOOKS_SUCCESS
+  LOAD_HANDBOOKS_SUCCESS,
+  TOGGLE_HANDBOOKS_EDIT_MODE
 } from "@constants";
 
 export const loadHandbooksFailed = ex => ({
@@ -16,4 +17,8 @@ export const loadHandbooksRequest = () => ({
 export const loadHandbooksSuccess = handbooks => ({
   type: LOAD_HANDBOOKS_SUCCESS,
   handbooks
+});
+
+export const toggleHandbooksEditMode = () => ({
+  type: TOGGLE_HANDBOOKS_EDIT_MODE
 });

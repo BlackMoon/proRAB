@@ -6,10 +6,8 @@ import {
   LOAD_RECORDS_REQUEST,
   LOAD_RECORDS_SUCCESS,
   LOAD_RECORD_REQUEST,
-  LOAD_RECORD_SUCCESS,
-  UPDATE_RECORD_FAILED,
-  UPDATE_RECORD_REQUEST,
-  UPDATE_RECORD_SUCCESS
+  TOGGLE_RECORDS_EDIT_MODE,
+  UPDATE_RECORD_REQUEST
 } from "@constants";
 
 export const addRecordFailed = ex => ({
@@ -49,6 +47,10 @@ export const loadRecordsSuccess = (records, fields) => ({
   type: LOAD_RECORDS_SUCCESS,
   records,
   fields
+});
+
+export const toggleRecordsEditMode = () => ({
+  type: TOGGLE_RECORDS_EDIT_MODE
 });
 
 export const updateRecordRequest = (item, table) => ({

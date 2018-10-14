@@ -6,12 +6,14 @@ import {
   LOAD_RECORDS_REQUEST,
   LOAD_RECORDS_SUCCESS,
   LOAD_RECORD_REQUEST,
+  TOGGLE_RECORDS_EDIT_MODE,
   UPDATE_RECORD_FAILED,
   UPDATE_RECORD_REQUEST,
   UPDATE_RECORD_SUCCESS
 } from "@constants";
 
 const initialState = {
+  editMode: false,
   goBack: false,
   fields: [],
   items: [],
@@ -59,7 +61,8 @@ export default function recordsReducer(state = initialState, action) {
       };
     case UPDATE_RECORD_SUCCESS:
       return { ...state, goBack: true, item: null, loading: false };
-
+    case TOGGLE_RECORDS_EDIT_MODE:
+      return { ...state, editMode: !state.editMode };
     default:
       return state;
   }
