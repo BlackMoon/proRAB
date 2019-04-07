@@ -2,14 +2,14 @@ import DataService from "./DataService";
 
 export class HandbooksDataService extends DataService {
   constructor() {
-    super("handbooks");
+    super("handbook");
   }
 
   async get(key) {
     let { rows } = await this.executeSql(
-      `select h.table_name tableName, hi.field_code code, hi.name, hi.valuetype_id 
+      `select h.table_name tableName, hi.fieldCode code, hi.name, hi.valuetypeId 
       from ${this.table} h
-      left join handbook_info hi on hi.handbook_id = h.id
+      left join handbookInfo hi on hi.handbookId = h.id
       where h.id = ?`,
       key
     );
@@ -30,7 +30,7 @@ export class HandbooksDataService extends DataService {
 
   async getAll(...args) {
     const { rows } = await this.executeSql(
-      `select id, name, table_name from ${this.table}`,
+      `select id, name, tableName from ${this.table}`,
       args
     );
     return rows._array;
