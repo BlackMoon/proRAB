@@ -1,0 +1,19 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-console": [
+            true,
+            "log",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "no-var-requires": false
+    },
+    "rulesDirectory": []
+}
