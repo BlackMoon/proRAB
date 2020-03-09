@@ -343,3 +343,4 @@ healthchecksdb
 ui/.vscode/
 
 .DS_Store
+.vscode/.react/*
