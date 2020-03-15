@@ -4,7 +4,7 @@ import config from '../constants';
 const db = SQLite.openDatabase(config.DB_NAME);
 
 export const executeSql = async (sqlStatement, ...args): Promise<SQLResultSet> => {
-    console.log(args);
+    console.debug(sqlStatement, args);
     return new Promise((resolve, reject) =>
         db.transaction(tx => {
             tx.executeSql(
