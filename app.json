@@ -24,7 +24,9 @@
       "**/*"
     ],
     "packagerOpts": {
-      "config": "metro.config.js"
+      "assetExts": [
+        "sql"
+      ]
     },
     "ios": {
       "supportsTablet": true
