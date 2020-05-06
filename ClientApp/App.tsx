@@ -8,7 +8,7 @@ export default class App extends Component {
     migrate();
   }
 
-  render(){
+  render() {
     return (
       <View style={styles.container}>
         <Text>Open up App.tsx to start working on your app!</Text>
