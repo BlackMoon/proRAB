@@ -1,7 +1,0 @@
-{
-  "packagerPort": 8081,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://fv-pmb.blackmoon.prorab.exp.direct",
-  "packagerNgrokUrl": "https://packager.fv-pmb.blackmoon.prorab.exp.direct",
-  "ngrokPid": 71436
-}
