@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { migrate } from './misc/preload';
+import { migrate } from './src/preload';
 
 export default class App extends Component {
   componentDidMount() {

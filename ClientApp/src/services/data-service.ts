@@ -40,7 +40,9 @@ export abstract class DataService {
       Array(entries.length).fill('?').join(',') +
       ')';
 
-    const { insertId } = await executeSql(sqlStatement, ...entries.map(([k, v]) => v)
+    const { insertId } = await executeSql(
+      sqlStatement,
+      ...entries.map(([k, v]) => v)
     );
     return insertId;
   }
