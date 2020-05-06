@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+import { migrate } from './preload';
+
+export default class App extends Component {
+  componentDidMount() {
+    migrate();
+  }
+
+  render(){
+    return (
+      <View style={styles.container}>
+        <Text>Open up App.tsx to start working on your app!</Text>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
