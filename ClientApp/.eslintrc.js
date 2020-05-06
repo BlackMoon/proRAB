@@ -1,3 +1,6 @@
 module.exports = {
-    extends: "universe"
+    extends: "universe",
+    rules: {      
+      "no-new-func": 0
+    }
   };

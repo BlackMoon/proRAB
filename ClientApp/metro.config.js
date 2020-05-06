@@ -1,4 +1,4 @@
-const { getDefaultConfig } = require("metro-config");
+const { getDefaultConfig } = require('metro-config');
 
 module.exports = (async () => {
   const {
@@ -6,7 +6,7 @@ module.exports = (async () => {
   } = await getDefaultConfig();
   return {
     resolver: {
-      assetExts: [assetExts, "png", "sql", "ttf"],
+      assetExts: [assetExts, 'png', 'sql', 'ttf'],
       sourceExts: [...sourceExts],
     },
   };
