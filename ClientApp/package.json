@@ -5,7 +5,7 @@
     "eject": "expo eject",
     "ios": "expo start --ios",
     "lint": "eslint **/*.{js,ts,tsx} --quiet --fix",
-    "start": "expo start",
+    "start": "npm run lint && expo start",
     "test": "jest",
     "web": "expo start --web"
   },
