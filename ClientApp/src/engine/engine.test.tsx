@@ -4,7 +4,7 @@ import { IFnContext } from './fn-context';
 describe('Function engine', () => {
 	it('empty context. 1 / 2 returns the 0.5', () => {
 		const expected = 0.5;
-		const result = new Engine().run<number>('return true;');
+		const result = new Engine().run<number>('return 1/2;');
 		console.log(typeof result);
 		expect(result).toEqual(expected);
 	});
