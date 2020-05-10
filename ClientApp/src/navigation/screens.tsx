@@ -10,10 +10,6 @@ const RepairStack = createStackNavigator();
 
 export const RepairsStackScreen = () => (
 	<RepairStack.Navigator>
-		<RepairStack.Screen
-			name="RepairScreen"
-			component={repair}
-			options={{ title: 'Ремонт' }}
-		/>
+		<RepairStack.Screen name="RepairScreen" component={repair} options={{ title: 'Ремонт' }} />
 	</RepairStack.Navigator>
 );

@@ -1,6 +1,5 @@
 import * as SQLite from 'expo-sqlite';
-
-import config from '../constants';
+import config from '@constants';
 
 const db = SQLite.openDatabase(config.DB_NAME);
 

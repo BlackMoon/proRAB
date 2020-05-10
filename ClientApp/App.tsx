@@ -1,10 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
-import AppNavigator from './src/navigation/AppNavigator';
-import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-
-import { getMigrations, getVersion, migrate } from './src/preload';
+import React, { Component } from 'react';
+import AppNavigator from '@navigation/AppNavigator';
+import { getMigrations, getVersion, migrate } from 'preload';
 
 export default class App extends Component {
 	state = { progress: 0, version: 0, isReady: true };

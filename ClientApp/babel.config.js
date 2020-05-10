@@ -6,12 +6,12 @@ module.exports = function (api) {
 			[
 				'module-resolver',
 				{
-					
+					root: ['./src'],
 					extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
 					alias: {
-						'@constants/*': 'constants/*',
-						'navigation': './src/navigation',
-						'@services/*': 'services/*',
+						'@constants': './src/constants',
+						'@navigation': './src/navigation',
+						'@services': './src/services',
 					},
 				},
 			],

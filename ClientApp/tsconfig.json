@@ -9,10 +9,10 @@
     "lib": ["es6"],
     "moduleResolution": "node",
     "noEmit": true,
-    "paths": {
-      "constants": ["constants"],      
-      "navigation/*": ["navigation/*"],      
-      "services": ["services"],
+    "paths": {          
+      "@constants": ["constants"],            
+      "@navigation/*": ["navigation/*"],
+      "@services": ["services"]                        
     },
     "strict": true,
     "target": "esnext"

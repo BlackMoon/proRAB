@@ -3,7 +3,7 @@ import * as React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { ICON_SIZE } from '../constants';
+import { ICON_SIZE } from '@constants';
 import { repair } from '../containers/repair';
 import { RepairsStackScreen } from './Screens';
 
