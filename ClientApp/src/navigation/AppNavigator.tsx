@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { ICON_SIZE } from '@constants';
 import { repair } from '../containers/repair';
-import { RepairsStackScreen } from './Screens';
+import { RepairsStackScreen, ConstructionStackScreen, ObjectsStackScreen } from './Screens';
 
 type BottomTabParams = {
 	Repair: undefined;
@@ -25,23 +25,23 @@ const AppNavigator = () => (
 			component={RepairsStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="format-paint" size={ICON_SIZE} color={color} />,
-				tabBarLabel: 'Ремонт',
+				title: 'Ремонт',
 			}}
 		/>
 		<BottomTab.Screen
 			name="Construction"
-			component={repair}
+			component={ConstructionStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="wall" size={ICON_SIZE} color={color} />,
-				tabBarLabel: 'Стройка',
+				title: 'Стройка',
 			}}
 		/>
 		<BottomTab.Screen
 			name="Objects"
-			component={repair}
+			component={ObjectsStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape-square-plus" size={ICON_SIZE} color={color} />,
-				tabBarLabel: 'Объекты',
+				title: 'Объекты',
 			}}
 		/>
 		<BottomTab.Screen
@@ -49,7 +49,7 @@ const AppNavigator = () => (
 			component={repair}
 			options={{
 				tabBarIcon: ({ color }) => <Entypo name="book" size={ICON_SIZE} color={color} />,
-				tabBarLabel: 'Справочники',
+				title: 'Справочники',
 			}}
 		/>
 		<BottomTab.Screen
@@ -57,7 +57,7 @@ const AppNavigator = () => (
 			component={repair}
 			options={{
 				tabBarIcon: ({ color }) => <Entypo name="dots-three-horizontal" size={ICON_SIZE} color={color} />,
-				tabBarLabel: 'Еще',
+				title: 'Еще',
 			}}
 		/>
 	</BottomTab.Navigator>
