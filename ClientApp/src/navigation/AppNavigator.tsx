@@ -5,9 +5,17 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { ICON_SIZE } from '../constants';
 import { repair } from '../containers/repair';
-import { RepairsStackScreen } from './screens';
+import { RepairsStackScreen } from './Screens';
 
-const BottomTab = createBottomTabNavigator();
+type BottomTabParams = {
+	Repair: undefined;
+	Construction: undefined;
+	Objects: undefined;
+	Catalogs: undefined;
+	More: undefined;
+};
+
+const BottomTab = createBottomTabNavigator<BottomTabParams>();
 const INITIAL_ROUTE_NAME = 'Repair';
 
 const AppNavigator = () => (
@@ -16,13 +24,7 @@ const AppNavigator = () => (
 			name="Repair"
 			component={RepairsStackScreen}
 			options={{
-				tabBarIcon: ({ color }) => (
-					<MaterialCommunityIcons
-						name="format-paint"
-						size={ICON_SIZE}
-						color={color}
-					/>
-				),
+				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="format-paint" size={ICON_SIZE} color={color} />,
 				tabBarLabel: 'Ремонт',
 			}}
 		/>
@@ -30,9 +32,7 @@ const AppNavigator = () => (
 			name="Construction"
 			component={repair}
 			options={{
-				tabBarIcon: ({ color }) => (
-					<MaterialCommunityIcons name="wall" size={ICON_SIZE} color={color} />
-				),
+				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="wall" size={ICON_SIZE} color={color} />,
 				tabBarLabel: 'Стройка',
 			}}
 		/>
@@ -40,13 +40,7 @@ const AppNavigator = () => (
 			name="Objects"
 			component={repair}
 			options={{
-				tabBarIcon: ({ color }) => (
-					<MaterialCommunityIcons
-						name="shape-square-plus"
-						size={ICON_SIZE}
-						color={color}
-					/>
-				),
+				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape-square-plus" size={ICON_SIZE} color={color} />,
 				tabBarLabel: 'Объекты',
 			}}
 		/>
@@ -54,9 +48,7 @@ const AppNavigator = () => (
 			name="Catalogs"
 			component={repair}
 			options={{
-				tabBarIcon: ({ color }) => (
-					<Entypo name="book" size={ICON_SIZE} color={color} />
-				),
+				tabBarIcon: ({ color }) => <Entypo name="book" size={ICON_SIZE} color={color} />,
 				tabBarLabel: 'Справочники',
 			}}
 		/>
@@ -64,9 +56,7 @@ const AppNavigator = () => (
 			name="More"
 			component={repair}
 			options={{
-				tabBarIcon: ({ color }) => (
-					<Entypo name="dots-three-horizontal" size={ICON_SIZE} color={color} />
-				),
+				tabBarIcon: ({ color }) => <Entypo name="dots-three-horizontal" size={ICON_SIZE} color={color} />,
 				tabBarLabel: 'Еще',
 			}}
 		/>

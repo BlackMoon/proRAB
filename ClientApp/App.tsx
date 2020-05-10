@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './src/navigation/AppNavigator';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 
-import AppNavigator from './src/navigation';
 import { getMigrations, getVersion, migrate } from './src/preload';
 
 export default class App extends Component {

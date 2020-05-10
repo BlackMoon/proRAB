@@ -13,7 +13,7 @@ export default class Engine {
 		}
 
 		const fn = this.makeFn(...args.concat(body));
-		console.debug(fn.toString(), typeof T);
+		console.debug(fn.toString());
 
 		return fn.apply(ctx, values) as T;
 	}
