@@ -1,11 +1,13 @@
+import { NavigationContainer } from '@react-navigation/native';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 
+import AppNavigator from './src/navigation';
 import { getMigrations, getVersion, migrate } from './src/preload';
 
 export default class App extends Component {
-	state = { progress: 0, version: 0, isReady: false };
+	state = { progress: 0, version: 0, isReady: true };
 
 	async componentDidMount() {
 		const version = await getVersion();
@@ -16,7 +18,7 @@ export default class App extends Component {
 		const migrations = getMigrations(version);
 		const migrationsTotal = migrations.length;
 
-		if (migrationsTotal) {
+		if (migrationsTotal > 0) {
 			this.setState({ isReady: false });
 			for (const [i, key] of migrations.entries()) {
 				await migrate(key);
@@ -37,9 +39,9 @@ export default class App extends Component {
 			);
 		}
 		return (
-			<View style={styles.container}>
-				<Text>Open up App.tsx to start working on your app!</Text>
-			</View>
+			<NavigationContainer>
+				<AppNavigator></AppNavigator>
+			</NavigationContainer>
 		);
 	}
 }
