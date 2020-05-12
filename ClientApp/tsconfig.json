@@ -11,6 +11,7 @@
     "noEmit": true,
     "paths": {          
       "@constants": ["constants"],            
+      "@localization": ["localization"],
       "@navigation/*": ["navigation/*"],
       "@services": ["services"]                        
     },

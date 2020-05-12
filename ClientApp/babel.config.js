@@ -10,6 +10,7 @@ module.exports = function (api) {
 					extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
 					alias: {
 						'@constants': './src/constants',
+						'@localization': './src/localization',
 						'@navigation': './src/navigation',
 						'@services': './src/services',
 					},

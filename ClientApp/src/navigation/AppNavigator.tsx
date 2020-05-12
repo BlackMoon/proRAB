@@ -4,60 +4,56 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { ICON_SIZE } from '@constants';
+import i18n from '../localization';
 import { repair } from '../containers/repair';
 import { RepairsStackScreen, ConstructionStackScreen, ObjectsStackScreen } from './Screens';
+import { routes } from './LinkingConfiguration';
 
-type BottomTabParams = {
-	Repair: undefined;
-	Construction: undefined;
-	Objects: undefined;
-	Catalogs: undefined;
-	More: undefined;
-};
+type BottomTabParams = { [Key in keyof typeof routes]: undefined };
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
-const INITIAL_ROUTE_NAME = 'Repair';
+const INITIAL_ROUTE_NAME = 'repair';
 
 const AppNavigator = () => (
 	<BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
 		<BottomTab.Screen
-			name="Repair"
+			name="repair"
 			component={RepairsStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="format-paint" size={ICON_SIZE} color={color} />,
-				title: 'Ремонт',
+				title: i18n.t('repair'),
 			}}
 		/>
 		<BottomTab.Screen
-			name="Construction"
+			name="construction"
 			component={ConstructionStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="wall" size={ICON_SIZE} color={color} />,
-				title: 'Стройка',
+				title: i18n.t('construction'),
 			}}
 		/>
 		<BottomTab.Screen
-			name="Objects"
+			name="objects"
 			component={ObjectsStackScreen}
 			options={{
 				tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape-square-plus" size={ICON_SIZE} color={color} />,
-				title: 'Объекты',
+				title: i18n.t('objects'),
 			}}
 		/>
 		<BottomTab.Screen
-			name="Catalogs"
+			name="catalogs"
 			component={repair}
 			options={{
 				tabBarIcon: ({ color }) => <Entypo name="book" size={ICON_SIZE} color={color} />,
-				title: 'Справочники',
+				title: i18n.t('catalogues'),
 			}}
 		/>
 		<BottomTab.Screen
-			name="More"
+			name="more"
 			component={repair}
 			options={{
 				tabBarIcon: ({ color }) => <Entypo name="dots-three-horizontal" size={ICON_SIZE} color={color} />,
-				title: 'Еще',
+				title: i18n.t('more'),
 			}}
 		/>
 	</BottomTab.Navigator>

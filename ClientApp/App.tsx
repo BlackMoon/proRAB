@@ -2,7 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import React, { Component } from 'react';
+
 import AppNavigator from '@navigation/AppNavigator';
+import LinkingConfiguration from '@navigation/LinkingConfiguration';
+import i18n from '@localization';
 import { getMigrations, getVersion, migrate } from 'preload';
 
 export default class App extends Component {
@@ -32,13 +35,13 @@ export default class App extends Component {
 		if (!this.state.isReady) {
 			return (
 				<View style={styles.container}>
-					<Text>{this.state.version === 0 ? 'Creating database' : 'Updating'}</Text>
+					<Text>{this.state.version === 0 ? i18n.t('creating_db') : i18n.t('updating')}</Text>
 					<Progress.Bar progress={this.state.progress} width={200} />
 				</View>
 			);
 		}
 		return (
-			<NavigationContainer>
+			<NavigationContainer linking={LinkingConfiguration}>
 				<AppNavigator></AppNavigator>
 			</NavigationContainer>
 		);
