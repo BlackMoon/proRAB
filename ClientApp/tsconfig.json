@@ -10,7 +10,9 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {          
+      "@components/*": ["components/*"],            
       "@constants": ["constants"],            
+      "@containers/*": ["containers/*"],            
       "@localization": ["localization"],
       "@navigation/*": ["navigation/*"],
       "@services": ["services"]                        

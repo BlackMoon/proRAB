@@ -10,5 +10,5 @@ export const routes = {
 
 export default {
 	prefixes: [Linking.makeUrl('/')],
-	config: { routes },
+	config: routes,
 };

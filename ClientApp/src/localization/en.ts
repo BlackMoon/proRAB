@@ -1,5 +1,8 @@
 export const en = {
-	catalogues: 'Catalogues',
+	creating_db: 'Creating database',
+	updating: 'Updating',
+	/** tabs */
+	catalogs: 'Catalogues',
 	construction: 'Construction',
 	more: 'More',
 	objects: 'Objects',

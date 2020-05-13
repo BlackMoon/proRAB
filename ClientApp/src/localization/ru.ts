@@ -2,7 +2,7 @@ export const ru = {
 	creating_db: 'Создание базы',
 	updating: 'Обновление',
 	/** tabs */
-	catalogues: 'Справочники',
+	catalogs: 'Справочники',
 	construction: 'Стройка',
 	more: 'Еще',
 	objects: 'Объекты',

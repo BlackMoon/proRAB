@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 
 // todo dummy component
-export const repair = () => {
+export const Repair = () => {
 	return (
 		<View style={{ flex: 1 }} >
 			<Text>repairs</Text>
