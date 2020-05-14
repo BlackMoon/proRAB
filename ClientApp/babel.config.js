@@ -19,7 +19,6 @@ module.exports = function (api) {
 						'@constants': './src/constants',
 						'@containers': './src/containers',
 						'@localization': './src/localization',
-						'@navigation': './src/navigation',
 						'@services': './src/services',
 					},
 				},

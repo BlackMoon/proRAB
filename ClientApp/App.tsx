@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 import React, { Component } from 'react';
+import { Provider } from 'mobx-react';
 
-import AppNavigator from '@navigation/AppNavigator';
+import AppNavigator from 'navigation/AppNavigator';
 import i18n from '@localization';
 import { getMigrations, getVersion, migrate } from 'preload';
 
@@ -38,7 +39,11 @@ export default class App extends Component {
 				</View>
 			);
 		}
-		return <AppNavigator></AppNavigator>;
+		return (
+			<Provider>
+				<AppNavigator></AppNavigator>
+			</Provider>
+		);
 	}
 }
 
