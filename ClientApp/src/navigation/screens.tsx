@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-
 import i18n from '@localization';
+
+import About from '@components/About';
 import More from '@components/More';
 import { Repair } from '@containers/Repair';
 
@@ -50,18 +51,21 @@ export const ObjectsStackScreen = () => (
 	</ObjectsStack.Navigator>
 );
 
-
 /**
  * More
  */
 type MoreStackParams = {
-	MoreScreen: undefined;
+	about: undefined;
+	more: undefined;
+	repair: undefined;
 };
 
 const MoreStack = createStackNavigator<MoreStackParams>();
 
 export const MoreStackScreen = () => (
 	<MoreStack.Navigator>
-		<MoreStack.Screen name="MoreScreen" component={More} options={{ title: i18n.t('more') }} />
+		<MoreStack.Screen name="more" component={More} options={{ title: i18n.t('more') }} />
+		<MoreStack.Screen name="repair" component={Repair} options={{ title: i18n.t('repair') }} />
+		<MoreStack.Screen name="about" component={About} options={{ title: i18n.t('about') }} />
 	</MoreStack.Navigator>
 );

@@ -1,55 +1,43 @@
-import { ScrollView, RectButton } from 'react-native-gesture-handler';
-import { StyleSheet, Text, View } from 'react-native';
+import { SectionList, Text, SectionListData } from 'react-native';
+import { ListItem, IconProps } from 'react-native-elements';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import i18n from '@localization';
 
-function OptionButton({ icon, label, onPress, isLastOption }) {
-	return (
-		<RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-			<View style={{ flexDirection: 'row' }}>
-				<View style={styles.optionIconContainer}>
-					<Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
-				</View>
-				<View style={styles.optionTextContainer}>
-					<Text style={styles.optionText}>{label}</Text>
-				</View>
-			</View>
-		</RectButton>
-	);
-}
+import { RouteItem, RouteItemGroup } from 'models';
+
+const sections: RouteItemGroup[] = [
+	{
+		data: [
+			{ title: i18n.t('functions'), iconName: 'function-variant', iconType: 'material-community', link: 'repair' },
+			{ title: i18n.t('tables'), iconName: 'table-settings', iconType: 'material-community', link: 'repair' },
+			{ title: i18n.t('calculations'), iconName: 'functions', iconType: 'material-icons', link: 'repair' },
+		],
+	},
+	{
+		data: [
+			{ title: i18n.t('settings'), link: 'repair' },
+			{ title: i18n.t('about'), link: 'about' },
+		],
+	},
+];
+
+const keyExtractor = (item: RouteItem, index: number) => index.toString();
+const renderItem = ({ item, navigation }: { item: RouteItem; navigation: NavigationProp<Record<string, object | undefined>> }) => {
+	const icon: IconProps = { name: item.iconName!, type: item.iconType };
+	return <ListItem leftIcon={icon} title={item.title} bottomDivider={true} chevron={true} onPress={() => navigation.navigate(item.link)} />;
+};
+
+const renderSectionHeader = ({ section: { title } }: { section: SectionListData<RouteItem> }) => <Text>{title}</Text>;
 
 export default function More() {
+	const navigation = useNavigation();
 	return (
-		<ScrollView style={styles.container}>
-			<OptionButton icon="md-school" label="Read the Expo documentation" />
-			<OptionButton icon="md-compass" label="Read the React Navigation documentation" />
-			<OptionButton icon="ios-chatboxes" label="Ask a question on the forums" isLastOption />
-		</ScrollView>
+		<SectionList<RouteItem>
+			sections={sections}
+			keyExtractor={keyExtractor}
+			renderItem={({ item }: { item: RouteItem }) => renderItem({ item, navigation })}
+			renderSectionHeader={renderSectionHeader}
+		/>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fafafa',
-	},
-	optionIconContainer: {
-		marginRight: 12,
-	},
-	option: {
-		backgroundColor: '#fdfdfd',
-		paddingHorizontal: 15,
-		paddingVertical: 15,
-		borderWidth: StyleSheet.hairlineWidth,
-		borderBottomWidth: 0,
-		borderColor: '#ededed',
-	},
-	lastOption: {
-		borderBottomWidth: StyleSheet.hairlineWidth,
-	},
-	optionText: {
-		fontSize: 15,
-		alignSelf: 'flex-start',
-		marginTop: 1,
-	},
-});
