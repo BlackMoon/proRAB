@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
-import * as Progress from 'react-native-progress';
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
 
 import AppNavigator from 'navigation/AppNavigator';
-import i18n from '@localization';
+import { i18n, locale } from '@localization';
 import { getMigrations, getVersion, migrate } from 'preload';
+import Migration from '@components/Migration';
+
+const LocalizationContext = React.createContext('en');
 
 export default class App extends Component {
 	state = { progress: 0, version: 0, isReady: true };
@@ -31,27 +32,25 @@ export default class App extends Component {
 	}
 
 	render() {
+		// const [locale, setLocale] = React.useState(i18n.locale);
+		// const localizationContext = React.useMemo(
+		// 	() => ({
+		// 		t: (scope, options) => i18n.t(scope, { locale, ...options }),
+		// 		locale,
+		// 		setLocale,
+		// 	}),
+		// 	[locale]
+		// );
+
 		if (!this.state.isReady) {
-			return (
-				<View style={styles.container}>
-					<Text>{this.state.version === 0 ? i18n.t('creating_db') : i18n.t('updating')}</Text>
-					<Progress.Bar progress={this.state.progress} width={200} />
-				</View>
-			);
+			return <Migration progress={this.state.progress} version={this.state.version}></Migration>;
 		}
 		return (
 			<Provider>
-				<AppNavigator></AppNavigator>
+				{/* <LocalizationContext.Provider value={localizationContext}> */}
+					<AppNavigator></AppNavigator>
+				{/* </LocalizationContext.Provider> */}
 			</Provider>
 		);
 	}
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-});

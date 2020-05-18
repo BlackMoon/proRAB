@@ -1,11 +1,8 @@
-export interface RouteItem {
-	link: string;
-	title: string;
-	iconName?: string;
-	iconType?: string;
+import { ItemGroup } from './item-group';
+import { OptionItem } from './option-item';
+
+export interface RouteItem extends OptionItem {
+	route: string;
 }
 
-export interface RouteItemGroup {
-	title?: string;
-	data: RouteItem[];
-}
+export interface RouteItemGroup extends ItemGroup<RouteItem> {}
