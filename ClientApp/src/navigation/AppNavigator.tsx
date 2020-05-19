@@ -4,7 +4,7 @@ import * as React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { ICON_SIZE } from '@constants';
+import { ICON_SIZE } from 'config';
 import i18n from '@localization';
 import { Repair } from '@containers/Repair';
 import { RepairsStackScreen, ConstructionStackScreen, ObjectsStackScreen, MoreStackScreen } from './Screens';

@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import React from 'react';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 
-import { i18n } from '@localization';
+import i18n from '@localization';
 
 interface MigrationProps {
 	progress: number;
@@ -16,11 +17,6 @@ const Migration: React.FC<MigrationProps> = ({ progress, version }) => (
 	</View>
 );
 
-Migration.defaultProps = {
-	progress: 0,
-	version: 0,
-};
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -29,5 +25,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 });
+
 
 export default Migration;

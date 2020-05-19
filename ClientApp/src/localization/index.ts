@@ -10,4 +10,4 @@ i18n.fallbacks = true;
 i18n.locale = 'ru'; // locale;
 i18n.translations = { en, ru };
 
-export { i18n, locale };
+export default i18n;

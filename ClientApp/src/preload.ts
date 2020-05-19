@@ -8,7 +8,7 @@ const migrations: ReadonlyMap<number, string> = new Map<number, string>([
 ]);
 
 export const getVersion = async (): Promise<number> => {
-	// await executeSql('PRAGMA user_version=0;');
+	await executeSql('PRAGMA user_version=0;');
 	const { rows } = await executeSql('PRAGMA user_version;');
 	const { user_version } = rows.item(0);
 	return user_version;
@@ -21,7 +21,7 @@ export const getMigrations = (currentVersion: number): number[] => {
 };
 
 export const migrate = async (key: number) => {
-	console.debug(`Applying migration: ${key}`);
+	console.debug(`\nApplying migration: ${key}\n`);
 	const module = migrations.get(key);
 	if (module) {
 		const path = `${FS.documentDirectory}${key}.sql`;

@@ -2,7 +2,7 @@ import { SectionList, Text, SectionListData } from 'react-native';
 import { ListItem, IconProps } from 'react-native-elements';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import React from 'react';
-import { i18n } from '@localization';
+import i18n from '@localization';
 
 import { RouteItem, RouteItemGroup } from 'models';
 

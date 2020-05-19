@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { i18n } from '@localization';
+import i18n from '@localization';
 
 import About from '@components/About';
 import More from '@components/More';

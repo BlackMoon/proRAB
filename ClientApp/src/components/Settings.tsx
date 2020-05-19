@@ -1,6 +1,6 @@
 import { Text, SectionList, SectionListData, StyleSheet, Alert } from 'react-native';
 import React from 'react';
-import { i18n } from '@localization';
+import i18n from '@localization';
 
 import { LocaleItemGroup, LocaleItem } from 'models';
 import { ListItem } from 'react-native-elements';
