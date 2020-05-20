@@ -26,5 +26,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-
 export default Migration;

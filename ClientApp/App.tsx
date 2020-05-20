@@ -1,56 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Provider } from 'mobx-react';
+import 'mobx-react-lite/batchingForReactNative';
 
-import AppNavigator from 'navigation/AppNavigator';
-import { i18n, locale } from '@localization';
 import { getMigrations, getVersion, migrate } from 'preload';
+import AppNavigator from '@navigation/AppNavigator';
 import Migration from '@components/Migration';
+import RootStore from '@store/root-store';
 
-const LocalizationContext = React.createContext('en');
+export default function App() {
+	const [isReady, setIsReady] = React.useState(true);
+	const [progress, setProgress] = React.useState(0);
+	const [version, setVersion] = React.useState(0);
 
-export default class App extends Component {
-	state = { progress: 0, version: 0, isReady: true };
+	useEffect(() => {
+		(async () => {
+			let version = await getVersion();
+			setVersion(version);
 
-	async componentDidMount() {
-		const version = await getVersion();
-		this.setState({ version });
+			const migrations = getMigrations(version);
+			const migrationsTotal = migrations.length;
 
-		console.debug(`current version: ${version}`);
-
-		const migrations = getMigrations(version);
-		const migrationsTotal = migrations.length;
-
-		if (migrationsTotal > 0) {
-			this.setState({ isReady: false });
-			for (const [i, key] of migrations.entries()) {
-				await migrate(key);
-				this.setState({ progress: (i + 1) / migrationsTotal });
+			if (migrationsTotal > 0) {
+				setIsReady(false);
+				for (const [i, key] of migrations.entries()) {
+					await migrate(key);
+					setProgress((i + 1) / migrationsTotal);
+					version = key;
+				}
 			}
-		}
+			RootStore.setDbVersion(version);
+			setIsReady(true);
+		})();
+	}, []);
 
-		this.setState({ isReady: true });
-	}
-
-	render() {
-		// const [locale, setLocale] = React.useState(i18n.locale);
-		// const localizationContext = React.useMemo(
-		// 	() => ({
-		// 		t: (scope, options) => i18n.t(scope, { locale, ...options }),
-		// 		locale,
-		// 		setLocale,
-		// 	}),
-		// 	[locale]
-		// );
-
-		if (!this.state.isReady) {
-			return <Migration progress={this.state.progress} version={this.state.version}></Migration>;
-		}
-		return (
-			<Provider>
-				{/* <LocalizationContext.Provider value={localizationContext}> */}
-					<AppNavigator></AppNavigator>
-				{/* </LocalizationContext.Provider> */}
-			</Provider>
-		);
-	}
+	return (
+		<Provider rootStore={RootStore}>
+			{!isReady ? <Migration progress={progress} version={version}></Migration> : <AppNavigator></AppNavigator>}
+		</Provider>
+	);
 }

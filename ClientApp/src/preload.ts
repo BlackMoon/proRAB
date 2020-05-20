@@ -20,8 +20,8 @@ export const getMigrations = (currentVersion: number): number[] => {
 		.sort((a, b) => a - b);
 };
 
-export const migrate = async (key: number) => {
-	console.debug(`\nApplying migration: ${key}\n`);
+export const migrate = async (key: number) => {	
+	console.debug(`Applying migration: ${key}\n`);
 	const module = migrations.get(key);
 	if (module) {
 		const path = `${FS.documentDirectory}${key}.sql`;

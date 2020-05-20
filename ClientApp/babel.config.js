@@ -16,10 +16,11 @@ module.exports = function (api) {
 					extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
 					alias: {
 						'@components': './src/components',
-						'@constants': './src/constants',
 						'@containers': './src/containers',
 						'@localization': './src/localization',
+						'@navigation': './src/navigation',
 						'@services': './src/services',
+						'@store': './src/store',
 					},
 				},
 			],

@@ -6,7 +6,7 @@ import { inject, observer } from 'mobx-react';
 import RootStore from '@store/root-store';
 
 interface AboutProps {
-	rootStore: RootStore;
+	rootStore: typeof RootStore;
 }
 
 const About: React.FC<AboutProps> = ({ rootStore }) => (

@@ -1,6 +1,7 @@
 import { observable, action, reaction } from 'mobx';
 
-export default class RootStore {
+/** Container class for stores */
+class RootStore {
 	constructor() {
 		reaction(
 			() => this.dbVersion,
@@ -16,3 +17,5 @@ export default class RootStore {
 	@action
 	setDbVersion = (version: number) => (this.dbVersion = version);
 }
+
+export default new RootStore();

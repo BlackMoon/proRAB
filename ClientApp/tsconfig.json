@@ -4,17 +4,19 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "isolatedModules": true,
     "jsx": "react",
     "lib": ["es6"],
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {          
-      "@components/*": ["components/*"],            
-      "@constants": ["constants"],            
+      "@components/*": ["components/*"],
       "@containers/*": ["containers/*"],            
       "@localization": ["localization"],      
-      "@services": ["services"]                        
+      "@navigation/*": ["navigation/*"],            
+      "@services": ["services"],
+      "@store/*": ["store/*"],                                                
     },
     "strict": true,
     "target": "esnext"
