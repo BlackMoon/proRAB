@@ -2,7 +2,7 @@ import { Text, SectionList, SectionListData, StyleSheet, Alert } from 'react-nat
 import React from 'react';
 import i18n from '@localization';
 
-import { LocaleItemGroup, LocaleItem } from 'models';
+import { LocaleItemGroup, LocaleItem } from '@models';
 import { ListItem } from 'react-native-elements';
 
 const handleLocaleChange = (locale: string) => {

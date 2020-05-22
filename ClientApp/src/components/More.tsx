@@ -4,7 +4,7 @@ import { useNavigation, NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import i18n from '@localization';
 
-import { RouteItem, RouteItemGroup } from 'models';
+import { RouteItem, RouteItemGroup } from '@models';
 
 const sections: RouteItemGroup[] = [
 	{
@@ -25,9 +25,7 @@ const sections: RouteItemGroup[] = [
 const keyExtractor = (item: RouteItem, index: number) => index.toString();
 const renderItem = ({ item, navigation }: { item: RouteItem; navigation: NavigationProp<Record<string, object | undefined>> }) => {
 	const icon: IconProps = { name: item.iconName!, type: item.iconType };
-	return (
-		<ListItem leftIcon={icon} title={item.title} bottomDivider={true} chevron={true} onPress={() => navigation.navigate(item.route)} />
-	);
+	return <ListItem leftIcon={icon} title={item.title} bottomDivider chevron onPress={() => navigation.navigate(item.route)} />;
 };
 
 const renderSectionHeader = ({ section: { title } }: { section: SectionListData<RouteItem> }) => <Text>{title}</Text>;

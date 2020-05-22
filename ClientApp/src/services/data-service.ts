@@ -1,83 +1,49 @@
-import * as SQLite from 'expo-sqlite';
-import config from 'config';
+import { executeSql } from './execute-sql';
 
-const db = SQLite.openDatabase(config.DB_NAME);
+export abstract class DataService<T> {
+	table: string;
 
-export const executeSql = async (sqlStatement: string, args?: any[] | undefined): Promise<SQLResultSet> => {	
-	console.debug(sqlStatement);
-	args && console.debug(args);
-	return new Promise((resolve, reject) =>
-		db.transaction(tx => {
-			tx.executeSql(
-				sqlStatement,
-				args,
-				(_, result) => resolve(result),
-				(_, error) => {
-					reject(error);
-					return false;
-				}
-			);
-		})
-	);
-};
+	constructor(table: string) {
+		this.table = table;
+	}
 
-// export abstract class DataService {
-// 	table: string;
+	// async add(entity, keyField): Promise<number> {
+	// 	const entries = Object.entries(entity).filter(([k]) => k !== keyField);
+	// 	const sqlStatement =
+	// 		`insert into ${this.table}(` +
+	// 		entries.map(([k, v]) => `${k}`).join(',') +
+	// 		`) values(` +
+	// 		Array(entries.length).fill('?').join(',') +
+	// 		')';
 
-// 	constructor(table: string) {
-// 		this.table = table;
-// 	}
+	// 	const { insertId } = await executeSql(sqlStatement, ...entries.map(([k, v]) => v));
+	// 	return insertId;
+	// }
 
-// 	async add(entity, keyField = 'id'): Promise<number> {
-// 		const entries = Object.entries(entity).filter(([k]) => k !== keyField);
-// 		const sqlStatement =
-// 			`insert into ${this.table}(` +
-// 			entries.map(([k, v]) => `${k}`).join(',') +
-// 			`) values(` +
-// 			Array(entries.length).fill('?').join(',') +
-// 			')';
+	// async delete(entity, keyField = 'id'): Promise<number> {
+	// 	const { rowsAffected } = await executeSql(`delete from ${this.table} where ${keyField} = ?`, entity[keyField]);
+	// 	return rowsAffected;
+	// }
 
-// 		const { insertId } = await executeSql(
-// 			sqlStatement,
-// 			...entries.map(([k, v]) => v)
-// 		);
-// 		return insertId;
-// 	}
+	// async get(key) {
+	// 	const { rows } = await executeSql(`select * from ${this.table} where id=?`, key);
+	// 	return rows.item(0);
+	// }
 
-// 	async delete(entity, keyField = 'id'): Promise<number> {
-// 		const { rowsAffected } = await executeSql(
-// 			`delete from ${this.table} where ${keyField} = ?`,
-// 			entity[keyField]
-// 		);
-// 		return rowsAffected;
-// 	}
+	async getAll(...args: any[]): Promise<T[]> {
+		const { rows } = await executeSql(`select * from ${this.table}`, args);
+		return (rows as any)._array;
+	}
 
-// 	async get(key) {
-// 		const { rows } = await executeSql(
-// 			`select * from ${this.table} where id=?`,
-// 			key
-// 		);
-// 		return rows.item(0);
-// 	}
+	// async update(entity, keyField = 'id'): Promise<number> {
+	// 	const entries = Object.entries(entity).filter(([k]) => k !== keyField);
 
-// 	async getAll(...args) {
-// 		const { rows } = await executeSql(`select * from ${this.table}`, args);
-// 		return rows;
-// 	}
+	// 	const sqlStatement =
+	// 		`update ${this.table} set ` +
+	// 		entries.map(([k, v]) => `${k} = ` + (typeof v === 'string' ? `'${v}'` : `${v}`)).join(',') +
+	// 		` where ${keyField} = ?`;
 
-// 	async update(entity, keyField = 'id'): Promise<number> {
-// 		const entries = Object.entries(entity).filter(([k]) => k !== keyField);
-
-// 		const sqlStatement =
-// 			`update ${this.table} set ` +
-// 			entries
-// 				.map(
-// 					([k, v]) => `${k} = ` + (typeof v === 'string' ? `'${v}'` : `${v}`)
-// 				)
-// 				.join(',') +
-// 			` where ${keyField} = ?`;
-
-// 		const { rowsAffected } = await executeSql(sqlStatement, entity[keyField]);
-// 		return rowsAffected;
-// 	}
-// }
+	// 	const { rowsAffected } = await executeSql(sqlStatement, entity[keyField]);
+	// 	return rowsAffected;
+	// }
+}

@@ -14,9 +14,11 @@
       "@components/*": ["components/*"],
       "@containers/*": ["containers/*"],            
       "@localization": ["localization"],      
+      "@models": ["models"],                                                
       "@navigation/*": ["navigation/*"],            
       "@services": ["services"],
-      "@store/*": ["store/*"],                                                
+      "@stores": ["stores"],                                                
+      "@stores/*": ["stores/*"],                                                
     },
     "strict": true,
     "target": "esnext"

@@ -3,9 +3,11 @@ import * as React from 'react';
 import i18n from '@localization';
 
 import About from '@components/About';
+import Catalogs from '@components/Catalogs';
 import More from '@components/More';
-import { Repair } from '@containers/Repair';
 import Settings from '@components/Settings';
+
+import { Repair } from '@containers/Repair';
 
 /**
  * Repairs
@@ -50,6 +52,22 @@ export const ObjectsStackScreen = () => (
 	<ObjectsStack.Navigator>
 		<ObjectsStack.Screen name="ObjectsScreen" component={Repair} options={{ title: i18n.t('objects') }} />
 	</ObjectsStack.Navigator>
+);
+
+/**
+ * Catalogs
+ */
+
+type CatalogsStackParams = {
+	CatalogsScreen: undefined;
+};
+
+const CatalogsStack = createStackNavigator<CatalogsStackParams>();
+
+export const CatalogsStackScreen = () => (
+	<CatalogsStack.Navigator>
+		<CatalogsStack.Screen name="CatalogsScreen" component={Catalogs} options={{ title: i18n.t('catalogs') }} />
+	</CatalogsStack.Navigator>
 );
 
 /**

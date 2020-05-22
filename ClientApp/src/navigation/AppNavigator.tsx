@@ -6,8 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { ICON_SIZE } from 'config';
 import i18n from '@localization';
-import { Repair } from '@containers/Repair';
-import { RepairsStackScreen, ConstructionStackScreen, ObjectsStackScreen, MoreStackScreen } from './Screens';
+import { RepairsStackScreen, ConstructionStackScreen, ObjectsStackScreen, MoreStackScreen, CatalogsStackScreen } from './Screens';
 import LinkingConfiguration, { routes } from './LinkingConfiguration';
 
 type BottomTabParams = { [Key in keyof typeof routes]: undefined };
@@ -44,7 +43,7 @@ const AppNavigator = () => (
 			/>
 			<BottomTab.Screen
 				name="catalogs"
-				component={Repair}
+				component={CatalogsStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <Entypo name="book" size={ICON_SIZE} color={color} />,
 					title: i18n.t('catalogs'),

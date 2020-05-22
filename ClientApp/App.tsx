@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { Provider } from 'mobx-react';
 import 'mobx-react-lite/batchingForReactNative';
 
-import { getMigrations, getVersion, migrate } from 'preload';
 import AppNavigator from '@navigation/AppNavigator';
 import Migration from '@components/Migration';
-import RootStore from '@store/root-store';
+import { getMigrations, getVersion, migrate } from 'preload';
+import stores from 'stores';
 
 export default function App() {
 	const [isReady, setIsReady] = React.useState(true);
@@ -19,7 +19,6 @@ export default function App() {
 
 			const migrations = getMigrations(version);
 			const migrationsTotal = migrations.length;
-
 			if (migrationsTotal > 0) {
 				setIsReady(false);
 				for (const [i, key] of migrations.entries()) {
@@ -28,13 +27,13 @@ export default function App() {
 					version = key;
 				}
 			}
-			RootStore.setDbVersion(version);
+			stores.rootStore.setDbVersion(version);
 			setIsReady(true);
 		})();
 	}, []);
 
 	return (
-		<Provider rootStore={RootStore}>
+		<Provider {...stores}>
 			{!isReady ? <Migration progress={progress} version={version}></Migration> : <AppNavigator></AppNavigator>}
 		</Provider>
 	);

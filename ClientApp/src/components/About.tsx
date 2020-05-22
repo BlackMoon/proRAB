@@ -1,15 +1,15 @@
+import React, { FC } from 'react';
 import { Text, View } from 'react-native';
 import Constants from 'expo-constants';
-import React from 'react';
 import { inject, observer } from 'mobx-react';
 
-import RootStore from '@store/root-store';
+import RootStore from '@stores/root-store';
 
 interface AboutProps {
 	rootStore: typeof RootStore;
 }
 
-const About: React.FC<AboutProps> = ({ rootStore }) => (
+const About: FC<AboutProps> = ({ rootStore }) => (
 	<View>
 		<Text>{Constants.manifest.name}</Text>
 		<Text>{Constants.manifest.version}</Text>
