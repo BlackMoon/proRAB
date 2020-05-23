@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS catalog (
 	CatalogName		VARCHAR2 NOT NULL UNIQUE
 );
 
+INSERT OR REPLACE INTO catalog(CatalogId, CatalogName) VALUES (1, 'first'), (2, 'second'), (3, 'third');
+
 CREATE TABLE IF NOT EXISTS valueType (
 	id				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	code			VARCHAR2 NOT NULL UNIQUE
@@ -17,4 +19,3 @@ CREATE TABLE IF NOT EXISTS measure (
 	code_ru			VARCHAR2,
 	valueTypeId		INTEGER
 );
-

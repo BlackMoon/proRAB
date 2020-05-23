@@ -17,6 +17,7 @@
       "@models": ["models"],                                                
       "@navigation/*": ["navigation/*"],            
       "@services": ["services"],
+      "@shared": ["shared"],                                                
       "@stores": ["stores"],                                                
       "@stores/*": ["stores/*"],                                                
     },

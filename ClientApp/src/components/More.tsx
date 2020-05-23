@@ -36,7 +36,7 @@ export default function More() {
 		<SectionList<RouteItem>
 			sections={sections}
 			keyExtractor={keyExtractor}
-			renderItem={({ item }: { item: RouteItem }) => renderItem({ item, navigation })}
+			renderItem={({ item }) => renderItem({ item, navigation })}
 			renderSectionHeader={renderSectionHeader}
 		/>
 	);
