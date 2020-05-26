@@ -9,7 +9,7 @@ export const defineLocalizedProperties = (target: object, propertyKeys: Property
 	for (const key of propertyKeys) {
 		for (const locale of locales) {
 			// concatenate Key + Locale
-			Reflect.defineProperty(target, String(key) + locale.toAlphaCase(), { enumerable: true, writable: true });
+			Reflect.defineProperty(target, String(key) + locale.split('-').shift().toAlphaCase(), { enumerable: true, writable: true });
 		}
 	}
 };

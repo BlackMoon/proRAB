@@ -4,9 +4,9 @@ CREATE TABLE IF NOT EXISTS catalog (
 	CatalogId		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	CatalogCode		VARCHAR2 NOT NULL UNIQUE,
 	CatalogNameEn	VARCHAR2,
-	CatalogNameRu	VARCHAR2
+	CatalogNameRu	VARCHAR2,
+	CreateDate		DATETIME DEFAULT CURRENT_TIMESTAMP
 );
-
 
 INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu) 
 VALUES 	(1, 'first', 'first', 'первый'), 
