@@ -1,6 +1,6 @@
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
-import * as React from 'react';
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -61,4 +61,4 @@ const AppNavigator = () => (
 	</NavigationContainer>
 );
 
-export default AppNavigator;
+export { AppNavigator };

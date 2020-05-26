@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
+import { AppLoading } from 'expo';
 import { Provider } from 'mobx-react';
 import 'mobx-react-lite/batchingForReactNative';
 
-import AppNavigator from '@navigation/AppNavigator';
-import Migration from '@components/Migration';
-import stores from '@stores';
+import { AppNavigator } from '@navigation';
+import { Migration } from '@components';
 import { getMigrations, getVersion, migrate } from 'preload';
+import stores, { rootStore } from '@stores';
 
 export default function App() {
-	const [isReady, setIsReady] = React.useState(true);
+	const [isReady, setIsReady] = React.useState(false);
+	const [runMigration, setRunMigration] = React.useState(false);
 	const [progress, setProgress] = React.useState(0);
 	const [version, setVersion] = React.useState(0);
 
@@ -20,21 +22,26 @@ export default function App() {
 			const migrations = getMigrations(version);
 			const migrationsTotal = migrations.length;
 			if (migrationsTotal > 0) {
-				setIsReady(false);
+				setRunMigration(true);
 				for (const [i, key] of migrations.entries()) {
 					await migrate(key);
 					setProgress((i + 1) / migrationsTotal);
 					version = key;
 				}
 			}
-			stores.rootStore.setDbVersion(version);
+			rootStore.setDbVersion(version);
+			setRunMigration(false);
 			setIsReady(true);
 		})();
 	}, []);
 
-	return (
+	return runMigration ? (
+		<Migration progress={progress} version={version}></Migration>
+	) : !isReady ? (
+		<AppLoading></AppLoading>
+	) : (
 		<Provider {...stores}>
-			{!isReady ? <Migration progress={progress} version={version}></Migration> : <AppNavigator></AppNavigator>}
+			<AppNavigator></AppNavigator>
 		</Provider>
 	);
 }

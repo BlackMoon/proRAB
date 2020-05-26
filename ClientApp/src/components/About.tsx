@@ -9,12 +9,14 @@ interface AboutProps {
 	rootStore: typeof RootStore;
 }
 
-const About: FC<AboutProps> = ({ rootStore }) => (
-	<View>
-		<Text>{Constants.manifest.name}</Text>
-		<Text>{Constants.manifest.version}</Text>
-		<Text>{rootStore.dbVersion}</Text>
-	</View>
+const About: FC<AboutProps> = inject('rootStore')(
+	observer(({ rootStore }) => (
+		<View>
+			<Text>{Constants.manifest.name}</Text>
+			<Text>{Constants.manifest.version}</Text>
+			<Text>{rootStore.dbVersion}</Text>
+		</View>
+	))
 );
 
-export default inject('rootStore')(observer(About));
+export { About };

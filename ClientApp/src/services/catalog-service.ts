@@ -8,6 +8,10 @@ export class CatalogService extends DataService<Catalog> {
 		super('catalog');
 	}
 
+	get(key: any) {
+		throw new Error('Method not implemented.');
+	}
+
 	async getAll(): Promise<Catalog[]> {
 		const { rows } = await executeSql(
 			`SELECT CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, System FROM ${this.table} ORDER BY System`

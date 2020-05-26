@@ -25,10 +25,7 @@ export abstract class DataService<T> {
 	// 	return rowsAffected;
 	// }
 
-	// async get(key) {
-	// 	const { rows } = await executeSql(`select * from ${this.table} where id=?`, key);
-	// 	return rows.item(0);
-	// }
+	abstract async get(key: any);
 
 	async getAll(...args: any[]): Promise<T[]> {
 		const { rows } = await executeSql(`select * from ${this.table}`, args);

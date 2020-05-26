@@ -2,6 +2,7 @@ export const en = {
 	cancel: 'Cancel',
 	ok: 'OK',
 	creating_db: 'Creating database',
+	system: 'system',
 	updating: 'Updating',
 
 	/** routes */

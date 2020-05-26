@@ -1,12 +1,9 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import React from 'react';
+import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { RouteProp } from '@react-navigation/native';
+
+import { About, CatalogItem, CatalogList, More, Settings } from '@components';
 import i18n from '@localization';
-
-import About from '@components/About';
-import CatalogList from '@components/catalog/CatalogList';
-import More from '@components/More';
-import Settings from '@components/Settings';
-
 import { Repair } from '@containers/Repair';
 
 /**
@@ -59,14 +56,19 @@ export const ObjectsStackScreen = () => (
  */
 
 type CatalogsStackParams = {
-	CatalogsScreen: undefined;
+	catalog: { catalogId: number; catalogName: string };
+	catalogs: undefined;
 };
+
+export type CatalogScreenRouteProp = RouteProp<CatalogsStackParams, 'catalog'>;
+export type CatalogsScreenNavigatorProp = StackNavigationProp<CatalogsStackParams>;
 
 const CatalogsStack = createStackNavigator<CatalogsStackParams>();
 
 export const CatalogsStackScreen = () => (
-	<CatalogsStack.Navigator>
-		<CatalogsStack.Screen name="CatalogsScreen" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
+	<CatalogsStack.Navigator initialRouteName="catalogs">
+		<CatalogsStack.Screen name="catalog" component={CatalogItem} />
+		<CatalogsStack.Screen name="catalogs" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
 	</CatalogsStack.Navigator>
 );
 

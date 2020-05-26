@@ -1,7 +1,6 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as Progress from 'react-native-progress';
-import React, { Component } from 'react';
-import { inject, observer } from 'mobx-react';
 
 import i18n from '@localization';
 
@@ -26,4 +25,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default Migration;
+export { Migration };

@@ -1,10 +1,14 @@
+import React, { FC } from 'react';
 import { SectionList, Text, SectionListData } from 'react-native';
 import { ListItem, IconProps } from 'react-native-elements';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import React from 'react';
-import i18n from '@localization';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
+import i18n from '@localization';
 import { RouteItem, RouteItemGroup } from '@models';
+
+interface MoreProps {	
+	navigation: NavigationProp<ParamListBase>;
+}
 
 const sections: RouteItemGroup[] = [
 	{
@@ -30,8 +34,7 @@ const renderItem = ({ item, navigation }: { item: RouteItem; navigation: Navigat
 
 const renderSectionHeader = ({ section: { title } }: { section: SectionListData<RouteItem> }) => <Text>{title}</Text>;
 
-export default function More() {
-	const navigation = useNavigation();
+const More: FC<MoreProps> = ({ navigation }) => {
 	return (
 		<SectionList<RouteItem>
 			sections={sections}
@@ -41,3 +44,5 @@ export default function More() {
 		/>
 	);
 }
+
+export { More };
