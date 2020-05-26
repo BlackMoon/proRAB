@@ -7,7 +7,11 @@ CREATE TABLE IF NOT EXISTS catalog (
 	CatalogNameRu	VARCHAR2
 );
 
-INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode) VALUES (1, 'first'), (2, 'second'), (3, 'third');
+
+INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu) 
+VALUES 	(1, 'first', 'first', 'первый'), 
+		(2, 'second', 'second', 'второй'), 
+		(3, 'third', 'third', 'третий');
 
 CREATE TABLE IF NOT EXISTS valueType (
 	id				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

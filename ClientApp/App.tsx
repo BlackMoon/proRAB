@@ -7,10 +7,6 @@ import Migration from '@components/Migration';
 import stores from '@stores';
 import { getMigrations, getVersion, migrate } from 'preload';
 
-/// <reference path="global.d.ts" />
-//...
-import './src/shared/string.extension';
-
 export default function App() {
 	const [isReady, setIsReady] = React.useState(true);
 	const [progress, setProgress] = React.useState(0);

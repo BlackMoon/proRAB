@@ -4,7 +4,7 @@ import i18n from 'i18n-js';
 import { en } from './en';
 import { ru } from './ru';
 
-import './../shared/string.extension';
+import './../shared/string.extensions';
 
 console.debug(locale);
 
@@ -13,6 +13,6 @@ i18n.locale = 'ru'; // locale;
 i18n.translations = { en, ru };
 
 export const translate = <T extends any>(source: T, scope: string, locale: string = i18n.locale): string =>
-	source[`${scope}` + locale.toAlphaCase()];
+	source[`${scope}` + locale.split('-').shift().toAlphaCase()];
 
 export default i18n;
