@@ -5,13 +5,14 @@ CREATE TABLE IF NOT EXISTS catalog (
 	CatalogCode		VARCHAR2 NOT NULL UNIQUE,
 	CatalogNameEn	VARCHAR2,
 	CatalogNameRu	VARCHAR2,
-	CreateDate		DATETIME DEFAULT CURRENT_TIMESTAMP
+	CreateDate		DATETIME DEFAULT CURRENT_TIMESTAMP,
+	System			TINYINT DEFAULT 0
 );
 
-INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu) 
-VALUES 	(1, 'first', 'first', 'первый'), 
-		(2, 'second', 'second', 'второй'), 
-		(3, 'third', 'third', 'третий');
+INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, System) 
+VALUES 	(1, 'first', 'First', 'Первый', 0), 
+		(2, 'second', 'Second', 'Второй', 1), 
+		(3, 'third', 'Third', 'Третий', 0);
 
 CREATE TABLE IF NOT EXISTS valueType (
 	id				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

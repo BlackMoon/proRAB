@@ -2,6 +2,7 @@ export const ru = {
 	cancel: 'Отмена',
 	ok: 'OK',
 	creating_db: 'Создание базы',
+	system: 'системный',
 	updating: 'Обновление',
 
 	/** routes */

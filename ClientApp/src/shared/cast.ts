@@ -15,12 +15,27 @@ export const castArray = <K extends object, T extends object>(source: K[], targe
 
 // shallow casting (case-insensitive property names)
 export const castObject = <K extends object, T extends object>(source: K, targetClass: Constructor<T>): T => {
-	const result = new targetClass();
+	const result = new targetClass() as any;
 	const sourceKeys = Object.keys(source);
 
 	for (const rKey of Object.keys(result)) {
 		const sourceKey = sourceKeys.find(skey => skey.toLowerCase() === rKey.toLowerCase());
-		(result as any)[rKey] = sourceKey ? (source as any)[sourceKey] : undefined;
+		if (sourceKey) {
+			const type = typeof result[rKey];
+			const value = (source as any)[sourceKey];
+
+			switch (type) {
+				case 'boolean':
+					result[rKey] = Boolean(value);
+					break;
+				case 'number':
+					result[rKey] = Number(value);
+					break;
+				default:
+					result[rKey] = String(value);
+					break;
+			}
+		}
 	}
 
 	return result;

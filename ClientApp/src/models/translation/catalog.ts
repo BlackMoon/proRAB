@@ -6,8 +6,10 @@ export class Catalog extends WithTranslation {
 
 		this.catalogId = 0;
 		this.catalogCode = '';
+		this.system = false;
 	}
 
 	catalogId: number;
 	catalogCode: string;
+	system: boolean;
 }

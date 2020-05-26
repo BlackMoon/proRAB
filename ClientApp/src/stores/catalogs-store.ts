@@ -9,6 +9,7 @@ class CatalogsStore {
 
 	loadCatalogs = flow(function* (this: CatalogsStore) {
 		this.catalogs = yield this.dataService.getAll();
+		console.log(this.catalogs);
 	});
 }
 

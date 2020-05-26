@@ -5,8 +5,7 @@ module.exports = {
       "import/order":  ["error", {
         groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
         'newlines-between': 'ignore',
-      }],      
-      "no-console": ["error", { allow: ["debug", "warn", "error"] }],
+      }],
       "no-new-func": 0      
     }
   };

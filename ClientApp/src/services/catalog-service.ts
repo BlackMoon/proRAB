@@ -9,7 +9,9 @@ export class CatalogService extends DataService<Catalog> {
 	}
 
 	async getAll(): Promise<Catalog[]> {
-		 const { rows } = await executeSql(`SELECT CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu FROM ${this.table}`);
+		const { rows } = await executeSql(
+			`SELECT CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, System FROM ${this.table} ORDER BY System`
+		);
 		return castArray((rows as any)._array, Catalog);
 	}
 }

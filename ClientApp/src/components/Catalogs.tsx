@@ -1,10 +1,11 @@
 import React, { FC, useEffect } from 'react';
+import { Text, View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { ListItem } from 'react-native-elements';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { inject, observer } from 'mobx-react';
 
-import { translate } from '@localization';
+import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
 import CatalogsStore from '@stores/catalogs-store';
 
@@ -20,6 +21,13 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: Navigatio
 			type: 'font-awesome',
 		}}
 		title={translate(item, 'catalogName')}
+		subtitle={
+			item.system && (
+				<View>
+					<Text>{i18n.t('system')}</Text>
+				</View>
+			)
+		}
 		bottomDivider
 		// dummy route
 		onPress={() => navigation.navigate('repair')}
