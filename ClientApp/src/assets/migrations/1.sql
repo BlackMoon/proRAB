@@ -2,10 +2,12 @@ PRAGMA user_version = 1;
 
 CREATE TABLE IF NOT EXISTS catalog (
 	CatalogId		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	CatalogName		VARCHAR2 NOT NULL UNIQUE
+	CatalogCode		VARCHAR2 NOT NULL UNIQUE,
+	CatalogNameEn	VARCHAR2,
+	CatalogNameRu	VARCHAR2
 );
 
-INSERT OR REPLACE INTO catalog(CatalogId, CatalogName) VALUES (1, 'first'), (2, 'second'), (3, 'third');
+INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode) VALUES (1, 'first'), (2, 'second'), (3, 'third');
 
 CREATE TABLE IF NOT EXISTS valueType (
 	id				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

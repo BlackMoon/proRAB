@@ -20,7 +20,7 @@ const RepairStack = createStackNavigator<RepairStackParams>();
 
 export const RepairsStackScreen = () => (
 	<RepairStack.Navigator>
-		<RepairStack.Screen name="RepairScreen" component={Repair} options={{ title: i18n.t('repair') }} />
+		<RepairStack.Screen name="RepairScreen" component={Repair} options={{ title: i18n.t('routes.repair') }} />
 	</RepairStack.Navigator>
 );
 
@@ -35,7 +35,7 @@ const ConstructionStack = createStackNavigator<ConstructionStackParams>();
 
 export const ConstructionStackScreen = () => (
 	<ConstructionStack.Navigator>
-		<ConstructionStack.Screen name="ConstructionScreen" component={Repair} options={{ title: i18n.t('construction') }} />
+		<ConstructionStack.Screen name="ConstructionScreen" component={Repair} options={{ title: i18n.t('routes.construction') }} />
 	</ConstructionStack.Navigator>
 );
 
@@ -50,7 +50,7 @@ const ObjectsStack = createStackNavigator<ObjectsStackParams>();
 
 export const ObjectsStackScreen = () => (
 	<ObjectsStack.Navigator>
-		<ObjectsStack.Screen name="ObjectsScreen" component={Repair} options={{ title: i18n.t('objects') }} />
+		<ObjectsStack.Screen name="ObjectsScreen" component={Repair} options={{ title: i18n.t('routes.objects') }} />
 	</ObjectsStack.Navigator>
 );
 
@@ -66,7 +66,7 @@ const CatalogsStack = createStackNavigator<CatalogsStackParams>();
 
 export const CatalogsStackScreen = () => (
 	<CatalogsStack.Navigator>
-		<CatalogsStack.Screen name="CatalogsScreen" component={Catalogs} options={{ title: i18n.t('catalogs') }} />
+		<CatalogsStack.Screen name="CatalogsScreen" component={Catalogs} options={{ title: i18n.t('routes.catalogs') }} />
 	</CatalogsStack.Navigator>
 );
 
@@ -84,8 +84,8 @@ const MoreStack = createStackNavigator<MoreStackParams>();
 
 export const MoreStackScreen = () => (
 	<MoreStack.Navigator>
-		<MoreStack.Screen name="more" component={More} options={{ title: i18n.t('more') }} />
-		<MoreStack.Screen name="settings" component={Settings} options={{ title: i18n.t('settings') }} />
-		<MoreStack.Screen name="about" component={About} options={{ title: i18n.t('about') }} />
+		<MoreStack.Screen name="more" component={More} options={{ title: i18n.t('routes.more') }} />
+		<MoreStack.Screen name="settings" component={Settings} options={{ title: i18n.t('routes.settings') }} />
+		<MoreStack.Screen name="about" component={About} options={{ title: i18n.t('routes.about') }} />
 	</MoreStack.Navigator>
 );

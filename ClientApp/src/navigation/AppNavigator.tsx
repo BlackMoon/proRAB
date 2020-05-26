@@ -22,7 +22,7 @@ const AppNavigator = () => (
 				component={RepairsStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="format-paint" size={ICON_SIZE} color={color} />,
-					title: i18n.t('repair'),
+					title: i18n.t('routes.repair'),
 				}}
 			/>
 			<BottomTab.Screen
@@ -30,7 +30,7 @@ const AppNavigator = () => (
 				component={ConstructionStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="wall" size={ICON_SIZE} color={color} />,
-					title: i18n.t('construction'),
+					title: i18n.t('routes.construction'),
 				}}
 			/>
 			<BottomTab.Screen
@@ -38,7 +38,7 @@ const AppNavigator = () => (
 				component={ObjectsStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape-square-plus" size={ICON_SIZE} color={color} />,
-					title: i18n.t('objects'),
+					title: i18n.t('routes.objects'),
 				}}
 			/>
 			<BottomTab.Screen
@@ -46,7 +46,7 @@ const AppNavigator = () => (
 				component={CatalogsStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <Entypo name="book" size={ICON_SIZE} color={color} />,
-					title: i18n.t('catalogs'),
+					title: i18n.t('routes.catalogs'),
 				}}
 			/>
 			<BottomTab.Screen
@@ -54,7 +54,7 @@ const AppNavigator = () => (
 				component={MoreStackScreen}
 				options={{
 					tabBarIcon: ({ color }) => <Entypo name="dots-three-horizontal" size={ICON_SIZE} color={color} />,
-					title: i18n.t('more'),
+					title: i18n.t('routes.more'),
 				}}
 			/>
 		</BottomTab.Navigator>

@@ -9,15 +9,15 @@ import { RouteItem, RouteItemGroup } from '@models';
 const sections: RouteItemGroup[] = [
 	{
 		data: [
-			{ title: i18n.t('functions'), iconName: 'function-variant', iconType: 'material-community', route: 'repair' },
-			{ title: i18n.t('tables'), iconName: 'table-settings', iconType: 'material-community', route: 'repair' },
-			{ title: i18n.t('calculations'), iconName: 'functions', iconType: 'material-icons', route: 'repair' },
+			{ title: i18n.t('routes.functions'), iconName: 'function-variant', iconType: 'material-community', route: 'repair' },
+			{ title: i18n.t('routes.tables'), iconName: 'table-settings', iconType: 'material-community', route: 'repair' },
+			{ title: i18n.t('routes.calculations'), iconName: 'functions', iconType: 'material-icons', route: 'repair' },
 		],
 	},
 	{
 		data: [
-			{ title: i18n.t('settings'), route: 'settings' },
-			{ title: i18n.t('about'), route: 'about' },
+			{ title: i18n.t('routes.settings'), route: 'settings' },
+			{ title: i18n.t('routes.about'), route: 'about' },
 		],
 	},
 ];

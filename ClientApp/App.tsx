@@ -4,8 +4,12 @@ import 'mobx-react-lite/batchingForReactNative';
 
 import AppNavigator from '@navigation/AppNavigator';
 import Migration from '@components/Migration';
+import stores from '@stores';
 import { getMigrations, getVersion, migrate } from 'preload';
-import stores from 'stores';
+
+/// <reference path="global.d.ts" />
+//...
+import './src/shared/string.extension';
 
 export default function App() {
 	const [isReady, setIsReady] = React.useState(true);

@@ -4,7 +4,8 @@ import { ListItem } from 'react-native-elements';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { inject, observer } from 'mobx-react';
 
-import { Catalog } from 'models';
+import { translate } from '@localization';
+import { Catalog } from '@models';
 import CatalogsStore from '@stores/catalogs-store';
 
 interface CatalogProps {
@@ -15,10 +16,10 @@ const keyExtractor = (item: Catalog) => item.catalogId.toString();
 const renderItem = ({ item, navigation }: { item: Catalog; navigation: NavigationProp<Record<string, object | undefined>> }) => (
 	<ListItem
 		leftIcon={{
-			name: 'folder',
-			type: 'FontAwesome',
+			name: 'folder-o',
+			type: 'font-awesome',
 		}}
-		title={item.catalogName}
+		title={translate(item, 'catalogName')}
 		bottomDivider
 		// dummy route
 		onPress={() => navigation.navigate('repair')}
