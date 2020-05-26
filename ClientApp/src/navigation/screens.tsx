@@ -3,7 +3,7 @@ import * as React from 'react';
 import i18n from '@localization';
 
 import About from '@components/About';
-import Catalogs from '@components/Catalogs';
+import CatalogList from '@components/catalog/CatalogList';
 import More from '@components/More';
 import Settings from '@components/Settings';
 
@@ -66,7 +66,7 @@ const CatalogsStack = createStackNavigator<CatalogsStackParams>();
 
 export const CatalogsStackScreen = () => (
 	<CatalogsStack.Navigator>
-		<CatalogsStack.Screen name="CatalogsScreen" component={Catalogs} options={{ title: i18n.t('routes.catalogs') }} />
+		<CatalogsStack.Screen name="CatalogsScreen" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
 	</CatalogsStack.Navigator>
 );
 

@@ -9,7 +9,7 @@ import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
 import CatalogsStore from '@stores/catalogs-store';
 
-interface CatalogProps {
+interface CatalogListProps {
 	catalogsStore: typeof CatalogsStore;
 }
 
@@ -22,11 +22,11 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: Navigatio
 		}}
 		title={translate(item, 'catalogName')}
 		subtitle={
-			item.system && (
+			item.system ? (
 				<View>
 					<Text>{i18n.t('system')}</Text>
 				</View>
-			)
+			) : null
 		}
 		bottomDivider
 		// dummy route
@@ -34,7 +34,7 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: Navigatio
 	/>
 );
 
-const Catalogs: FC<CatalogProps> = ({ catalogsStore }) => {
+const CatalogList: FC<CatalogListProps> = ({ catalogsStore }) => {
 	const navigation = useNavigation();
 	useEffect(() => {
 		(async () => catalogsStore.loadCatalogs())();
@@ -42,4 +42,4 @@ const Catalogs: FC<CatalogProps> = ({ catalogsStore }) => {
 	return <FlatList keyExtractor={keyExtractor} data={catalogsStore.catalogs} renderItem={({ item }) => renderItem({ item, navigation })} />;
 };
 
-export default inject('catalogsStore')(observer(Catalogs));
+export default inject('catalogsStore')(observer(CatalogList));
