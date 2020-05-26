@@ -32,7 +32,7 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsS
 				) : null
 			}
 			bottomDivider
-			onPress={() => navigation.navigate('catalog', { catalogId: item.catalogId, catalogName }) }
+			onPress={() => navigation.navigate('catalog', { catalogId: item.catalogId, catalogName })}
 		/>
 	);
 };
@@ -40,9 +40,15 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsS
 const CatalogList: FC<CatalogListProps> = inject('catalogsStore')(
 	observer(({ catalogsStore, navigation }) => {
 		useEffect(() => {
-			(async () => catalogsStore.loadCatalogs())();
+			navigation.addListener('focus', () => catalogsStore.loadCatalogs());
+			navigation.addListener('blur', () => catalogsStore.clearCatalogs());
 		}, []);
-		return (
+
+		return catalogsStore.loading ? (
+			<View>
+				<Text>loading</Text>
+			</View>
+		) : (
 			<FlatList keyExtractor={keyExtractor} data={catalogsStore.catalogs} renderItem={({ item }) => renderItem({ item, navigation })} />
 		);
 	})
