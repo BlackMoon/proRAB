@@ -2,18 +2,18 @@ import { FC, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { CatalogScreenRouteProp, CatalogsScreenNavigatorProp } from '@navigation';
-import { CatalogsStore } from '@stores';
+import { RecordsStore } from '@stores';
 
 interface CatalogItemProps {
-	catalogsStore: typeof CatalogsStore;
+	recordsStore: typeof RecordsStore;
 	navigation: CatalogsScreenNavigatorProp;
 	route: CatalogScreenRouteProp;
 }
 
 const CatalogItem: FC<CatalogItemProps> = inject('catalogsStore')(
-	observer(({ catalogsStore, navigation, route }) => {
+	observer(({ recordsStore, navigation, route }) => {
 		useEffect(() => {
-			(async () => catalogsStore.loadCatalogs())();
+			(async () => recordsStore.loadCatalogs())();
 		}, []);
 
 		const { catalogId, catalogName } = route.params;
