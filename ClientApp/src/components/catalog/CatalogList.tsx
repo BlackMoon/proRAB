@@ -8,7 +8,7 @@ import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
 import { CatalogsScreenNavigatorProp } from '@navigation';
 import { catalogsStore } from '@stores';
-import { WithLoader } from '../../hoc/WithLoader';
+import { WithLoader } from '../WithLoader';
 
 interface CatalogListProps {
 	catalogsStore: typeof catalogsStore;
