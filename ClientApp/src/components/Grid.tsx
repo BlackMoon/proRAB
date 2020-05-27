@@ -1,6 +1,13 @@
-import GridView from 'react-native-super-grid';
 import React from 'react';
+import { Text, View } from 'react-native';
+import { WithLoader } from '../hoc/WithLoader';
 
-const Grid = () => <GridView />;
+const Grid = () => (
+	<View>
+		<Text>HOC</Text>
+	</View>
+);
 
-export default Grid;
+const Grid1 = WithLoader(Grid);
+
+export { Grid1 as Grid };

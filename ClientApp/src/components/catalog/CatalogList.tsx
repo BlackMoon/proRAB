@@ -8,6 +8,7 @@ import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
 import { CatalogsScreenNavigatorProp } from '@navigation';
 import { catalogsStore } from '@stores';
+import { WithLoader } from '../../hoc/WithLoader';
 
 interface CatalogListProps {
 	catalogsStore: typeof catalogsStore;
@@ -37,19 +38,22 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsS
 	);
 };
 
+const CatalogListWithLoader = WithLoader(FlatList);
+
 const CatalogList: FC<CatalogListProps> = inject('catalogsStore')(
 	observer(({ catalogsStore, navigation }) => {
 		useEffect(() => {
 			navigation.addListener('focus', () => catalogsStore.loadCatalogs());
 			navigation.addListener('blur', () => catalogsStore.clearCatalogs());
 		}, []);
-
-		return catalogsStore.loading ? (
-			<View>
-				<Text>loading</Text>
-			</View>
-		) : (
-			<FlatList keyExtractor={keyExtractor} data={catalogsStore.catalogs} renderItem={({ item }) => renderItem({ item, navigation })} />
+		const { loading, catalogs } = catalogsStore;
+		return (
+			<CatalogListWithLoader
+				loading={loading}
+				data={catalogs}
+				keyExtractor={keyExtractor}
+				renderItem={({ item }) => renderItem({ item, navigation })}
+			></CatalogListWithLoader>
 		);
 	})
 );

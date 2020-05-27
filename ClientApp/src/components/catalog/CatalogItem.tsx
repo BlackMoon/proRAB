@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 
 import { CatalogScreenRouteProp, CatalogsScreenNavigatorProp } from '@navigation';
-import CatalogsStore from '@stores/catalogs-store';
+import { CatalogsStore } from '@stores';
 
 interface CatalogItemProps {
 	catalogsStore: typeof CatalogsStore;
