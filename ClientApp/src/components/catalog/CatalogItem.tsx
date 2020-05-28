@@ -10,7 +10,7 @@ interface CatalogItemProps {
 	route: CatalogScreenRouteProp;
 }
 
-const CatalogItem: FC<CatalogItemProps> = inject('catalogsStore')(
+const CatalogItem: FC<CatalogItemProps> = inject('recordsStore')(
 	observer(({ recordsStore, navigation, route }) => {
 		useEffect(() => {
 			(async () => recordsStore.loadCatalogs())();
