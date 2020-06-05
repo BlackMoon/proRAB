@@ -1,17 +1,17 @@
 import React, { FC, useEffect } from 'react';
 import { Text, View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
 import { ListItem } from 'react-native-elements';
+import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
 import i18n, { translate } from '@localization';
-import { Catalog } from '@models';
 import { CatalogsScreenNavigatorProp } from '@navigation';
-import { catalogsStore } from '@stores';
 import { WithLoader } from '../WithLoader';
+import { CatalogsStore } from '../../stores/catalogs-store';
+import { Catalog } from './../../models';
 
 interface CatalogListProps {
-	catalogsStore: typeof catalogsStore;
+	catalogsStore: CatalogsStore;
 	navigation: CatalogsScreenNavigatorProp;
 }
 
@@ -26,7 +26,7 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsS
 			}}
 			title={catalogName}
 			subtitle={
-				item.system ? (
+				item.isSystem ? (
 					<View>
 						<Text>{i18n.t('system')}</Text>
 					</View>

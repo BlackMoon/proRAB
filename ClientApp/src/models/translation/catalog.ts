@@ -1,4 +1,5 @@
 import { WithTranslation } from './with-translation';
+import { Field } from './field';
 
 export class Catalog extends WithTranslation {
 	constructor() {
@@ -6,10 +7,13 @@ export class Catalog extends WithTranslation {
 
 		this.catalogId = 0;
 		this.catalogCode = '';
-		this.system = false;
+		this.isSystem = false;
+		this.tableName = '';
 	}
 
 	catalogId: number;
 	catalogCode: string;
-	system: boolean;
+	fields: Field[];
+	isSystem: boolean;
+	tableName: string;
 }

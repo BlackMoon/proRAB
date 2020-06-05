@@ -21,8 +21,8 @@ export abstract class DataService<T> {
 		return rowsAffected;
 	}
 
-	async get(key: any): Promise<T> {
-		const { rows } = await executeSql(`SELECT * FROM ${this.table} WHERE id=?`, key);
+	async get(key: string | number, keyField: string): Promise<T> {
+		const { rows } = await executeSql(`SELECT * FROM ${this.table} WHERE ${keyField}=?`, key);
 		return rows.item(0);
 	}
 

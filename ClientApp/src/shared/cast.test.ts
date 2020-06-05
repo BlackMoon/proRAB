@@ -7,7 +7,7 @@ describe('Cast', () => {
 		expected.catalogId = 1;
 		expected.catalogCode = 'first';
 
-		const result = cast({ catalogid: 1, catalogcode: 'first' }, Catalog);
+		const result = cast({ CatalogCode: 'block', CatalogId: 1, TableName: 'catalogBlock' }, Catalog);
 		expect(result).toEqual(expected);
 	});
 

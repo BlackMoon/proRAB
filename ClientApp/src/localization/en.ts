@@ -1,4 +1,5 @@
 export const en = {
+	add: 'Add',
 	cancel: 'Cancel',
 	ok: 'OK',
 	creating_db: 'Creating database',

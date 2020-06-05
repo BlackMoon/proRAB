@@ -1,4 +1,5 @@
 export const ru = {
+	add: 'Добавить',
 	cancel: 'Отмена',
 	ok: 'OK',
 	creating_db: 'Создание базы',
