@@ -1,4 +1,4 @@
-import { Catalog } from './../models';
+import { Catalog, Field } from './../models';
 import { castArray, castObject } from './../shared';
 import { DataService } from './data-service';
 import { executeSql } from './execute-sql';
@@ -9,8 +9,20 @@ export class CatalogService extends DataService<Catalog> {
 	}
 
 	async get(catalogId: number): Promise<Catalog> {
-		const { rows } = await executeSql(`SELECT CatalogId, CatalogCode, TableName FROM ${this.table} WHERE CatalogId=?`, catalogId);
-		return castObject(rows.item(0), Catalog);
+		const { rows } = await executeSql(
+			`SELECT c.CatalogId, c.CatalogCode, c.TableName, f.fieldId, f.FieldCode, f.FieldNameEn, f.FieldNameRu 
+			FROM ${this.table} c
+			LEFT JOIN Field f ON f.CatalogId = c.CatalogId
+			WHERE c.CatalogId=?`,
+			catalogId
+		);
+
+		let catalog: Catalog = null;
+		if (rows.length > 0) {
+			catalog = castObject(rows.item(0), Catalog);
+			catalog.fields = castArray((rows as any)._array, Field);
+		}
+		return catalog;
 	}
 
 	async getAll(): Promise<Catalog[]> {

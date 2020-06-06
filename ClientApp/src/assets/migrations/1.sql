@@ -24,13 +24,13 @@ CREATE UNIQUE INDEX IF NOT EXISTS uxField ON field (
 	CatalogId,
 	FieldCode
 );
-drop table catalogBlock;
+
 CREATE TABLE IF NOT EXISTS catalogBlock (
 	CatalogBlockId		INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	CatalogBlockNameEn	VARCHAR,
 	CatalogBlockNameRu	VARCHAR,
 	Density				REAL DEFAULT 0,
-	Weight				REAL DEFAULT 0,
+	Mass				REAL DEFAULT 0,
 	CreateDate			DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -38,9 +38,12 @@ INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNam
 VALUES 	(1, 'block', 'Blocks', 'Блоки', 'catalogBlock', 0), 
 		(2, 'material', 'Materials', 'Материалы', 'catalogMaterial', 1);
 
-INSERT OR REPLACE INTO catalogBlock(CatalogBlockNameEn, CatalogBlockNameRu, Density, Weight) 
-VALUES 	('brick', 'кирпич', 7, 7);
+INSERT OR REPLACE INTO catalogBlock(CatalogBlockId, CatalogBlockNameEn, CatalogBlockNameRu, Density, Mass) 
+VALUES 	(1, 'brick', 'кирпич', 7000, 6);
 
+INSERT OR REPLACE INTO field(CatalogId, FieldCode, FieldNameEn, FieldNameRu) 
+VALUES 	(1, 'density', 'Density', 'Плотность, кг/м3'),
+		(1, 'mass', 'Mass', 'Масса, кг');
 
 CREATE TABLE IF NOT EXISTS valueType (
 	ValueTypeId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

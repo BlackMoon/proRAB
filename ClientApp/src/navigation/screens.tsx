@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'react-native-elements';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
@@ -58,6 +59,7 @@ export const ObjectsStackScreen = () => (
 type CatalogsStackParams = {
 	catalog: { catalogId: number; catalogName: string };
 	catalogs: undefined;
+	record: undefined;
 };
 
 export type CatalogScreenRouteProp = RouteProp<CatalogsStackParams, 'catalog'>;
@@ -67,8 +69,17 @@ const CatalogsStack = createStackNavigator<CatalogsStackParams>();
 
 export const CatalogsStackScreen = () => (
 	<CatalogsStack.Navigator initialRouteName="catalogs">
-		<CatalogsStack.Screen name="catalog" component={CatalogItem} />
+		<CatalogsStack.Screen
+			name="catalog"
+			component={CatalogItem}
+			options={({ route, navigation }) => ({
+				headerRight: ({ tintColor }) => (
+					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" color="systemBlue" onPress={() => navigation.navigate('record')} />
+				),
+			})}
+		/>
 		<CatalogsStack.Screen name="catalogs" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
+		<CatalogsStack.Screen name="record" component={Repair} />
 	</CatalogsStack.Navigator>
 );
 

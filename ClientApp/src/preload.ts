@@ -1,6 +1,6 @@
 import { Asset } from 'expo-asset';
 import * as FS from 'expo-file-system';
-import { executeSql } from '@services';
+import { executeSql } from './services';
 
 const migrations: ReadonlyMap<number, string> = new Map<number, string>([
 	[1, require('./assets/migrations/1.sql')],
