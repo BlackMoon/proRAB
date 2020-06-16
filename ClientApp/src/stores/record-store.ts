@@ -1,10 +1,10 @@
 import { observable, flow } from 'mobx';
 
-import { Catalog } from './../models';
-import { catalogService, recordService } from './../services'; //'@services';
+import { Catalog } from '../models';
+import { catalogService, recordService } from '../services'; //'@services';
 import { ActivityStore } from './activity-store';
 
-class RecordsStore extends ActivityStore {
+class RecordStore extends ActivityStore {
 	constructor() {
 		super();
 		this.loadRecords = this.loadRecords.bind(this);
@@ -13,7 +13,7 @@ class RecordsStore extends ActivityStore {
 	@observable catalog: Catalog;
 	@observable records: object[] = [];
 
-	loadRecords = flow(function* (this: RecordsStore, catalogId: number) {
+	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
 		this.loading = true;
 		this.catalog = yield catalogService.get(catalogId);
 		if (this.catalog) {
@@ -23,4 +23,4 @@ class RecordsStore extends ActivityStore {
 	});
 }
 
-export default new RecordsStore();
+export default new RecordStore();

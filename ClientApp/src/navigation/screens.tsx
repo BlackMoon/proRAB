@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon } from 'react-native-elements';
+import { Text, View } from 'react-native';
+import { Icon, Button } from 'react-native-elements';
 import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
@@ -42,45 +43,98 @@ export const ConstructionStackScreen = () => (
  */
 type ObjectsStackParams = {
 	ObjectsScreen: undefined;
+	Card: undefined;
+};
+
+type ObjectsRootStackParams = {
+	ObjectsScreen: undefined;
+	Modal: undefined;
 };
 
 const ObjectsStack = createStackNavigator<ObjectsStackParams>();
+const ObjectsRootStack = createStackNavigator<ObjectsRootStackParams>();
+
+function HomeScreen({ navigation }) {
+	return (
+		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<Text style={{ fontSize: 30 }}>This is the home screen!</Text>
+			<Button onPress={() => navigation.navigate('Card')} title="Open Card" />
+			<Button onPress={() => navigation.navigate('Modal')} title="Open Modal" />
+		</View>
+	);
+}
+
+function ModalScreen({ navigation }) {
+	return (
+		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<Text style={{ fontSize: 30 }}>This is a modal!</Text>
+			<Button onPress={() => navigation.goBack()} title="Dismiss" />
+		</View>
+	);
+}
 
 export const ObjectsStackScreen = () => (
 	<ObjectsStack.Navigator>
-		<ObjectsStack.Screen name="ObjectsScreen" component={Repair} options={{ title: i18n.t('routes.objects') }} />
+		<ObjectsStack.Screen name="ObjectsScreen" component={HomeScreen} options={{ title: i18n.t('routes.objects') }} />
+		<ObjectsStack.Screen name="Card" component={Repair} options={{ title: i18n.t('routes.objects') }} />
 	</ObjectsStack.Navigator>
 );
 
+export const ObjectsRootStackScreen = () => (
+	<ObjectsRootStack.Navigator mode="modal">
+		<ObjectsRootStack.Screen
+			name="ObjectsScreen"
+			component={ObjectsStackScreen}
+			options={{ headerShown: false, title: i18n.t('routes.objects') }}
+		/>
+		<ObjectsRootStack.Screen name="Modal" component={ModalScreen} options={{ title: i18n.t('routes.objects') }} />
+	</ObjectsRootStack.Navigator>
+);
+
 /**
- * Catalogs
+ * Catalog
  */
 
-type CatalogsStackParams = {
+type CatalogMainStackParams = {
 	catalog: { catalogId: number; catalogName: string };
 	catalogs: undefined;
-	record: undefined;
 };
 
-export type CatalogScreenRouteProp = RouteProp<CatalogsStackParams, 'catalog'>;
-export type CatalogsScreenNavigatorProp = StackNavigationProp<CatalogsStackParams>;
+const CatalogMainStack = createStackNavigator<CatalogMainStackParams>();
 
-const CatalogsStack = createStackNavigator<CatalogsStackParams>();
+export type CatalogMainScreenRouteProp = RouteProp<CatalogMainStackParams, 'catalog'>;
+export type CatalogMainScreenNavigatorProp = StackNavigationProp<CatalogMainStackParams>;
 
-export const CatalogsStackScreen = () => (
-	<CatalogsStack.Navigator initialRouteName="catalogs">
-		<CatalogsStack.Screen
+export const CatalogsMainScreen = () => (
+	<CatalogMainStack.Navigator initialRouteName="catalogs">
+		<CatalogMainStack.Screen
 			name="catalog"
 			component={CatalogItem}
 			options={({ route, navigation }) => ({
 				headerRight: ({ tintColor }) => (
-					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" color="systemBlue" onPress={() => navigation.navigate('record')} />
+					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" onPress={() => navigation.navigate('record')} />
 				),
 			})}
 		/>
-		<CatalogsStack.Screen name="catalogs" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
-		<CatalogsStack.Screen name="record" component={Repair} />
-	</CatalogsStack.Navigator>
+		<CatalogMainStack.Screen name="catalogs" component={CatalogList} options={{ title: i18n.t('routes.catalogs') }} />
+	</CatalogMainStack.Navigator>
+);
+
+type CatalogStackParams = {
+	main: undefined;
+	record: { recordId?: number };
+};
+
+const CatalogStack = createStackNavigator<CatalogStackParams>();
+
+export type CatalogScreenNavigatorProp = StackNavigationProp<CatalogStackParams>;
+
+// modal stackNavigator
+export const CatalogScreen = () => (
+	<CatalogStack.Navigator initialRouteName="main" mode="modal">
+		<CatalogStack.Screen name="main" component={CatalogsMainScreen} options={{ headerShown: false }} />
+		<CatalogStack.Screen name="record" component={Repair} />
+	</CatalogStack.Navigator>
 );
 
 /**

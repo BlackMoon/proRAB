@@ -4,12 +4,12 @@ import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
-import { CatalogScreenRouteProp, CatalogsScreenNavigatorProp } from '@navigation';
-import { recordsStore } from '@stores';
 import './../../shared/string.extensions';
 import i18n, { translate } from '@localization';
 import { WithLoader } from '../WithLoader';
 import { Field } from '../../models';
+import { CatalogMainScreenRouteProp, CatalogScreenNavigatorProp } from '../../navigation/Screens';
+import { recordStore } from '../../stores';
 
 const styles = StyleSheet.create({
 	field: {
@@ -23,9 +23,9 @@ const styles = StyleSheet.create({
 });
 
 interface CatalogItemProps {
-	recordsStore: typeof recordsStore;
-	navigation: CatalogsScreenNavigatorProp;
-	route: CatalogScreenRouteProp;
+	recordStore: typeof recordStore;
+	navigation: CatalogScreenNavigatorProp;
+	route: CatalogMainScreenRouteProp;
 }
 
 const renderItem = ({
@@ -39,7 +39,7 @@ const renderItem = ({
 	keyProperty: string;
 	nameProperty: string;
 	fields: Field[];
-	navigation: CatalogsScreenNavigatorProp;
+	navigation: CatalogScreenNavigatorProp;
 }) => {
 	const key = item[keyProperty];
 	const title = translate(item, nameProperty);
@@ -65,10 +65,10 @@ const renderItem = ({
 
 const CatalogItemWithLoader = WithLoader(FlatList);
 
-const CatalogItem: FC<CatalogItemProps> = inject('recordsStore')(
-	observer(({ recordsStore, navigation, route }) => {
+const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
+	observer(({ recordStore, navigation, route }) => {
 		const { catalogId, catalogName } = route.params;
-		const { catalog, loading, records, loadRecords } = recordsStore;
+		const { catalog, loading, records, loadRecords } = recordStore;
 
 		useEffect(() => {
 			(async () => loadRecords(catalogId))();
@@ -90,6 +90,5 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordsStore')(
 		);
 	})
 );
-
 
 export { CatalogItem };

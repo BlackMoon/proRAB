@@ -1,22 +1,22 @@
 import React, { FC, useEffect } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, FlatListProps } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
 import i18n, { translate } from '@localization';
-import { CatalogsScreenNavigatorProp } from '@navigation';
 import { WithLoader } from '../WithLoader';
-import { CatalogsStore } from '../../stores/catalogs-store';
+import { catalogStore } from '../../stores';
+import { CatalogMainScreenNavigatorProp } from '../../navigation/Screens';
 import { Catalog } from './../../models';
 
 interface CatalogListProps {
-	catalogsStore: CatalogsStore;
-	navigation: CatalogsScreenNavigatorProp;
+	catalogStore: typeof catalogStore;
+	navigation: CatalogMainScreenNavigatorProp;
 }
 
 const keyExtractor = (item: Catalog) => item.catalogId.toString();
-const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsScreenNavigatorProp }) => {
+const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogMainScreenNavigatorProp }) => {
 	const catalogName = translate(item, 'catalogName');
 	return (
 		<ListItem
@@ -38,11 +38,11 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogsS
 	);
 };
 
-const CatalogListWithLoader = WithLoader(FlatList);
+const CatalogListWithLoader = WithLoader<FlatListProps<Catalog>>(FlatList);
 
-const CatalogList: FC<CatalogListProps> = inject('catalogsStore')(
-	observer(({ catalogsStore, navigation }) => {
-		const { catalogs, clearCatalogs, loadCatalogs, loading } = catalogsStore;
+const CatalogList: FC<CatalogListProps> = inject('catalogStore')(
+	observer(({ catalogStore, navigation }) => {
+		const { catalogs, clearCatalogs, loadCatalogs, loading } = catalogStore;
 
 		useEffect(() => {
 			navigation.addListener('blur', () => clearCatalogs());

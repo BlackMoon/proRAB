@@ -1,11 +1,11 @@
-import catalogsStore from './catalogs-store';
-import recordsStore from './records-store';
+import catalogStore from './catalog-store';
+import recordStore from './record-store';
 import rootStore from './root-store';
 
-export { catalogsStore, recordsStore, rootStore };
+export { catalogStore, recordStore, rootStore };
 
 export default {
-	catalogsStore,
-	recordsStore,
+	catalogStore,
+	recordStore,
 	rootStore,
 };

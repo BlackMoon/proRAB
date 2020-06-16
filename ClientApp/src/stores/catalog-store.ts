@@ -1,10 +1,10 @@
 import { action, flow, observable } from 'mobx';
 
-import { Catalog } from '@models';
-import { catalogService } from './../services';
+import { catalogService } from '../services';
+import { Catalog } from '../models';
 import { ActivityStore } from './activity-store';
 
-class CatalogsStore extends ActivityStore {
+class CatalogStore extends ActivityStore {
 	constructor() {
 		super();
 		this.loadCatalogs = this.loadCatalogs.bind(this);
@@ -12,13 +12,15 @@ class CatalogsStore extends ActivityStore {
 
 	@observable catalogs: Catalog[] = [];
 
-	@action clearCatalogs = () => (this.catalogs = []);
+	@action clearCatalogs = () => {
+		this.catalogs = [];
+	};
 
-	loadCatalogs = flow(function* (this: CatalogsStore) {
+	loadCatalogs = flow(function* (this: CatalogStore) {
 		this.loading = true;
 		this.catalogs = yield catalogService.getAll();
 		this.loading = false;
 	});
 }
 
-export default new CatalogsStore();
+export default new CatalogStore();
