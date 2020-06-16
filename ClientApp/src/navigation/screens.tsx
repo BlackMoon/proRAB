@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
 import { Icon, Button } from 'react-native-elements';
-import { createStackNavigator, StackNavigationProp } from '@react-navigation/stack';
+import { createStackNavigator, StackNavigationProp, HeaderBackButton } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
 import { About, CatalogItem, CatalogList, More, Settings } from '@components';
 import i18n from '@localization';
-import { Repair } from '@containers/Repair';
+import { Repair } from '../containers/repair';
 
 /**
  * Repairs
@@ -112,7 +112,7 @@ export const CatalogsMainScreen = () => (
 			component={CatalogItem}
 			options={({ route, navigation }) => ({
 				headerRight: ({ tintColor }) => (
-					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" onPress={() => navigation.navigate('record')} />
+					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" onPress={() => navigation.navigate('record', {})} />
 				),
 			})}
 		/>
@@ -132,8 +132,24 @@ export type CatalogScreenNavigatorProp = StackNavigationProp<CatalogStackParams>
 // modal stackNavigator
 export const CatalogScreen = () => (
 	<CatalogStack.Navigator initialRouteName="main" mode="modal">
-		<CatalogStack.Screen name="main" component={CatalogsMainScreen} options={{ headerShown: false }} />
-		<CatalogStack.Screen name="record" component={Repair} />
+		<CatalogStack.Screen name="main" component={CatalogsMainScreen} options={{ headerShown: false, title: i18n.t('cancel') }} />
+		<CatalogStack.Screen
+			name="record"
+			component={Repair}
+			options={({ route, navigation }) => {
+				const { recordId } = route.params;
+				return {
+					headerLeft: () => (
+						<HeaderBackButton
+							backImage={() => <View></View>}
+							label={i18n.t('cancel')}
+							onPress={() => navigation.goBack()}
+						></HeaderBackButton>
+					),
+					title: i18n.t(recordId ? 'record.edit' : 'record.new'),
+				};
+			}}
+		/>
 	</CatalogStack.Navigator>
 );
 

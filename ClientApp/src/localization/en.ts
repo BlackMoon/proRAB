@@ -6,6 +6,11 @@ export const en = {
 	system: 'system',
 	updating: 'Updating',
 
+	record: {
+		new: 'New record',
+		edit: 'Record',
+	},
+
 	/** routes */
 	routes: {
 		about: 'About',

@@ -6,6 +6,11 @@ export const ru = {
 	system: 'системный',
 	updating: 'Обновление',
 
+	record: {
+		new: 'Новая запись',
+		edit: 'Запись',
+	},
+
 	/** routes */
 	routes: {
 		about: 'О программе',
