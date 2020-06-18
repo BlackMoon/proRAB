@@ -11,18 +11,16 @@
     "moduleResolution": "node",
     "noEmit": true,
     "paths": {          
-      "@components/*": ["components/*"],
-      "@containers/*": ["containers/*"],                  
+      "@components": ["components"],      
       "@localization": ["localization"],      
       "@models": ["models"],                                                
-      "@navigation/*": ["navigation/*"],            
+      "@navigation": ["navigation"],            
       "@services": ["services"],
       "@shared": ["shared"],                                                
-      "@stores/*": ["stores/*"],                                                
+      "@stores": ["stores"],                                                
     },
     "strict": true,
     "target": "esnext"
   },  
-  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"],
-  "files": ["src/global.d.ts"]
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]  
 }

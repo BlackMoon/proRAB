@@ -39,7 +39,8 @@ VALUES 	(1, 'block', 'Blocks', 'Блоки', 'catalogBlock', 0),
 		(2, 'material', 'Materials', 'Материалы', 'catalogMaterial', 1);
 
 INSERT OR REPLACE INTO catalogBlock(CatalogBlockId, CatalogBlockNameEn, CatalogBlockNameRu, Density, Mass) 
-VALUES 	(1, 'brick', 'кирпич', 7000, 6);
+VALUES 	(1, 'white brick', 'кирпич белый', 7000, 6),
+		(2, 'red brick', 'кирпич красный', 6000, 5);
 
 INSERT OR REPLACE INTO field(CatalogId, FieldCode, FieldNameEn, FieldNameRu) 
 VALUES 	(1, 'density', 'Density', 'Плотность, кг/м3'),

@@ -5,10 +5,10 @@ import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
 import i18n, { translate } from '@localization';
+import { Catalog } from '@models';
+import { CatalogMainScreenNavigatorProp } from '@navigation';
+import { catalogStore } from '@stores';
 import { WithLoader } from '../WithLoader';
-import { catalogStore } from '../../stores';
-import { CatalogMainScreenNavigatorProp } from '../../navigation/Screens';
-import { Catalog } from './../../models';
 
 interface CatalogListProps {
 	catalogStore: typeof catalogStore;
@@ -30,7 +30,7 @@ const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogMa
 					<View>
 						<Text>{i18n.t('system')}</Text>
 					</View>
-				) : null
+				) : undefined
 			}
 			bottomDivider
 			onPress={() => navigation.navigate('catalog', { catalogId: item.catalogId, catalogName })}

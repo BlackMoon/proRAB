@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatListProps } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
@@ -35,7 +35,7 @@ const renderItem = ({
 	fields,
 	navigation,
 }: {
-	item: unknown;
+	item: any;
 	keyProperty: string;
 	nameProperty: string;
 	fields: Field[];
@@ -63,7 +63,7 @@ const renderItem = ({
 	);
 };
 
-const CatalogItemWithLoader = WithLoader(FlatList);
+const CatalogItemWithLoader = WithLoader<FlatListProps<any>>(FlatList);
 
 const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 	observer(({ recordStore, navigation, route }) => {

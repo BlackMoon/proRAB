@@ -6,7 +6,7 @@ import { NavigationProp, ParamListBase } from '@react-navigation/native';
 import i18n from '@localization';
 import { RouteItem, RouteItemGroup } from '@models';
 
-interface MoreProps {	
+interface MoreProps {
 	navigation: NavigationProp<ParamListBase>;
 }
 

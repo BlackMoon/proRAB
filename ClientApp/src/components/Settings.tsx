@@ -1,9 +1,9 @@
-import { Text, SectionList, SectionListData, StyleSheet, Alert } from 'react-native';
 import React from 'react';
-import i18n from '@localization';
-
-import { LocaleItemGroup, LocaleItem } from '@models';
+import { Text, SectionList, SectionListData, StyleSheet, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements';
+
+import i18n from '@localization';
+import { LocaleItemGroup, LocaleItem } from '@models';
 
 const handleLocaleChange = (locale: string) => {
 	Alert.alert(i18n.t('change_language'), undefined, [
