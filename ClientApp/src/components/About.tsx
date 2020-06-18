@@ -3,10 +3,10 @@ import { Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import { inject, observer } from 'mobx-react';
 
-import RootStore from '@stores/root-store';
+import { rootStore } from '@stores';
 
 interface AboutProps {
-	rootStore: typeof RootStore;
+	rootStore: typeof rootStore;
 }
 
 const About: FC<AboutProps> = inject('rootStore')(

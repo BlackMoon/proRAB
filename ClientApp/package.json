@@ -18,8 +18,10 @@
     "@types/i18n-js": "^3.0.3",
     "@types/react-native-vector-icons": "^6.4.5",
     "expo": "~37.0.3",
+    "expo-constants": "~9.0.0",
     "expo-linking": "^1.0.1",
     "expo-localization": "^8.1.0",
+    "formik": "^2.1.4",
     "i18n-js": "^3.5.1",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
@@ -34,8 +36,7 @@
     "react-native-screens": "^2.2.0",
     "react-native-super-grid": "^3.2.0",
     "react-native-vector-icons": "^6.6.0",
-    "react-native-web": "~0.11.7",
-    "expo-constants": "~9.0.0"
+    "react-native-web": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

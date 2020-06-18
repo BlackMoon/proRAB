@@ -1,8 +1,10 @@
 export const ru = {
 	add: 'Добавить',
 	cancel: 'Отмена',
-	ok: 'OK',
 	creating_db: 'Создание базы',
+	name: 'Наименование',
+	ok: 'OK',
+	save: 'Сохранить',
 	system: 'системный',
 	updating: 'Обновление',
 

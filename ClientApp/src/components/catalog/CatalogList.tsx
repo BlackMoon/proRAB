@@ -6,17 +6,17 @@ import { inject, observer } from 'mobx-react';
 
 import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
-import { CatalogMainScreenNavigatorProp } from '@navigation';
+import { CatalogScreenNavigatorProp } from '@navigation';
 import { catalogStore } from '@stores';
 import { WithLoader } from '../WithLoader';
 
 interface CatalogListProps {
 	catalogStore: typeof catalogStore;
-	navigation: CatalogMainScreenNavigatorProp;
+	navigation: CatalogScreenNavigatorProp;
 }
 
 const keyExtractor = (item: Catalog) => item.catalogId.toString();
-const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogMainScreenNavigatorProp }) => {
+const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogScreenNavigatorProp }) => {
 	const catalogName = translate(item, 'catalogName');
 	return (
 		<ListItem

@@ -13,7 +13,7 @@ export class Catalog extends WithTranslation {
 
 	catalogId: number;
 	catalogCode: string;
-	fields: Field[];
+	fields?: Field[];
 	isSystem: boolean;
 	tableName: string;
 }

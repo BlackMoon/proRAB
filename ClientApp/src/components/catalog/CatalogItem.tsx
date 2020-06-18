@@ -4,11 +4,10 @@ import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
-import './../../shared/string.extensions';
-import i18n, { translate } from '@localization';
+import { translate } from '@localization';
 import { WithLoader } from '../WithLoader';
 import { Field } from '../../models';
-import { CatalogMainScreenRouteProp, CatalogScreenNavigatorProp } from '../../navigation/Screens';
+import { CatalogScreenRouteProp, RecordScreenNavigatorProp } from '../../navigation/Screens';
 import { recordStore } from '../../stores';
 
 const styles = StyleSheet.create({
@@ -24,8 +23,8 @@ const styles = StyleSheet.create({
 
 interface CatalogItemProps {
 	recordStore: typeof recordStore;
-	navigation: CatalogScreenNavigatorProp;
-	route: CatalogMainScreenRouteProp;
+	navigation: RecordScreenNavigatorProp;
+	route: CatalogScreenRouteProp;
 }
 
 const renderItem = ({
@@ -38,11 +37,11 @@ const renderItem = ({
 	item: any;
 	keyProperty: string;
 	nameProperty: string;
-	fields: Field[];
-	navigation: CatalogScreenNavigatorProp;
+	fields?: Field[];
+	navigation: RecordScreenNavigatorProp;
 }) => {
 	const key = item[keyProperty];
-	const title = translate(item, nameProperty);
+	const name = translate(item, nameProperty);
 
 	const subtitle = fields
 		? fields.map(f => (
@@ -55,7 +54,7 @@ const renderItem = ({
 
 	return (
 		<ListItem
-			title={title}
+			title={name}
 			subtitle={<View style={styles.subtitle}>{subtitle}</View>}
 			bottomDivider
 			onPress={() => navigation.navigate('record', { recordId: key })}

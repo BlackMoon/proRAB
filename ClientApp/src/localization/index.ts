@@ -4,8 +4,6 @@ import i18n from 'i18n-js';
 import { en } from './en';
 import { ru } from './ru';
 
-import '@shared/string.extensions';
-
 console.debug(locale);
 
 i18n.fallbacks = true;

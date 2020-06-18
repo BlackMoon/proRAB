@@ -4,7 +4,7 @@ import { Icon, Button } from 'react-native-elements';
 import { createStackNavigator, StackNavigationProp, HeaderBackButton } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
-import { About, CatalogItem, CatalogList, More, Settings } from '@components';
+import { About, CatalogItem, CatalogList, More, Settings, RecordItem } from '@components';
 import i18n from '@localization';
 import { Repair } from '../containers/repair';
 
@@ -102,8 +102,8 @@ type CatalogMainStackParams = {
 
 const CatalogMainStack = createStackNavigator<CatalogMainStackParams>();
 
-export type CatalogMainScreenRouteProp = RouteProp<CatalogMainStackParams, 'catalog'>;
-export type CatalogMainScreenNavigatorProp = StackNavigationProp<CatalogMainStackParams>;
+export type CatalogScreenRouteProp = RouteProp<CatalogMainStackParams, 'catalog'>;
+export type CatalogScreenNavigatorProp = StackNavigationProp<CatalogMainStackParams>;
 
 export const CatalogsMainScreen = () => (
 	<CatalogMainStack.Navigator initialRouteName="catalogs">
@@ -127,7 +127,8 @@ type CatalogStackParams = {
 
 const CatalogStack = createStackNavigator<CatalogStackParams>();
 
-export type CatalogScreenNavigatorProp = StackNavigationProp<CatalogStackParams>;
+export type RecordScreenRouteProp = RouteProp<CatalogStackParams, 'record'>;
+export type RecordScreenNavigatorProp = StackNavigationProp<CatalogStackParams, 'record'>;
 
 // modal stackNavigator
 export const CatalogScreen = () => (
@@ -135,7 +136,7 @@ export const CatalogScreen = () => (
 		<CatalogStack.Screen name="main" component={CatalogsMainScreen} options={{ headerShown: false, title: i18n.t('cancel') }} />
 		<CatalogStack.Screen
 			name="record"
-			component={Repair}
+			component={RecordItem}
 			options={({ route, navigation }) => {
 				const { recordId } = route.params;
 				return {

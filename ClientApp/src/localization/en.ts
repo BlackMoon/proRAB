@@ -1,8 +1,10 @@
 export const en = {
 	add: 'Add',
 	cancel: 'Cancel',
-	ok: 'OK',
 	creating_db: 'Creating database',
+	name: 'Name',
+	ok: 'OK',
+	save: 'Save',
 	system: 'system',
 	updating: 'Updating',
 
