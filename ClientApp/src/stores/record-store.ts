@@ -27,7 +27,12 @@ class RecordStore extends ActivityStore {
 		this.loading = true;
 		this.catalog = yield catalogService.get(catalogId);
 		if (this.catalog) {
-			this.records = yield recordService.getAll(this.catalog.tableName);
+			try {
+				this.records = yield recordService.getAll(this.catalog.tableName);
+			} catch (ex) {
+				this.records = [];
+				console.log(ex);
+			}
 		}
 		this.loading = false;
 	});

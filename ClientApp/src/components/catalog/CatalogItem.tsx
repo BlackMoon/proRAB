@@ -5,10 +5,10 @@ import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
 import { translate } from '@localization';
+import { Field } from '@models';
+import { CatalogScreenRouteProp, RecordScreenNavigatorProp } from '@navigation';
+import { recordStore } from '@stores';
 import { WithLoader } from '../WithLoader';
-import { Field } from '../../models';
-import { CatalogScreenRouteProp, RecordScreenNavigatorProp } from '../../navigation/Screens';
-import { recordStore } from '../../stores';
 
 const styles = StyleSheet.create({
 	field: {

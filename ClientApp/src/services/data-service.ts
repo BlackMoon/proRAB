@@ -17,7 +17,7 @@ export abstract class DataService<T> {
 	}
 
 	async delete(entity: T, keyField: string): Promise<number> {
-		const { rowsAffected } = await executeSql(`DELETE FROM ${this.table} WHERER ${keyField} = ?`, entity[keyField]);
+		const { rowsAffected } = await executeSql(`DELETE FROM ${this.table} WHERE ${keyField} = ?`, entity[keyField]);
 		return rowsAffected;
 	}
 
