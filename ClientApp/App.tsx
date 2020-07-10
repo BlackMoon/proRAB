@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppLoading } from 'expo';
-import { Provider } from 'mobx-react';
+import { Snackbar } from 'react-native-snack';
+import { observe } from 'mobx';
+import { Provider, observer } from 'mobx-react';
 import 'mobx-react-lite/batchingForReactNative';
 
 import { AppNavigator } from '@navigation';
@@ -9,10 +11,14 @@ import { getMigrations, getVersion, migrate } from 'preload';
 import stores, { rootStore } from '@stores';
 
 export default function App() {
-	const [isReady, setIsReady] = React.useState(false);
-	const [runMigration, setRunMigration] = React.useState(false);
-	const [progress, setProgress] = React.useState(0);
-	const [version, setVersion] = React.useState(0);
+	const [isReady, setIsReady] = useState(false);
+	const [runMigration, setRunMigration] = useState(false);
+	const [progress, setProgress] = useState(0);
+	const [version, setVersion] = useState(0);
+
+	observe(rootStore, 'error', change => {
+		Snackbar.show({ message: change.newValue!.message });
+	});
 
 	useEffect(() => {
 		(async () => {
@@ -42,6 +48,7 @@ export default function App() {
 	) : (
 		<Provider {...stores}>
 			<AppNavigator></AppNavigator>
+			<Snackbar />
 		</Provider>
 	);
 }

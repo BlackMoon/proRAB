@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
 
 export abstract class ActivityStore {
-	@observable error: string;
+	@observable error?: Error;
 	@observable loading: boolean = false;
 }

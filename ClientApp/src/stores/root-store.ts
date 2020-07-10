@@ -1,6 +1,8 @@
-import { observable, action, reaction } from 'mobx';
+import { observable, action, reaction, computed } from 'mobx';
 
-/** Container class for stores */
+import catalogStore from './catalog-store';
+import recordStore from './record-store';
+
 class RootStore {
 	constructor() {
 		reaction(
@@ -10,12 +12,21 @@ class RootStore {
 				reaction.dispose();
 			}
 		);
+		reaction(
+			() => this.error,
+			// log to file
+			error => console.log(error)
+		);
 	}
 
 	@observable dbVersion = 0;
 
 	@action
 	setDbVersion = (version: number) => (this.dbVersion = version);
+
+	@computed get error() {
+		return catalogStore.error || recordStore.error;
+	}
 }
 
 export default new RootStore();

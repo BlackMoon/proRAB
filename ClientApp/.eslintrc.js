@@ -1,7 +1,7 @@
 module.exports = {
     extends: "universe",    
     rules: {     
-      "arrow-parens": 0,
+      "arrow-parens": 0,      
       "import/order":  ["error", {
         groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
         'newlines-between': 'ignore',

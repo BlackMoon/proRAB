@@ -25,14 +25,14 @@ class RecordStore extends ActivityStore {
 
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
 		this.loading = true;
-		this.catalog = yield catalogService.get(catalogId);
-		if (this.catalog) {
-			try {
+		try {
+			this.catalog = yield catalogService.get(catalogId);
+			if (this.catalog) {
 				this.records = yield recordService.getAll(this.catalog.tableName);
-			} catch (ex) {
-				this.records = [];
-				console.log(ex);
 			}
+		} catch (ex) {
+			this.error = ex;
+			this.records = [];
 		}
 		this.loading = false;
 	});
