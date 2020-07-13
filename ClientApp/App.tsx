@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppLoading } from 'expo';
 import { Snackbar } from 'react-native-snack';
 import { observe } from 'mobx';
-import { Provider, observer } from 'mobx-react';
+import { Provider } from 'mobx-react';
 import 'mobx-react-lite/batchingForReactNative';
 
 import { AppNavigator } from '@navigation';

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Text, View, TextInput, TouchableHighlight, Button } from 'react-native';
+import { View, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import { inject, observer } from 'mobx-react';
 
@@ -71,16 +71,6 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 						);
 					}}
 				</Formik>
-
-				<TouchableHighlight
-					activeOpacity={0.6}
-					style={{ alignItems: 'center', backgroundColor: '#DDDDDD', padding: 10 }}
-					onPress={() => {
-						submit();
-					}}
-				>
-					<Text>Touch Here</Text>
-				</TouchableHighlight>
 			</View>
 		) : null;
 	})
