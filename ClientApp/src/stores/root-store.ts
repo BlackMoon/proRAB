@@ -22,7 +22,9 @@ class RootStore {
 	@observable dbVersion = 0;
 
 	@action
-	setDbVersion = (version: number) => (this.dbVersion = version);
+	setDbVersion(version: number) {
+		this.dbVersion = version;
+	}
 
 	@computed get error() {
 		return catalogStore.error || recordStore.error;
