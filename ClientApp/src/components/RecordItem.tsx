@@ -48,17 +48,15 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 					}}
 				>
 					{({ handleChange, handleSubmit, values }) => {
-						const locales = Object.keys(i18n.translations);
 						submit = handleSubmit;
 						return (
 							<View>
-								{locales.map(l => {
-									const field = nameProperty + l.toAlphaCase();
-									console.log(l);
+								{Object.keys(i18n.translations).map(locale => {
+									const field = nameProperty + locale.toAlphaCase();
 									return (
 										<TextInput
 											key={field}
-											placeholder={i18n.t('name', { locale: l })}
+											placeholder={i18n.t('name', { locale })}
 											value={values[field]}
 											onChangeText={handleChange(field)}
 										/>
