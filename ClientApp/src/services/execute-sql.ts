@@ -3,7 +3,7 @@ import config from './../config';
 
 const db = SQLite.openDatabase(config.DB_NAME);
 
-export const executeSql = async (sqlStatement: string, ...args: any[] | undefined): Promise<SQLResultSet> => {
+export const executeSql = async (sqlStatement: string, ...args: any[]): Promise<SQLResultSet> => {
 	console.debug(sqlStatement);
 	args?.length && console.log(args);
 	return new Promise((resolve, reject) =>

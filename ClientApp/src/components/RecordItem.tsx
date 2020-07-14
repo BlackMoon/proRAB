@@ -28,31 +28,42 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 		}, []);
 
 		const fields = catalog?.fields;
-		const keyProperty = `Catalog${catalog?.catalogCode.toAlphaCase()}Id`;
-		const nameProperty = `Catalog${catalog?.catalogCode.toAlphaCase()}Name`;
+		const keyProperty = catalog?.keyProperty || '';
+		const nameProperty = catalog?.nameProperty || '';
 		const record: any = recordId ? loadRecord(recordId) : {};
 
 		return fields ? (
 			<View>
 				<Formik
 					initialValues={record}
-					onSubmit={values => {
+					onSubmit={async values => {
 						const key = values[keyProperty];
 						if (key) {
-							updateRecord(values);
+							await updateRecord(values);
 						} else {
-							addRecord(values);
+							await addRecord(values);
 						}
 						console.log(values);
 						navigation.goBack();
 					}}
 				>
 					{({ handleChange, handleSubmit, values }) => {
-						const name = translate(values, nameProperty);
+						const locales = Object.keys(i18n.translations);
 						submit = handleSubmit;
 						return (
 							<View>
-								<TextInput key={nameProperty} placeholder={i18n.t('name')} value={name} />
+								{locales.map(l => {
+									const field = nameProperty + l.toAlphaCase();
+									console.log(l);
+									return (
+										<TextInput
+											key={field}
+											placeholder={i18n.t('name', { locale: l })}
+											value={values[field]}
+											onChangeText={handleChange(field)}
+										/>
+									);
+								})}
 								{fields.map(f => {
 									const field = f.fieldCode.toAlphaCase();
 									const placeHolder = translate(f, 'fieldName');

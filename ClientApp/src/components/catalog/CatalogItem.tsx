@@ -72,11 +72,10 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 		useEffect(() => {
 			(async () => loadRecords(catalogId))();
 		}, []);
-
 		navigation.setOptions({ title: catalogName });
 
-		const keyProperty = `Catalog${catalog?.catalogCode.toAlphaCase()}Id`;
-		const nameProperty = `Catalog${catalog?.catalogCode.toAlphaCase()}Name`;
+		const keyProperty = catalog?.keyProperty || '';
+		const nameProperty = catalog?.nameProperty || '';
 		const fields = catalog?.fields;
 
 		return (

@@ -16,4 +16,12 @@ export class Catalog extends WithTranslation {
 	fields?: Field[];
 	isSystem: boolean;
 	tableName: string;
+
+	get keyProperty() {
+		return `Catalog${this.catalogCode.toAlphaCase()}Id`;
+	}
+
+	get nameProperty() {
+		return `Catalog${this.catalogCode.toAlphaCase()}Name`;
+	}
 }
