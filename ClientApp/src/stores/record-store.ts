@@ -2,7 +2,6 @@ import { observable, flow } from 'mobx';
 
 import { Catalog } from '@models';
 import { catalogService, recordService } from '@services';
-import { t } from 'i18n-js';
 import { ActivityStore } from './activity-store';
 
 class RecordStore extends ActivityStore {
@@ -14,6 +13,7 @@ class RecordStore extends ActivityStore {
 	}
 
 	@observable catalog?: Catalog;
+	@observable forceLoad: boolean = false;
 	@observable records: any[] = [];
 
 	addRecord = flow(function* (this: RecordStore, record: any) {
@@ -22,10 +22,8 @@ class RecordStore extends ActivityStore {
 		try {
 			const { keyProperty, tableName } = this.catalog!;
 			insertedId = yield recordService.add(record, keyProperty, tableName);
-			console.log(insertedId);
 			if (insertedId > 0) {
-				record[keyProperty] = insertedId;
-				this.records.push(record);
+				this.forceLoad = !this.forceLoad;
 			}
 		} catch (ex) {
 			this.error = ex;
@@ -61,8 +59,7 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			rowsAffected = yield recordService.update(record, keyProperty, tableName);
 			if (rowsAffected > 0) {
-				const ix = this.records.findIndex(r => r[keyProperty] === record[keyProperty]);
-				this.records[ix] = record;
+				this.forceLoad = !this.forceLoad;
 			}
 		} catch (ex) {
 			this.error = ex;

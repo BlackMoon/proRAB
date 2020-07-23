@@ -67,11 +67,12 @@ const CatalogItemWithLoader = WithLoader<FlatListProps<any>>(FlatList);
 const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 	observer(({ recordStore, navigation, route }) => {
 		const { catalogId, catalogName } = route.params;
-		const { catalog, loading, records, loadRecords } = recordStore;
+		const { catalog, forceLoad, loading, records, loadRecords } = recordStore;
 
 		useEffect(() => {
 			(async () => loadRecords(catalogId))();
-		}, []);
+		}, [forceLoad]);
+
 		navigation.setOptions({ title: catalogName });
 
 		const keyProperty = catalog?.keyProperty || '';
