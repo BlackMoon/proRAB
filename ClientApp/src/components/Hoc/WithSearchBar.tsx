@@ -6,10 +6,12 @@ import i18n from '@localization';
 
 export interface WithSearchBarProps {
 	onChangeText?(text: string): void;
+	onClear?(): void;
 }
 
 const WithSearchBar = <P extends object>(WrappedComponent: ComponentType<P>): ComponentType<P & WithSearchBarProps> => ({
 	onChangeText,
+	onClear,
 	...props
 }) => {
 	const [search, setSearch] = useState('');
@@ -27,13 +29,13 @@ const WithSearchBar = <P extends object>(WrappedComponent: ComponentType<P>): Co
 				cancelButtonTitle={i18n.t('cancel')}
 				placeholder={i18n.t('search')}
 				platform={platform}
-				showCancel={false}
 				onChangeText={text => {
 					setSearch(text);
 					if (onChangeText) {
 						onChangeText(text);
 					}
 				}}
+				onClear={onClear}
 				value={search}
 			/>
 			<WrappedComponent {...(props as P)}></WrappedComponent>

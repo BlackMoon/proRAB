@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
 	field: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		width: '100%',
 	},
 	subtitle: {
 		paddingLeft: 10,
@@ -62,16 +63,16 @@ const renderItem = ({
 	);
 };
 
-const CatalogItemWithLoader = WithLoader<FlatListProps<any>>(WithSearchBar(FlatList));
+const CatalogItemWithLoader = WithLoader(WithSearchBar<FlatListProps<any>>(FlatList));
 
 const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 	observer(({ recordStore, navigation, route }) => {
 		const { catalogId, catalogName } = route.params;
-		const { catalog, forceLoad, loading, records, loadRecords } = recordStore;
+		const { catalog, filteredRecords, forceReload, loading, filterRecords, loadRecords } = recordStore;
 
 		useEffect(() => {
 			(async () => loadRecords(catalogId))();
-		}, [forceLoad]);
+		}, [forceReload]);
 
 		navigation.setOptions({ title: catalogName });
 
@@ -81,10 +82,11 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 
 		return (
 			<CatalogItemWithLoader
-				ListHeaderComponent={SearchBar}
-				loading={loading}
-				data={records}
+				data={filteredRecords}
 				keyExtractor={item => item[keyProperty].toString()}
+				loading={loading}
+				onChangeText={filterRecords}
+				onClear={filterRecords}
 				renderItem={({ item }) => renderItem({ item, keyProperty, nameProperty, fields, navigation })}
 			></CatalogItemWithLoader>
 		);

@@ -1,6 +1,7 @@
 import { observable, flow } from 'mobx';
 
 import { Catalog } from '@models';
+import i18n from '@localization';
 import { catalogService, recordService } from '@services';
 import { ActivityStore } from './activity-store';
 
@@ -13,7 +14,8 @@ class RecordStore extends ActivityStore {
 	}
 
 	@observable catalog?: Catalog;
-	@observable forceLoad: boolean = false;
+	@observable forceReload: boolean = false;
+	@observable filteredRecords: any[] = [];
 	@observable records: any[] = [];
 
 	addRecord = flow(function* (this: RecordStore, record: any) {
@@ -23,7 +25,7 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			insertedId = yield recordService.add(record, keyProperty, tableName);
 			if (insertedId > 0) {
-				this.forceLoad = !this.forceLoad;
+				this.forceReload = !this.forceReload;
 			}
 		} catch (ex) {
 			this.error = ex;
@@ -32,6 +34,16 @@ class RecordStore extends ActivityStore {
 		this.loading = false;
 		return insertedId;
 	});
+
+	filterRecords = (text?: string, locale: string = i18n.locale) => {
+		if (text) {
+			const field = this.catalog!.nameProperty + locale.split('-').shift()?.toAlphaCase();
+			const normalizedText = text.trim().toLowerCase();
+			this.filteredRecords = this.records.filter(r => r[field].includes(normalizedText))
+		} else {
+			this.filteredRecords = this.records;
+		}
+	};
 
 	loadRecord = (recordId: number): object => {
 		const keyProperty = this.catalog!.keyProperty;
@@ -44,6 +56,7 @@ class RecordStore extends ActivityStore {
 			this.catalog = yield catalogService.get(catalogId);
 			if (this.catalog) {
 				this.records = yield recordService.getAll(this.catalog.tableName);
+				this.filteredRecords = this.records;
 			}
 		} catch (ex) {
 			this.error = ex;
@@ -59,7 +72,7 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			rowsAffected = yield recordService.update(record, keyProperty, tableName);
 			if (rowsAffected > 0) {
-				this.forceLoad = !this.forceLoad;
+				this.forceReload = !this.forceReload;
 			}
 		} catch (ex) {
 			this.error = ex;

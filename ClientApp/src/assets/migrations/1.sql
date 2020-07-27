@@ -34,16 +34,16 @@ CREATE TABLE IF NOT EXISTS catalogBlock (
 	CreateDate			DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT OR REPLACE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, TableName, IsSystem) 
+INSERT OR IGNORE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, TableName, IsSystem) 
 VALUES 	(1, 'block', 'Blocks', 'Блоки', 'catalogBlock', 0), 
 		(2, 'material', 'Materials', 'Материалы', 'catalogMaterial', 1);
 
-INSERT OR REPLACE INTO catalogBlock(CatalogBlockId, CatalogBlockNameEn, CatalogBlockNameRu, Density, Mass) 
+INSERT OR IGNORE INTO catalogBlock(CatalogBlockId, CatalogBlockNameEn, CatalogBlockNameRu, Density, Mass) 
 VALUES 	(1, 'white brick', 'кирпич белый', 7000, 6),
 		(2, 'red brick', 'кирпич красный', 6000, 5),
 		(3, 'decorate brick', 'кирпич облицовочный', 6000, 5);
 
-INSERT OR REPLACE INTO field(CatalogId, FieldCode, FieldNameEn, FieldNameRu) 
+INSERT OR IGNORE INTO field(CatalogId, FieldCode, FieldNameEn, FieldNameRu) 
 VALUES 	(1, 'density', 'Density', 'Плотность, кг/м3'),
 		(1, 'mass', 'Mass', 'Масса, кг');
 
