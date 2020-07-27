@@ -5,6 +5,7 @@ export const en = {
 	name: 'Name',
 	ok: 'OK',
 	save: 'Save',
+	search: 'Search',
 	system: 'system',
 	updating: 'Updating',
 

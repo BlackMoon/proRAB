@@ -5,6 +5,7 @@ export const ru = {
 	name: 'Наименование',
 	ok: 'OK',
 	save: 'Сохранить',
+	search: 'Поиск',
 	system: 'системный',
 	updating: 'Обновление',
 

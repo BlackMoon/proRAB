@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatListProps } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { FlatListProps, StyleSheet, Text, View } from 'react-native';
+import { ListItem, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
@@ -8,7 +8,7 @@ import { translate } from '@localization';
 import { Field } from '@models';
 import { CatalogScreenRouteProp, RecordScreenNavigatorProp } from '@navigation';
 import { recordStore } from '@stores';
-import { WithLoader } from '../WithLoader';
+import { WithLoader, WithSearchBar } from '../Hoc';
 
 const styles = StyleSheet.create({
 	field: {
@@ -62,7 +62,7 @@ const renderItem = ({
 	);
 };
 
-const CatalogItemWithLoader = WithLoader<FlatListProps<any>>(FlatList);
+const CatalogItemWithLoader = WithLoader<FlatListProps<any>>(WithSearchBar(FlatList));
 
 const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 	observer(({ recordStore, navigation, route }) => {
@@ -81,6 +81,7 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 
 		return (
 			<CatalogItemWithLoader
+				ListHeaderComponent={SearchBar}
 				loading={loading}
 				data={records}
 				keyExtractor={item => item[keyProperty].toString()}
