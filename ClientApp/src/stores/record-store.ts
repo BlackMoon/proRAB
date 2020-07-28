@@ -14,9 +14,9 @@ class RecordStore extends ActivityStore {
 	}
 
 	@observable catalog?: Catalog;
-	@observable forceReload: boolean = false;
 	@observable filteredRecords: any[] = [];
 	@observable records: any[] = [];
+	@observable searchText?: string;
 
 	addRecord = flow(function* (this: RecordStore, record: any) {
 		let insertedId = 0;
@@ -25,24 +25,20 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			insertedId = yield recordService.add(record, keyProperty, tableName);
 			if (insertedId > 0) {
-				this.forceReload = !this.forceReload;
+				record[keyProperty] = insertedId;
+				this.records.push(record);
+				this.filterInternal();
 			}
 		} catch (ex) {
 			this.error = ex;
-			console.log(ex);
 		}
 		this.loading = false;
 		return insertedId;
 	});
 
-	filterRecords = (text?: string, locale: string = i18n.locale) => {
-		if (text) {
-			const field = this.catalog!.nameProperty + locale.split('-').shift()?.toAlphaCase();
-			const normalizedText = text.trim().toLowerCase();
-			this.filteredRecords = this.records.filter(r => r[field].includes(normalizedText))
-		} else {
-			this.filteredRecords = this.records;
-		}
+	filterRecords = (text?: string) => {
+		this.searchText = text;
+		this.filterInternal();
 	};
 
 	loadRecord = (recordId: number): object => {
@@ -52,6 +48,7 @@ class RecordStore extends ActivityStore {
 
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
 		this.loading = true;
+		this.searchText = undefined;
 		try {
 			this.catalog = yield catalogService.get(catalogId);
 			if (this.catalog) {
@@ -72,7 +69,9 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			rowsAffected = yield recordService.update(record, keyProperty, tableName);
 			if (rowsAffected > 0) {
-				this.forceReload = !this.forceReload;
+				const ix = this.records.findIndex(r => r[keyProperty] === record[keyProperty]);
+				this.records[ix] = record;
+				this.filterInternal();
 			}
 		} catch (ex) {
 			this.error = ex;
@@ -80,6 +79,16 @@ class RecordStore extends ActivityStore {
 		this.loading = false;
 		return rowsAffected;
 	});
+
+	private filterInternal(locale: string = i18n.locale) {
+		if (this.searchText) {
+			const field = this.catalog!.nameProperty + locale.split('-').shift()?.toAlphaCase();
+			const normalizedText = this.searchText?.trim().toLowerCase();
+			this.filteredRecords = this.records.filter(r => r[field].includes(normalizedText));
+		} else {
+			this.filteredRecords = this.records;
+		}
+	}
 }
 
 export default new RecordStore();

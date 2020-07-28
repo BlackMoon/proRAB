@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { FlatListProps, StyleSheet, Text, View } from 'react-native';
 import { ListItem, SearchBar } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
@@ -68,11 +68,11 @@ const CatalogItemWithLoader = WithLoader(WithSearchBar<FlatListProps<any>>(FlatL
 const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 	observer(({ recordStore, navigation, route }) => {
 		const { catalogId, catalogName } = route.params;
-		const { catalog, filteredRecords, forceReload, loading, filterRecords, loadRecords } = recordStore;
+		const { catalog, filteredRecords, loading, searchText, filterRecords, loadRecords } = recordStore;
 
 		useEffect(() => {
 			(async () => loadRecords(catalogId))();
-		}, [forceReload]);
+		}, []);
 
 		navigation.setOptions({ title: catalogName });
 
@@ -86,8 +86,8 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 				keyExtractor={item => item[keyProperty].toString()}
 				loading={loading}
 				onChangeText={filterRecords}
-				onClear={filterRecords}
 				renderItem={({ item }) => renderItem({ item, keyProperty, nameProperty, fields, navigation })}
+				searchText={searchText}
 			></CatalogItemWithLoader>
 		);
 	})

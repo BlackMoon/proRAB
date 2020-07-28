@@ -6,7 +6,7 @@ export abstract class DataService<T> {
 	constructor(table?: string) {
 		this.table = table;
 	}
-
+	/** Inserts entity. Returns insertedId */
 	async add(entity: T, keyField?: string, tableName?: string): Promise<number> {
 		const keys = Object.keys(entity).filter(k => k !== keyField);
 		const sqlStatement =
@@ -19,7 +19,7 @@ export abstract class DataService<T> {
 		const { insertId } = await executeSql(sqlStatement, ...keys.map(k => (entity as any)[k]));
 		return insertId;
 	}
-
+	/** Removes entity. Returns rowsAffected number */
 	async delete(entity: T, keyField: string): Promise<number> {
 		const { rowsAffected } = await executeSql(`DELETE FROM ${this.table} WHERE ${keyField} = ?`, (entity as any)[keyField]);
 		return rowsAffected;
@@ -34,7 +34,7 @@ export abstract class DataService<T> {
 		const { rows } = await executeSql(`SELECT * FROM ${this.table}`, args);
 		return (rows as any)._array;
 	}
-
+	/** Updates entity. Returns rowsAffected number */
 	async update(entity: T, keyField: string, tableName?: string): Promise<number> {
 		const keys = Object.keys(entity).filter(k => k !== keyField);
 
