@@ -49,6 +49,7 @@ class RecordStore extends ActivityStore {
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
 		this.loading = true;
 		this.searchText = undefined;
+		this.filteredRecords = [];
 		try {
 			this.catalog = yield catalogService.get(catalogId);
 			if (this.catalog) {
@@ -57,7 +58,6 @@ class RecordStore extends ActivityStore {
 			}
 		} catch (ex) {
 			this.error = ex;
-			this.records = [];
 		}
 		this.loading = false;
 	});

@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { AppLoading } from 'expo';
-import { Snackbar } from 'react-native-snack';
 import { observe } from 'mobx';
 import { Provider } from 'mobx-react';
 
 import { AppNavigator } from '@navigation';
-import { Migration } from '@components';
-import { getMigrations, getVersion, migrate } from 'preload';
+import { Migration, Snackbar } from '@components';
 import stores, { rootStore } from '@stores';
+import { getMigrations, getVersion, migrate } from 'preload';
 
-observe(rootStore, 'error', change => {
-	Snackbar.show({ message: change.newValue!.message });
-});
+observe(rootStore, 'error', change => Snackbar.show({ message: change.newValue!.message }));
 
 export default function App() {
 	const [isReady, setIsReady] = useState(false);

@@ -5,3 +5,4 @@ export * from './More';
 export * from './Project';
 export * from './NameInput';
 export * from './Settings';
+export * from './SnackBar';

@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { FlatListProps, StyleSheet, Text, View } from 'react-native';
-import { ListItem, SearchBar } from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
@@ -45,10 +45,10 @@ const renderItem = ({
 
 	const subtitle = fields
 		? fields.map(f => (
-				<ListItem.Subtitle key={f.fieldCode} style={styles.subtitle}>
+				<View key={f.fieldCode} style={styles.field}>
 					<Text>{translate(f, 'fieldName')}:</Text>
 					<Text>{item[f.fieldCode.toAlphaCase()]}</Text>
-				</ListItem.Subtitle>
+				</View>
 		  ))
 		: null;
 
@@ -56,7 +56,7 @@ const renderItem = ({
 		<ListItem bottomDivider onPress={() => navigation.navigate('record', { recordId: key })}>
 			<ListItem.Content>
 				<ListItem.Title>{name}</ListItem.Title>
-				{subtitle}
+				<View style={styles.subtitle}>{subtitle}</View>
 			</ListItem.Content>
 		</ListItem>
 	);
@@ -82,7 +82,7 @@ const CatalogItem: FC<CatalogItemProps> = inject('recordStore')(
 		return (
 			<CatalogItemWithLoader
 				data={filteredRecords}
-				keyExtractor={item => item[keyProperty].toString()}
+				keyExtractor={item => item[keyProperty]?.toString()}
 				loading={loading}
 				onChangeText={filterRecords}
 				renderItem={({ item }) => renderItem({ item, keyProperty, nameProperty, fields, navigation })}
