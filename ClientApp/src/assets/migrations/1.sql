@@ -34,6 +34,12 @@ CREATE TABLE IF NOT EXISTS catalogBlock (
 	CreateDate			DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS project (
+	ProjectId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	ProjectName			VARCHAR NOT NULL UNIQUE,
+	ProjectDescription	VARCHAR
+);
+
 INSERT OR IGNORE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, TableName, IsSystem) 
 VALUES 	(1, 'block', 'Blocks', 'Блоки', 'catalogBlock', 0), 
 		(2, 'material', 'Materials', 'Материалы', 'catalogMaterial', 1);
@@ -46,16 +52,11 @@ VALUES 	(1, 'white brick', 'кирпич белый', 7000, 6),
 INSERT OR IGNORE INTO field(CatalogId, FieldCode, FieldNameEn, FieldNameRu) 
 VALUES 	(1, 'density', 'Density', 'Плотность, кг/м3'),
 		(1, 'mass', 'Mass', 'Масса, кг');
+	
+INSERT OR IGNORE INTO project(ProjectId, ProjectName, ProjectDescription) 
+VALUES 	(1, 'Project 1', 'Project 1');
 
 CREATE TABLE IF NOT EXISTS valueType (
 	ValueTypeId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	ValueTypeCode		VARCHAR NOT NULL UNIQUE
-);
-
-CREATE TABLE IF NOT EXISTS measure (
-	id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-	code				VARCHAR NOT NULL UNIQUE,
-	code_en				VARCHAR,
-	code_ru				VARCHAR,
-	valueTypeId			INTEGER
 );

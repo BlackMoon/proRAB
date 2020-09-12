@@ -10,7 +10,7 @@
     "lib": ["es6"],
     "moduleResolution": "node",
     "noEmit": true,
-    "paths": {          
+    "paths": {                
       "@components": ["components"],      
       "@localization": ["localization"],      
       "@models": ["models"],                                                

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
-import { createStackNavigator, StackNavigationProp, HeaderBackButton } from '@react-navigation/stack';
+import { View } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { createStackNavigator, HeaderBackButton, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
-import { About, CatalogItem, CatalogList, More, Settings, RecordItem } from '@components';
+import { About, CatalogItem, CatalogList, More, ProjectList, Settings, RecordItem } from '@components';
 import i18n from '@localization';
 import { Repair } from '../containers/repair';
 
@@ -39,56 +39,21 @@ export const ConstructionStackScreen = () => (
 );
 
 /**
- * Objects
+ * Projects
  */
-type ObjectsStackParams = {
-	ObjectsScreen: undefined;
-	Card: undefined;
+type ProjectsStackParams = {
+	project: { projectId: number };
+	projects: undefined;
 };
 
-type ObjectsRootStackParams = {
-	ObjectsScreen: undefined;
-	Modal: undefined;
-};
+const ProjectStack = createStackNavigator<ProjectsStackParams>();
 
-const ObjectsStack = createStackNavigator<ObjectsStackParams>();
-const ObjectsRootStack = createStackNavigator<ObjectsRootStackParams>();
+export type ProjectScreenNavigatorProp = StackNavigationProp<ProjectsStackParams>;
 
-function HomeScreen({ navigation }) {
-	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text style={{ fontSize: 30 }}>This is the home screen!</Text>
-			<Button onPress={() => navigation.navigate('Card')} title="Open Card" />
-			<Button onPress={() => navigation.navigate('Modal')} title="Open Modal" />
-		</View>
-	);
-}
-
-function ModalScreen({ navigation }) {
-	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text style={{ fontSize: 30 }}>This is a modal!</Text>
-			<Button onPress={() => navigation.goBack()} title="Dismiss" />
-		</View>
-	);
-}
-
-export const ObjectsStackScreen = () => (
-	<ObjectsStack.Navigator>
-		<ObjectsStack.Screen name="ObjectsScreen" component={HomeScreen} options={{ title: i18n.t('routes.objects') }} />
-		<ObjectsStack.Screen name="Card" component={Repair} options={{ title: i18n.t('routes.objects') }} />
-	</ObjectsStack.Navigator>
-);
-
-export const ObjectsRootStackScreen = () => (
-	<ObjectsRootStack.Navigator mode="modal">
-		<ObjectsRootStack.Screen
-			name="ObjectsScreen"
-			component={ObjectsStackScreen}
-			options={{ headerShown: false, title: i18n.t('routes.objects') }}
-		/>
-		<ObjectsRootStack.Screen name="Modal" component={ModalScreen} options={{ title: i18n.t('routes.objects') }} />
-	</ObjectsRootStack.Navigator>
+export const ProjectStackScreen = () => (
+	<ProjectStack.Navigator>
+		<ProjectStack.Screen name="projects" component={ProjectList} options={{ title: i18n.t('routes.objects') }} />
+	</ProjectStack.Navigator>
 );
 
 /**

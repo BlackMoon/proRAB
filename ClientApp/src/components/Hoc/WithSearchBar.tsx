@@ -1,5 +1,5 @@
-import React, { ComponentType, useState } from 'react';
-import { Platform, View, Text } from 'react-native';
+import React, { ComponentType } from 'react';
+import { Platform, View } from 'react-native';
 import { SearchBar } from 'react-native-elements';
 
 import i18n from '@localization';
@@ -10,6 +10,10 @@ export interface WithSearchBarProps {
 	onClear?(): void;
 }
 
+/**
+ * Looks like SearchBar in FlatList's ListHeaderComponent does not behave as usual.
+ * Therefore hoc is used
+ */
 const WithSearchBar = <P extends object>(WrappedComponent: ComponentType<P>): ComponentType<P & WithSearchBarProps> => ({
 	searchText: searchValue,
 	onChangeText,
@@ -31,11 +35,7 @@ const WithSearchBar = <P extends object>(WrappedComponent: ComponentType<P>): Co
 				placeholder={i18n.t('search')}
 				platform={platform}
 				showCancel={false}
-				onChangeText={text => {
-					if (onChangeText) {
-						onChangeText(text);
-					}
-				}}
+				onChangeText={text => onChangeText && onChangeText(text)}
 				onClear={onClear}
 				value={searchValue}
 			/>

@@ -1,7 +1,7 @@
 import { action, flow, observable } from 'mobx';
 
-import { catalogService } from '../services';
-import { Catalog } from '../models';
+import { Catalog } from '@models';
+import { catalogService } from '@services';
 import { ActivityStore } from './activity-store';
 
 class CatalogStore extends ActivityStore {
@@ -18,7 +18,11 @@ class CatalogStore extends ActivityStore {
 
 	loadCatalogs = flow(function* (this: CatalogStore) {
 		this.loading = true;
-		this.catalogs = yield catalogService.getAll();
+		try {
+			this.catalogs = yield catalogService.getAll();
+		} catch (ex) {
+			this.error = ex;
+		}
 		this.loading = false;
 	});
 }

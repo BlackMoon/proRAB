@@ -1,5 +1,5 @@
-import { Catalog, Field } from './../models';
-import { castArray, castObject } from './../shared';
+import { Catalog, Field } from '@models';
+import { castArray, castObject } from '@shared';
 import { DataService } from './data-service';
 import { executeSql } from './execute-sql';
 
