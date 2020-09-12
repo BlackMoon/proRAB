@@ -3,7 +3,6 @@ import { AppLoading } from 'expo';
 import { Snackbar } from 'react-native-snack';
 import { observe } from 'mobx';
 import { Provider } from 'mobx-react';
-import 'mobx-react-lite/batchingForReactNative';
 
 import { AppNavigator } from '@navigation';
 import { Migration } from '@components';

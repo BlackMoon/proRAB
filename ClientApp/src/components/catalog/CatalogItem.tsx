@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
 	},
 	subtitle: {
 		paddingLeft: 10,
-		paddingTop: 5,
 	},
 });
 
@@ -46,20 +45,20 @@ const renderItem = ({
 
 	const subtitle = fields
 		? fields.map(f => (
-				<View key={f.fieldCode} style={styles.field}>
+				<ListItem.Subtitle key={f.fieldCode} style={styles.subtitle}>
 					<Text>{translate(f, 'fieldName')}:</Text>
 					<Text>{item[f.fieldCode.toAlphaCase()]}</Text>
-				</View>
+				</ListItem.Subtitle>
 		  ))
 		: null;
 
 	return (
-		<ListItem
-			title={name}
-			subtitle={<View style={styles.subtitle}>{subtitle}</View>}
-			bottomDivider
-			onPress={() => navigation.navigate('record', { recordId: key })}
-		/>
+		<ListItem bottomDivider onPress={() => navigation.navigate('record', { recordId: key })}>
+			<ListItem.Content>
+				<ListItem.Title>{name}</ListItem.Title>
+				{subtitle}
+			</ListItem.Content>
+		</ListItem>
 	);
 };
 

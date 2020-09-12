@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { FlatListProps } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
@@ -17,16 +17,14 @@ interface ProjectListProps {
 const keyExtractor = (item: Project) => item.projectId.toString();
 const renderItem = ({ item, navigation }: { item: Project; navigation: ProjectScreenNavigatorProp }) => {
 	return (
-		<ListItem
-			leftIcon={{
-				name: 'layers',
-				type: 'feather',
-			}}
-			title={item.projectName}
-			subtitle={item.projectDescription}
-			bottomDivider
-			onPress={() => navigation.navigate('project', { projectId: item.projectId })}
-		/>
+		<ListItem bottomDivider onPress={() => navigation.navigate('project', { projectId: item.projectId })}>
+			<Icon name="layers" type="feather" />
+			<ListItem.Content>
+				<ListItem.Title>{item.projectName}</ListItem.Title>
+				<ListItem.Subtitle>{item.projectDescription}</ListItem.Subtitle>
+			</ListItem.Content>
+			<ListItem.Chevron />
+		</ListItem>
 	);
 };
 

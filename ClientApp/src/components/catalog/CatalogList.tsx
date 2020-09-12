@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Text, View, FlatListProps } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';
 
@@ -19,22 +19,14 @@ const keyExtractor = (item: Catalog) => item.catalogId.toString();
 const renderItem = ({ item, navigation }: { item: Catalog; navigation: CatalogScreenNavigatorProp }) => {
 	const catalogName = translate(item, 'catalogName');
 	return (
-		<ListItem
-			leftIcon={{
-				name: 'folder-o',
-				type: 'font-awesome',
-			}}
-			title={catalogName}
-			subtitle={
-				item.isSystem ? (
-					<View>
-						<Text>{i18n.t('system')}</Text>
-					</View>
-				) : undefined
-			}
-			bottomDivider
-			onPress={() => navigation.navigate('catalog', { catalogId: item.catalogId, catalogName })}
-		/>
+		<ListItem bottomDivider onPress={() => navigation.navigate('catalog', { catalogId: item.catalogId, catalogName })}>
+			<Icon name="folder-o" type="font-awesome" />
+			<ListItem.Content>
+				<ListItem.Title>{catalogName}</ListItem.Title>
+				<ListItem.Subtitle>{item.isSystem ? i18n.t('system') : null}</ListItem.Subtitle>
+			</ListItem.Content>
+			<ListItem.Chevron />
+		</ListItem>
 	);
 };
 
