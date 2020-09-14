@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useLayoutEffect } from 'react';
 import { View, TextInput, Button } from 'react-native';
 import { Formik } from 'formik';
 import { inject, observer } from 'mobx-react';
@@ -21,7 +21,7 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 		const { recordId } = route.params;
 		const { catalog, addRecord, loadRecord, updateRecord } = recordStore;
 
-		React.useLayoutEffect(() => {
+		useLayoutEffect(() => {
 			navigation.setOptions({
 				headerRight: () => <Button onPress={submit} title={i18n.t('save')} />,
 			});
@@ -30,12 +30,12 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 		const fields = catalog?.fields;
 		const keyProperty = catalog?.keyProperty || '';
 		const nameProperty = catalog?.nameProperty || '';
-		const record: any = recordId ? loadRecord(recordId) : {};
+		const currentRecord = loadRecord(recordId);
 
 		return fields ? (
 			<View>
 				<Formik
-					initialValues={record}
+					initialValues={currentRecord}
 					onSubmit={async values => {
 						const key = values[keyProperty];
 						if (key) {

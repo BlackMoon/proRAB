@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Text, View, FlatListProps } from 'react-native';
+import { FlatListProps } from 'react-native';
 import { Icon, ListItem } from 'react-native-elements';
 import { FlatList } from 'react-native-gesture-handler';
 import { inject, observer } from 'mobx-react';

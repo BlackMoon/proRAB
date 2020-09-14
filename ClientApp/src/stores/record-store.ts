@@ -41,15 +41,15 @@ class RecordStore extends ActivityStore {
 		this.filterInternal();
 	};
 
-	loadRecord = (recordId: number): object => {
+	loadRecord = (recordId?: number): any => {
 		const keyProperty = this.catalog!.keyProperty;
-		return this.records.find(r => r[keyProperty] === recordId);
+		return recordId ? this.records.find(r => r[keyProperty] === recordId) : {};
 	};
 
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
 		this.loading = true;
-		this.searchText = undefined;
 		this.filteredRecords = [];
+		this.searchText = undefined;
 		try {
 			this.catalog = yield catalogService.get(catalogId);
 			if (this.catalog) {

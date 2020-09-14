@@ -4,22 +4,32 @@ import { Icon } from 'react-native-elements';
 import { createStackNavigator, HeaderBackButton, StackNavigationProp } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 
-import { About, CatalogItem, CatalogList, More, ProjectList, Settings, RecordItem } from '@components';
+import {
+	About,
+	CatalogItem,
+	CatalogList,
+	ConstructionList,
+	More,
+	ProjectItem,
+	ProjectList,
+	RecordItem,
+	RepairList,
+	Settings,
+} from '@components';
 import i18n from '@localization';
-import { Repair } from '../containers/repair';
 
 /**
  * Repairs
  */
 type RepairStackParams = {
-	RepairScreen: undefined;
+	repair: undefined;
 };
 
 const RepairStack = createStackNavigator<RepairStackParams>();
 
 export const RepairsStackScreen = () => (
 	<RepairStack.Navigator>
-		<RepairStack.Screen name="RepairScreen" component={Repair} options={{ title: i18n.t('routes.repair') }} />
+		<RepairStack.Screen name="repair" component={RepairList} options={{ title: i18n.t('routes.repair') }} />
 	</RepairStack.Navigator>
 );
 
@@ -27,14 +37,14 @@ export const RepairsStackScreen = () => (
  * Construction
  */
 type ConstructionStackParams = {
-	ConstructionScreen: undefined;
+	construction: undefined;
 };
 
 const ConstructionStack = createStackNavigator<ConstructionStackParams>();
 
 export const ConstructionStackScreen = () => (
 	<ConstructionStack.Navigator>
-		<ConstructionStack.Screen name="ConstructionScreen" component={Repair} options={{ title: i18n.t('routes.construction') }} />
+		<ConstructionStack.Screen name="construction" component={ConstructionList} options={{ title: i18n.t('routes.construction') }} />
 	</ConstructionStack.Navigator>
 );
 
@@ -49,9 +59,11 @@ type ProjectsStackParams = {
 const ProjectStack = createStackNavigator<ProjectsStackParams>();
 
 export type ProjectScreenNavigatorProp = StackNavigationProp<ProjectsStackParams>;
+export type ProjectdScreenRouteProp = RouteProp<ProjectsStackParams, 'project'>;
 
 export const ProjectStackScreen = () => (
-	<ProjectStack.Navigator>
+	<ProjectStack.Navigator initialRouteName="projects">
+		<ProjectStack.Screen name="project" component={ProjectItem} />
 		<ProjectStack.Screen name="projects" component={ProjectList} options={{ title: i18n.t('routes.objects') }} />
 	</ProjectStack.Navigator>
 );
@@ -59,7 +71,6 @@ export const ProjectStackScreen = () => (
 /**
  * Catalog
  */
-
 type CatalogMainStackParams = {
 	catalog: { catalogId: number; catalogName: string };
 	catalogs: undefined;
