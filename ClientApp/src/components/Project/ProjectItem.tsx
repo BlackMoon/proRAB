@@ -2,17 +2,31 @@ import React, { FC, useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Text, View } from 'react-native';
 
-import { ProjectdScreenRouteProp, ProjectScreenNavigatorProp } from '@navigation';
+import { ProjectdScreenRouteProp } from '@navigation';
 import { projectStore } from '@stores';
+import { Project } from '@models';
+import { WithLoader } from '../Hoc';
 
 interface ProjectItemProps {
-	navigation: ProjectScreenNavigatorProp;
 	projectStore: typeof projectStore;
 	route: ProjectdScreenRouteProp;
 }
 
+// todo enhance ProjectCard!
+const ProjectCard = ({ project }: { project?: Project }) => {
+	return (
+		<View>
+			<Text>{project?.projectId}</Text>
+			<Text>{project?.projectName}</Text>
+			<Text>{project?.projectDescription}</Text>
+		</View>
+	);
+};
+
+const ProjectItemWithLoader = WithLoader(ProjectCard);
+
 const ProjectItem: FC<ProjectItemProps> = inject('projectStore')(
-	observer(({ navigation, projectStore, route }) => {
+	observer(({ projectStore, route }) => {
 		const { projectId } = route.params;
 		const { currentProject, loadProject, loading } = projectStore;
 
@@ -20,13 +34,7 @@ const ProjectItem: FC<ProjectItemProps> = inject('projectStore')(
 			(async () => loadProject(projectId))();
 		}, []);
 
-		return (
-			<View>
-				<Text>{currentProject?.projectId}</Text>
-				<Text>{currentProject?.projectName}</Text>
-				<Text>{currentProject?.projectDescription}</Text>
-			</View>
-		);
+		return <ProjectItemWithLoader loading={loading} project={currentProject}></ProjectItemWithLoader>;
 	})
 );
 
