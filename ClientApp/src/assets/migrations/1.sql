@@ -54,7 +54,9 @@ VALUES 	(1, 'density', 'Density', 'Плотность, кг/м3'),
 		(1, 'mass', 'Mass', 'Масса, кг');
 	
 INSERT OR IGNORE INTO project(ProjectId, ProjectName, ProjectDescription) 
-VALUES 	(1, 'Project 1', 'Project 1');
+VALUES 	(1, 'Project 1', 'Project 1'),
+		(2, 'Project 2', 'Project 2'),
+		(3, 'Project 3', 'Project 3');
 
 CREATE TABLE IF NOT EXISTS valueType (
 	ValueTypeId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,

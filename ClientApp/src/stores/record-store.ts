@@ -14,6 +14,7 @@ class RecordStore extends ActivityStore {
 	}
 
 	@observable catalog?: Catalog;
+	@observable currentRecord: any = {};
 	@observable filteredRecords: any[] = [];
 	@observable records: any[] = [];
 	@observable searchText?: string;
@@ -41,9 +42,9 @@ class RecordStore extends ActivityStore {
 		this.filterInternal();
 	};
 
-	loadRecord = (recordId?: number): any => {
+	loadRecord = (recordId?: number) => {
 		const keyProperty = this.catalog!.keyProperty;
-		return recordId ? this.records.find(r => r[keyProperty] === recordId) : {};
+		this.currentRecord = recordId ? this.records.find(r => r[keyProperty] === recordId) : {};
 	};
 
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {

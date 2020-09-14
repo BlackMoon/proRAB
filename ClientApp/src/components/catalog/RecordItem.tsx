@@ -1,5 +1,5 @@
-import React, { FC, useLayoutEffect } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import React, { FC, useEffect, useLayoutEffect } from 'react';
+import { View, TextInput, Button, Text } from 'react-native';
 import { Formik } from 'formik';
 import { inject, observer } from 'mobx-react';
 
@@ -19,7 +19,9 @@ let submit: () => void;
 export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 	observer(({ navigation, recordStore, route }) => {
 		const { recordId } = route.params;
-		const { catalog, addRecord, loadRecord, updateRecord } = recordStore;
+		const { catalog, currentRecord, addRecord, loadRecord, updateRecord } = recordStore;
+
+		useEffect(() => loadRecord(recordId), []);
 
 		useLayoutEffect(() => {
 			navigation.setOptions({
@@ -30,11 +32,11 @@ export const RecordItem: FC<RecordItemProps> = inject('recordStore')(
 		const fields = catalog?.fields;
 		const keyProperty = catalog?.keyProperty || '';
 		const nameProperty = catalog?.nameProperty || '';
-		const currentRecord = loadRecord(recordId);
 
 		return fields ? (
 			<View>
 				<Formik
+					enableReinitialize={true}
 					initialValues={currentRecord}
 					onSubmit={async values => {
 						const key = values[keyProperty];
