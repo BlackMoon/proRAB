@@ -32,10 +32,9 @@ const ProjectListWithLoader = WithLoader<FlatListProps<Project>>(FlatList);
 
 const ProjectList: FC<ProjectListProps> = inject('projectStore')(
 	observer(({ projectStore, navigation }) => {
-		const { clearProjects, loadProjects, loading, projects } = projectStore;
+		const { loadProjects, loading, projects } = projectStore;
 
 		useEffect(() => {
-			navigation.addListener('blur', () => clearProjects());
 			navigation.addListener('focus', () => loadProjects());
 		}, []);
 

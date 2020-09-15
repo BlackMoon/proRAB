@@ -34,10 +34,9 @@ const CatalogListWithLoader = WithLoader<FlatListProps<Catalog>>(FlatList);
 
 const CatalogList: FC<CatalogListProps> = inject('catalogStore')(
 	observer(({ catalogStore, navigation }) => {
-		const { catalogs, clearCatalogs, loadCatalogs, loading } = catalogStore;
+		const { catalogs, loadCatalogs, loading } = catalogStore;
 
 		useEffect(() => {
-			navigation.addListener('blur', () => clearCatalogs());
 			navigation.addListener('focus', () => loadCatalogs());
 		}, []);
 
