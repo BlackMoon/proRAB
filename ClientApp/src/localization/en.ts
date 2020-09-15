@@ -9,6 +9,11 @@ export const en = {
 	system: 'system',
 	updating: 'Updating',
 
+	project: {
+		new: 'New project',
+		edit: 'Project',
+	},
+
 	record: {
 		new: 'New record',
 		edit: 'Record',
@@ -18,7 +23,7 @@ export const en = {
 	routes: {
 		about: 'About',
 		calculations: 'Calculations',
-		catalogs: 'Catalogues',
+		catalogs: 'Catalogs',
 		construction: 'Construction',
 		functions: 'Functions',
 		more: 'More',

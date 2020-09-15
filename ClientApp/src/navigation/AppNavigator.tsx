@@ -6,10 +6,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { ICON_SIZE } from 'config';
 import i18n from '@localization';
-import { RepairsStackScreen, ConstructionStackScreen, ProjectStackScreen, CatalogScreen, MoreStackScreen } from './Screens';
-import LinkingConfiguration, { routes } from './LinkingConfiguration';
+import { RepairsStackScreen, ConstructionStackScreen, ProjectScreen, CatalogScreen, MoreStackScreen } from './Screens';
+import LinkingConfiguration, { screens } from './LinkingConfiguration';
 
-type BottomTabParams = { [Key in keyof typeof routes]: undefined };
+type BottomTabParams = { [Key in keyof typeof screens]: object };
 
 const BottomTab = createBottomTabNavigator<BottomTabParams>();
 const INITIAL_ROUTE_NAME = 'repair';
@@ -35,7 +35,7 @@ const AppNavigator = () => (
 			/>
 			<BottomTab.Screen
 				name="objects"
-				component={ProjectStackScreen}
+				component={ProjectScreen}
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="shape-square-plus" size={ICON_SIZE} color={color} />,
 					title: i18n.t('routes.objects'),

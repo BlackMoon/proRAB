@@ -1,4 +1,4 @@
-import { action, flow, observable } from 'mobx';
+import { flow, observable } from 'mobx';
 
 import { Project } from '@models';
 import { projectService } from '@services';
@@ -14,14 +14,18 @@ export class ProjectStore extends DataActivityStore {
 	@observable currentProject?: Project;
 	@observable projects: Project[] = [];
 
-	loadProject = flow(function* (this: ProjectStore, projectId: number) {
-		this.loading = true;
-		try {
-			this.currentProject = yield projectService.get(projectId);
-		} catch (ex) {
-			this.error = ex;
+	loadProject = flow(function* (this: ProjectStore, projectId?: number) {
+		if (projectId) {
+			this.loading = true;
+			try {
+				this.currentProject = yield projectService.get(projectId);
+			} catch (ex) {
+				this.error = ex;
+			}
+			this.loading = false;
+		} else {
+			this.currentProject = undefined;
 		}
-		this.loading = false;
 	});
 
 	loadProjects = flow(function* (this: ProjectStore) {

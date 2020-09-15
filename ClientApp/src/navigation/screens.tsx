@@ -51,20 +51,57 @@ export const ConstructionStackScreen = () => (
 /**
  * Projects
  */
-type ProjectsStackParams = {
-	project: { projectId: number };
+type ProjectMainStackParams = {
 	projects: undefined;
 };
 
-const ProjectStack = createStackNavigator<ProjectsStackParams>();
+const ProjectMainStack = createStackNavigator<ProjectMainStackParams>();
 
-export type ProjectScreenNavigatorProp = StackNavigationProp<ProjectsStackParams>;
-export type ProjectdScreenRouteProp = RouteProp<ProjectsStackParams, 'project'>;
+export const ProjectMainScreen = () => (
+	<ProjectMainStack.Navigator>
+		<ProjectMainStack.Screen
+			name="projects"
+			component={ProjectList}
+			options={({ route, navigation }) => ({
+				headerRight: () => (
+					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" onPress={() => navigation.navigate('project', {})} />
+				),
+				title: i18n.t('routes.objects'),
+			})}
+		/>
+	</ProjectMainStack.Navigator>
+);
 
-export const ProjectStackScreen = () => (
-	<ProjectStack.Navigator initialRouteName="projects">
-		<ProjectStack.Screen name="project" component={ProjectItem} />
-		<ProjectStack.Screen name="projects" component={ProjectList} options={{ title: i18n.t('routes.objects') }} />
+type ProjectStackParams = {
+	main: undefined;
+	project: { projectId?: number };
+};
+
+const ProjectStack = createStackNavigator<ProjectStackParams>();
+
+export type ProjectdScreenRouteProp = RouteProp<ProjectStackParams, 'project'>;
+export type ProjectScreenNavigatorProp = StackNavigationProp<ProjectStackParams>;
+
+export const ProjectScreen = () => (
+	<ProjectStack.Navigator initialRouteName="main" mode="modal">
+		<ProjectStack.Screen name="main" component={ProjectMainScreen} options={{ headerShown: false, title: i18n.t('cancel') }} />
+		<ProjectStack.Screen
+			name="project"
+			component={ProjectItem}
+			options={({ route, navigation }) => {
+				const { projectId } = route.params;
+				return {
+					headerLeft: () => (
+						<HeaderBackButton
+							backImage={() => <View></View>}
+							label={i18n.t('cancel')}
+							onPress={() => navigation.goBack()}
+						></HeaderBackButton>
+					),
+					title: i18n.t(projectId ? 'project.edit' : 'project.new'),
+				};
+			}}
+		/>
 	</ProjectStack.Navigator>
 );
 
@@ -81,13 +118,13 @@ const CatalogMainStack = createStackNavigator<CatalogMainStackParams>();
 export type CatalogScreenRouteProp = RouteProp<CatalogMainStackParams, 'catalog'>;
 export type CatalogScreenNavigatorProp = StackNavigationProp<CatalogMainStackParams>;
 
-export const CatalogsMainScreen = () => (
+export const CatalogMainScreen = () => (
 	<CatalogMainStack.Navigator initialRouteName="catalogs">
 		<CatalogMainStack.Screen
 			name="catalog"
 			component={CatalogItem}
 			options={({ route, navigation }) => ({
-				headerRight: ({ tintColor }) => (
+				headerRight: () => (
 					<Icon style={{ paddingEnd: 15 }} name="md-add" type="ionicon" onPress={() => navigation.navigate('record', {})} />
 				),
 			})}
@@ -106,10 +143,9 @@ const CatalogStack = createStackNavigator<CatalogStackParams>();
 export type RecordScreenRouteProp = RouteProp<CatalogStackParams, 'record'>;
 export type RecordScreenNavigatorProp = StackNavigationProp<CatalogStackParams, 'record'>;
 
-// modal stackNavigator
 export const CatalogScreen = () => (
 	<CatalogStack.Navigator initialRouteName="main" mode="modal">
-		<CatalogStack.Screen name="main" component={CatalogsMainScreen} options={{ headerShown: false, title: i18n.t('cancel') }} />
+		<CatalogStack.Screen name="main" component={CatalogMainScreen} options={{ headerShown: false, title: i18n.t('cancel') }} />
 		<CatalogStack.Screen
 			name="record"
 			component={RecordItem}

@@ -9,6 +9,11 @@ export const ru = {
 	system: 'системный',
 	updating: 'Обновление',
 
+	project: {
+		new: 'Новый объект',
+		edit: 'Объект',
+	},
+
 	record: {
 		new: 'Новая запись',
 		edit: 'Запись',

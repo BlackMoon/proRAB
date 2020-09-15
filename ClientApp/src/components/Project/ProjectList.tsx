@@ -23,7 +23,6 @@ const renderItem = ({ item, navigation }: { item: Project; navigation: ProjectSc
 				<ListItem.Title>{item.projectName}</ListItem.Title>
 				<ListItem.Subtitle>{item.projectDescription}</ListItem.Subtitle>
 			</ListItem.Content>
-			<ListItem.Chevron />
 		</ListItem>
 	);
 };

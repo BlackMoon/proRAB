@@ -1,6 +1,6 @@
 import * as Linking from 'expo-linking';
 
-export const routes = {
+export const screens = {
 	about: 'about',
 	catalogs: 'catalogs',
 	construction: 'construction',
@@ -14,5 +14,5 @@ export const routes = {
 
 export default {
 	prefixes: [Linking.makeUrl('/')],
-	config: routes,
+	screens,
 };
