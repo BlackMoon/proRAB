@@ -17,10 +17,10 @@ export class CatalogService extends DataService<Catalog> {
 			catalogId
 		);
 
-		let catalog: Catalog = null;
+		let catalog: any = null;
 		if (rows.length > 0) {
 			catalog = castObject(rows.item(0), Catalog);
-			catalog.fields = castArray((rows as any)._array, Field);
+			catalog.fields = castArray((rows as any)._array, Field).filter(f => f.fieldId);
 		}
 		return catalog;
 	}

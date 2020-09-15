@@ -31,7 +31,7 @@ const ProjectListWithLoader = WithLoader<FlatListProps<Project>>(FlatList);
 
 const ProjectList: FC<ProjectListProps> = inject('projectStore')(
 	observer(({ projectStore, navigation }) => {
-		const { loadProjects, loading, projects } = projectStore;
+		const { allEntities, loadProjects, loading } = projectStore;
 
 		useEffect(() => {
 			navigation.addListener('focus', () => loadProjects());
@@ -40,7 +40,7 @@ const ProjectList: FC<ProjectListProps> = inject('projectStore')(
 		return (
 			<ProjectListWithLoader
 				loading={loading}
-				data={projects}
+				data={allEntities}
 				keyExtractor={keyExtractor}
 				renderItem={({ item }) => renderItem({ item, navigation })}
 			></ProjectListWithLoader>

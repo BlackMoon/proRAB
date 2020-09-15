@@ -1,16 +1,15 @@
-import { flow, observable } from 'mobx';
+import { flow } from 'mobx';
 
 import { Catalog } from '@models';
 import { catalogService } from '@services';
 import { DataActivityStore } from './activity-store';
 
-class CatalogStore extends DataActivityStore {
+class CatalogStore extends DataActivityStore<Catalog> {
+	selectId = (c: Catalog) => c.catalogId;
 	constructor() {
 		super();
 		this.loadCatalogs = this.loadCatalogs.bind(this);
 	}
-
-	@observable catalogs: Catalog[] = [];
 
 	loadCatalogs = flow(function* (this: CatalogStore) {
 		if (this.dataLoaded) {
@@ -19,7 +18,8 @@ class CatalogStore extends DataActivityStore {
 
 		this.loading = true;
 		try {
-			this.catalogs = yield catalogService.getAll();
+			const catalogs = yield catalogService.getAll();
+			this.setManyMutably(catalogs);
 			this.dataLoaded = true;
 		} catch (ex) {
 			this.error = ex;

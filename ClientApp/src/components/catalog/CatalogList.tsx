@@ -34,7 +34,7 @@ const CatalogListWithLoader = WithLoader<FlatListProps<Catalog>>(FlatList);
 
 const CatalogList: FC<CatalogListProps> = inject('catalogStore')(
 	observer(({ catalogStore, navigation }) => {
-		const { catalogs, loadCatalogs, loading } = catalogStore;
+		const { allEntities, loadCatalogs, loading } = catalogStore;
 
 		useEffect(() => {
 			navigation.addListener('focus', () => loadCatalogs());
@@ -43,7 +43,7 @@ const CatalogList: FC<CatalogListProps> = inject('catalogStore')(
 		return (
 			<CatalogListWithLoader
 				loading={loading}
-				data={catalogs}
+				data={allEntities}
 				keyExtractor={keyExtractor}
 				renderItem={({ item }) => renderItem({ item, navigation })}
 			></CatalogListWithLoader>

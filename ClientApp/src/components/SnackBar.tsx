@@ -19,6 +19,8 @@ interface SnackBarState {
 	options: SnackbarOptions;
 }
 
+const DEFAULT_DURATION = 2000;
+
 export class Snackbar extends React.Component<object, SnackBarState> {
 	private static singletonRef?: Snackbar;
 
@@ -67,7 +69,7 @@ export class Snackbar extends React.Component<object, SnackBarState> {
 		}).start(() => {
 			options.onCompletedShow && options.onCompletedShow();
 			// eslint-disable-next-line no-undef
-			setTimeout(this.hide, this.state.options.duration || 2000);
+			setTimeout(this.hide, this.state.options.duration || DEFAULT_DURATION);
 		});
 	};
 

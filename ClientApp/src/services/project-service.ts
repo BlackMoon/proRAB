@@ -15,7 +15,7 @@ export class ProjectService extends DataService<Project> {
 			projectId
 		);
 
-		let project: Project = null;
+		let project: any = null;
 		if (rows.length > 0) {
 			project = castObject(rows.item(0), Project);
 		}

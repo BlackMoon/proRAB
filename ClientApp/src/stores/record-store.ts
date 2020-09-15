@@ -1,11 +1,19 @@
 import { observable, flow } from 'mobx';
 
+import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
-import i18n from '@localization';
 import { catalogService, recordService } from '@services';
-import { ActivityStore } from './activity-store';
+import { DataActivityStore } from './activity-store';
 
-class RecordStore extends ActivityStore {
+class RecordStore extends DataActivityStore<any> {
+	selectId = (r: any) => r[this.catalog!.keyProperty];
+	sortComparer = (a: any, b: any) => {
+		const nameProperty = this.catalog!.nameProperty;
+		const aname = translate(a, nameProperty);
+		const bname = translate(b, nameProperty);
+		return aname.localeCompare(bname);
+	}
+
 	constructor() {
 		super();
 		this.addRecord = this.addRecord.bind(this);
@@ -13,11 +21,11 @@ class RecordStore extends ActivityStore {
 		this.updateRecord = this.updateRecord.bind(this);
 	}
 
-	@observable catalog?: Catalog;
+	catalog?: Catalog;
+	searchText?: string;
+
 	@observable currentRecord: any = {};
 	@observable filteredRecords: any[] = [];
-	@observable records: any[] = [];
-	@observable searchText?: string;
 
 	addRecord = flow(function* (this: RecordStore, record: any) {
 		let insertedId = 0;
@@ -27,7 +35,7 @@ class RecordStore extends ActivityStore {
 			insertedId = yield recordService.add(record, keyProperty, tableName);
 			if (insertedId > 0) {
 				record[keyProperty] = insertedId;
-				this.records.push(record);
+				this.addOneMutably(record);
 				this.filterInternal();
 			}
 		} catch (ex) {
@@ -43,8 +51,7 @@ class RecordStore extends ActivityStore {
 	};
 
 	loadRecord = (recordId?: number) => {
-		const keyProperty = this.catalog!.keyProperty;
-		this.currentRecord = recordId ? this.records.find(r => r[keyProperty] === recordId) : {};
+		this.currentRecord = recordId ? this.entities[recordId] : {};
 	};
 
 	loadRecords = flow(function* (this: RecordStore, catalogId: number) {
@@ -54,8 +61,9 @@ class RecordStore extends ActivityStore {
 		try {
 			this.catalog = yield catalogService.get(catalogId);
 			if (this.catalog) {
-				this.records = yield recordService.getAll(this.catalog.tableName);
-				this.filteredRecords = this.records;
+				const records = yield recordService.getAll(this.catalog.tableName);
+				this.setManyMutably(records);
+				this.filteredRecords = this.allEntities;
 			}
 		} catch (ex) {
 			this.error = ex;
@@ -70,8 +78,7 @@ class RecordStore extends ActivityStore {
 			const { keyProperty, tableName } = this.catalog!;
 			rowsAffected = yield recordService.update(record, keyProperty, tableName);
 			if (rowsAffected > 0) {
-				const ix = this.records.findIndex(r => r[keyProperty] === record[keyProperty]);
-				this.records[ix] = record;
+				this.updateOneMutably(record);
 				this.filterInternal();
 			}
 		} catch (ex) {
@@ -84,10 +91,10 @@ class RecordStore extends ActivityStore {
 	private filterInternal(locale: string = i18n.locale) {
 		if (this.searchText) {
 			const field = this.catalog!.nameProperty + locale.split('-').shift()?.toAlphaCase();
-			const normalizedText = this.searchText?.trim().toLowerCase();
-			this.filteredRecords = this.records.filter(r => r[field].includes(normalizedText));
+			const normalizedText = this.searchText.trim().toLowerCase();
+			this.filteredRecords = this.allEntities.filter(r => r[field]?.toLowerCase().includes(normalizedText));
 		} else {
-			this.filteredRecords = this.records;
+			this.filteredRecords = this.allEntities;
 		}
 	}
 }
