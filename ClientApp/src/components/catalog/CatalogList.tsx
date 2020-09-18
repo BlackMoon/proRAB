@@ -7,11 +7,11 @@ import { inject, observer } from 'mobx-react';
 import i18n, { translate } from '@localization';
 import { Catalog } from '@models';
 import { CatalogScreenNavigatorProp } from '@navigation';
-import { catalogStore } from '@stores';
+import stores from '@stores';
 import { WithLoader } from '../Hoc';
 
 interface CatalogListProps {
-	catalogStore: typeof catalogStore;
+	catalogStore: typeof stores.catalogStore;
 	navigation: CatalogScreenNavigatorProp;
 }
 

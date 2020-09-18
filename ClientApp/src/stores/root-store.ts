@@ -1,6 +1,7 @@
 import { projectService } from '@services';
 import { observable, action, reaction, computed } from 'mobx';
 
+import aggregateStore from './aggregate-store';
 import catalogStore from './catalog-store';
 import projectStore from './project-store';
 import recordStore from './record-store';
@@ -29,7 +30,7 @@ class RootStore {
 	}
 
 	@computed get error() {
-		return catalogStore.error || projectStore.error || recordStore.error;
+		return aggregateStore.error || catalogStore.error || projectStore.error || recordStore.error;
 	}
 }
 

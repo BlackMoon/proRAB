@@ -33,7 +33,7 @@ const renderItem = ({ item }: { item: LocaleItem }) => (
 	<ListItem
 		checkmark={i18n.currentLocale() === item.locale}
 		title={item.title}
-		bottomDivider={true}
+		bottomDivider
 		onPress={() => i18n.currentLocale() !== item.locale && handleLocaleChange(item.locale)}
 	/>
 );

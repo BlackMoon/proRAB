@@ -1,5 +1,13 @@
 PRAGMA user_version = 1;
 
+CREATE TABLE IF NOT EXISTS aggregate (
+	AggregateId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	AggregateNameEn		VARCHAR,
+	AggregateNameRu		VARCHAR,	
+	AggregateType		VARCHAR NOT NULL,	
+	CreateDate			DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE IF NOT EXISTS catalog (
 	CatalogId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	CatalogCode			VARCHAR NOT NULL UNIQUE,
@@ -37,8 +45,14 @@ CREATE TABLE IF NOT EXISTS catalogBlock (
 CREATE TABLE IF NOT EXISTS project (
 	ProjectId			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	ProjectName			VARCHAR NOT NULL UNIQUE,
-	ProjectDescription	VARCHAR
+	ProjectDescription	VARCHAR,
+	CreateDate			DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+INSERT OR IGNORE INTO aggregate(AggregateId, AggregateNameEn, AggregateNameRu, AggregateType) 
+VALUES 	(1, 'laminat', 'Ламинат', 'Repair'), 
+		(2, 'oboi', 'Обои', 'Repair'),
+		(3, 'pilom', 'Пиломатериалы', 'Construction');
 
 INSERT OR IGNORE INTO catalog(CatalogId, CatalogCode, CatalogNameEn, CatalogNameRu, TableName, IsSystem) 
 VALUES 	(1, 'block', 'Blocks', 'Блоки', 'catalogBlock', 0), 

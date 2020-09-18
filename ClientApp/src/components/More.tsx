@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { SectionList, Text, SectionListData } from 'react-native';
-import { ListItem, IconProps } from 'react-native-elements';
+import { Icon, ListItem } from 'react-native-elements';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 import i18n from '@localization';
@@ -28,8 +28,15 @@ const sections: RouteItemGroup[] = [
 
 const keyExtractor = (item: RouteItem, index: number) => index.toString();
 const renderItem = ({ item, navigation }: { item: RouteItem; navigation: NavigationProp<Record<string, object | undefined>> }) => {
-	const icon: IconProps = { name: item.iconName!, type: item.iconType };
-	return <ListItem leftIcon={icon} title={item.title} bottomDivider chevron onPress={() => navigation.navigate(item.route)} />;
+	return (
+		<ListItem bottomDivider onPress={() => navigation.navigate(item.route)}>
+			<Icon name={item.iconName!} type={item.iconType} />
+			<ListItem.Content>
+				<ListItem.Title>{item.title}</ListItem.Title>
+			</ListItem.Content>
+			<ListItem.Chevron></ListItem.Chevron>
+		</ListItem>
+	);
 };
 
 const renderSectionHeader = ({ section: { title } }: { section: SectionListData<RouteItem> }) => <Text>{title}</Text>;
@@ -43,6 +50,6 @@ const More: FC<MoreProps> = ({ navigation }) => {
 			renderSectionHeader={renderSectionHeader}
 		/>
 	);
-}
+};
 
 export { More };

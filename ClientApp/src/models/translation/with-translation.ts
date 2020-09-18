@@ -1,5 +1,5 @@
 import i18n from '@localization';
-import './../../shared/string.extensions';
+import '@shared/string.extensions';
 
 export const defineLocalizedProperties = (target: object, propertyKeys: PropertyKey[], locales: string[]): void => {
 	if (propertyKeys === null || locales === null) {

@@ -7,7 +7,7 @@ import { inject, observer } from 'mobx-react';
 import { translate } from '@localization';
 import { Field } from '@models';
 import { CatalogScreenRouteProp, RecordScreenNavigatorProp } from '@navigation';
-import { recordStore } from '@stores';
+import stores from '@stores';
 import { WithLoader, WithSearchBar } from '../Hoc';
 
 const styles = StyleSheet.create({
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 interface CatalogItemProps {
-	recordStore: typeof recordStore;
+	recordStore: typeof stores.recordStore;
 	navigation: RecordScreenNavigatorProp;
 	route: CatalogScreenRouteProp;
 }

@@ -5,11 +5,11 @@ import { inject, observer } from 'mobx-react';
 
 import i18n, { translate } from '@localization';
 import { RecordScreenRouteProp, RecordScreenNavigatorProp } from '@navigation';
-import { recordStore } from '@stores';
+import stores from '@stores';
 
 interface RecordItemProps {
 	navigation: RecordScreenNavigatorProp;
-	recordStore: typeof recordStore;
+	recordStore: typeof stores.recordStore;
 	route: RecordScreenRouteProp;
 }
 

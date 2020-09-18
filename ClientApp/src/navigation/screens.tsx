@@ -6,6 +6,7 @@ import { RouteProp } from '@react-navigation/native';
 
 import {
 	About,
+	AggregateItem,
 	CatalogItem,
 	CatalogList,
 	ConstructionList,
@@ -18,25 +19,32 @@ import {
 } from '@components';
 import i18n from '@localization';
 
+type AggregationStackParams = {
+	aggregate: { aggregateId: number };
+};
+
 /**
  * Repairs
  */
-type RepairStackParams = {
+type RepairStackParams = AggregationStackParams & {
 	repair: undefined;
 };
 
 const RepairStack = createStackNavigator<RepairStackParams>();
 
+export type AggregationScreenNavigatorProp = StackNavigationProp<AggregationStackParams>;
+
 export const RepairsStackScreen = () => (
 	<RepairStack.Navigator>
 		<RepairStack.Screen name="repair" component={RepairList} options={{ title: i18n.t('routes.repair') }} />
+		<RepairStack.Screen name="aggregate" component={AggregateItem} />
 	</RepairStack.Navigator>
 );
 
 /**
  * Construction
  */
-type ConstructionStackParams = {
+type ConstructionStackParams = AggregationStackParams & {
 	construction: undefined;
 };
 
