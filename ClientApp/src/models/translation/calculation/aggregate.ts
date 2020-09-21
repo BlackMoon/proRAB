@@ -1,9 +1,6 @@
+import { ProjectType } from '../../project';
 import { WithTranslation } from '../with-translation';
-
-enum AggregateType {
-	Construction = 'Construction',
-	Repair = 'Repair',
-}
+import { AggregateType } from './aggregate-type';
 
 export class Aggregate extends WithTranslation {
 	constructor() {
@@ -12,9 +9,11 @@ export class Aggregate extends WithTranslation {
 		this.aggregateId = 0;
 		this.aggregateDescription = '';
 		this.aggregateType = AggregateType.Repair;
+		this.projectType = ProjectType.House;
 	}
 
 	aggregateId: number;
 	aggregateDescription?: string;
 	aggregateType: AggregateType;
+	projectType: ProjectType;
 }

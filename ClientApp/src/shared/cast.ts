@@ -17,7 +17,6 @@ export const castArray = <K extends object, T extends object>(source: K[], targe
 export const castObject = <K extends object, T extends object>(source: K, targetClass: Constructor<T>): T => {
 	const result = new targetClass() as any;
 	const sourceKeys = Object.keys(source);
-
 	for (const rKey of Object.keys(result)) {
 		const sourceKey = sourceKeys.find(skey => skey.toLowerCase() === rKey.toLowerCase());
 		if (sourceKey) {
