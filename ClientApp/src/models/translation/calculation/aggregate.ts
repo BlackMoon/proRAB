@@ -1,7 +1,10 @@
+import { name } from '@shared';
+
 import { ProjectType } from '../../project';
 import { WithTranslation } from '../with-translation';
 import { AggregateType } from './aggregate-type';
 
+@name('Aggregate')
 export class Aggregate extends WithTranslation {
 	constructor() {
 		super('aggregateName');
