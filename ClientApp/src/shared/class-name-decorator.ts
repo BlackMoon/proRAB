@@ -30,5 +30,6 @@ export function getName(type: Function): string {
  * @param instance
  */
 export function getInstanceName(instance: Object): string {
-  return Reflect.getMetadata(nameKey, instance.constructor);
+  const constructor = instance.constructor;
+  return Reflect.getMetadata(nameKey, constructor) || constructor.name;
 }
