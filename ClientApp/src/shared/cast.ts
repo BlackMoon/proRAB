@@ -2,6 +2,19 @@ export type Constructor<T> = {
 	new (...args: any[]): T;
 };
 
+export const applyMixins = <T>(derivedCtor: Constructor<T>, ...baseCtors: any[]): void => {
+	baseCtors.forEach(baseCtor => {
+		Object.getOwnPropertyNames(baseCtor.prototype)
+			.forEach(name => {
+				Object.defineProperty(
+					derivedCtor.prototype,
+					name,
+					Object.getOwnPropertyDescriptor(baseCtor.prototype, name)!
+				);
+			});
+	});
+}
+
 export const cast = <K extends object, T extends object>(source: K | K[], targetClass: Constructor<T>): T | T[] => {
 	if (Array.isArray(source)) {
 		return castArray(source, targetClass);
